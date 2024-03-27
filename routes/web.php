@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/tes', function(){
     return view('pages.user.test');
 });
+Route::get('/login', function(){
+    return view('pages.login');
+});
