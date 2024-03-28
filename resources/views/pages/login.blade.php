@@ -4,16 +4,7 @@
     <div class="bg-image ">
         <link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css">
 
-        <div class="row-2">
-            <div class="col-6">
-                <div class="navbar-nav">
-                    <a class="navbar-brand" href="#">
-                        <img src="../img/logo lp.png" alt="Logo" width="150" height=""
-                            class="d-inline-block align-text-top">
-                    </a>
-                </div>
-            </div>
-        </div>
+        
         <!-- welcome -->
         <div class="row"></div>
         <div class="row  mt-5">
@@ -28,7 +19,7 @@
 
             </div>
             <!-- form -->
-            <div class="col-5  ">
+            <div class="col-5 mt-5 ">
                 <form class="form-container  rounded-3 sub-font col-8  " method="POST" action="">
                     <h1 class="text-center fw-bolder ">LOGIN</h1>
                     <div class="mb-3 ms-3 me-3">
@@ -53,8 +44,6 @@
                             <p><small>Don’t have an account? Click <a href="#">Here</a></p>
                         </div>
                     </div>
-
-
                 </form>
             </div>
         </div>
