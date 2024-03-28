@@ -19,7 +19,7 @@
 
             </div>
             <!-- form -->
-            <div class="col-5 mt-5 ">
+            <div class="col-5 mt-5  " style="font-size:0.7vw;">
                 <form class="form-container  rounded-3 sub-font col-8  " method="POST" action="">
                     <h1 class="text-center fw-bolder ">LOGIN</h1>
                     <div class="mb-3 ms-3 me-3">

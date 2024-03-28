@@ -24,9 +24,9 @@
 
             </div>
             <!-- form -->
-            <div class="col-6">
-                <form class="form-container  rounded-3 sub-font col-8  " method="POST" action="">
-                    <h1 class="text-center fw-bolder ">REGISTER</h1>
+            <div class="col-6 " style="font-size:0.7vw">
+                <form class="form-container  rounded-3 sub-font col-8 mb-5  " method="POST" action="">
+                    <h2 class="text-center fw-bolder">REGISTER</h2>
                     <div class="mb-3 ms-3 me-3">
                         <label for="exampleFormControlInput1" class="form-label ">Full Name</label>
                         <input style="background-color:#D0DDEF;" type="name" class="form-control"
@@ -55,10 +55,10 @@
                     <div class="text-left row  ms-2">
                         <div class="col-3 fw-bolder">
                             <button type="submit" class="btn btn-dark me-5">
-                                <H4 class="fw-bolder">REGISTER</H4>
+                                <H4>REGISTER</H4>
                             </button>
                         </div>
-                        <div class="col-6 ms-5 ">
+                        <div class="col-6 ms-4 ">
                             <p><small>Already have an account? Click<a href="#">Here</a></p>
                         </div>
                     </div>
