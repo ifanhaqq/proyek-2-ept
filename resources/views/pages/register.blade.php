@@ -7,10 +7,6 @@
         <div class="row-2">
             <div class="col-6">
                 <div class="navbar-nav">
-                    <a class="navbar-brand" href="#">
-                        <img src="../img/logo lp.png" alt="Logo" width="150" height=""
-                            class="d-inline-block align-text-top">
-                    </a>
                 </div>
             </div>
         </div>
@@ -58,11 +54,11 @@
 
                     <div class="text-left row  ms-2">
                         <div class="col-3 fw-bolder">
-                            <button type="submit" class="btn btn-dark">
+                            <button type="submit" class="btn btn-dark me-5">
                                 <H4 class="fw-bolder">REGISTER</H4>
                             </button>
                         </div>
-                        <div class="col-6 ">
+                        <div class="col-6 ms-5 ">
                             <p><small>Already have an account? Click<a href="#">Here</a></p>
                         </div>
                     </div>
