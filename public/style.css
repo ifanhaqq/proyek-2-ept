@@ -4,14 +4,20 @@
 
 /* login */
 .bg-image {
-    background-image: url(../img/cover.png);
+    background-image: url(../img/cover-blurred.png);
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
+    height: 95vh;
     background-attachment: fixed;
-    
+  }
 
-
+.login-box {
+  margin-top: 18%;
+  background-color: white;
+  width: 80vh;
+  height: 60vh;
+  padding: 5%;
+  border-radius: 3%;
+  border-style: groove;
 }
 
 .sub-font {
@@ -25,10 +31,6 @@
 
 }
 
-.form-container {
-    background-color: rgb(255, 255, 255);
-}
-
 
 /* .header */
 .header-bg{
@@ -39,6 +41,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .sidebar {
