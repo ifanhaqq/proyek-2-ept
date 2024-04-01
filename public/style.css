@@ -44,30 +44,3 @@ body {
   overflow-x: hidden;
 }
 
-.sidebar {
-  height: 100%;
-  width: 200px;
-  position:relative;
-  top: 0;
-  left: 0;
-  background-color: #E1E6ED;
-  padding-top: 20px;
-  padding-bottom: 350px;
-  font-family: rowdies;
-}
-
-.sidebar a {
-  padding: 10px;
-  text-decoration: none;
-  display: block;
-  color: rgb(6, 6, 6);
-}
-
-.sidebar a:hover {
-  background-color: #f5f0c1;
-}
-
-.content {
-  margin-left: 220px; /* Adjust this value to match the sidebar width */
-  padding: 20px;
-}

@@ -23,6 +23,10 @@ Route::get('/tes', function(){
     return view('pages.user.test');
 });
 
+Route::get('/admin', function(){
+    return view('pages.admin.test');
+});
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/auth', 'authentication')->name('auth');
