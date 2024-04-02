@@ -1,6 +1,42 @@
-<h1>This is admin dashboard</h1>
+@extends('layouts.user-layout')
 
-<form action="{{ route('logout') }}" method="post">
-    @csrf
-    <button type="submit">Logout</button>
-</form>
+@section('content')
+<!-- CSS -->
+<link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css">
+<!-- Div-Container -->
+<div class="div-container container-fluid borders">
+      <!-- Grid -->
+      <div class="grid row borders borders-danger">
+        <!-- Menu -->
+        <div class="menu col-3 borders shadow">
+          <!-- Board -->
+          <div class="board borders p-3">
+            <!-- Dashboard -->
+            <div class="dashboard borders">
+              <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
+              <!-- Dashboard-Child -->
+              <ul class="dashboard-child borders ps-4">
+                <a href="test.blade.php">
+                  <li class="list borders d-flex p-2">
+                    <img src="" alt="" />
+                    <h6>New Test</h6>
+                  </li>
+                </a>
+                <a href="test.blade.php">
+                  <li class="list borders d-flex p-2">
+                    <img src="" alt="" />
+                    <h6>Manage Test</h6>
+                  </li>
+                </a>
+                <a href="test.blade.php">
+                  <li class="list borders d-flex p-2">
+                    <img src="" alt="" />
+                    <h6>Test Taker Result</h6>
+                  </li>
+                </a>
+              </ul>
+            </div>
+        <!-- Data-Table -->
+        <div class="data-table col-9 borders">
+          
+@endsection
