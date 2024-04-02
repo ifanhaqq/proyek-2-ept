@@ -6,7 +6,7 @@
 .bg-image {
     background-image: url(../img/cover-blurred.png);
     background-size: cover;
-    height: 95vh;
+    height: 100vh;
     background-attachment: fixed;
   }
 
@@ -42,6 +42,10 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow-x: hidden;
+}
+.responsive{
+  width: 100%;
+  height: auto;
 }
 
 /* nav sidebar */
