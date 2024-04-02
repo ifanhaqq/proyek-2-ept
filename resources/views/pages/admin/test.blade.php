@@ -16,19 +16,19 @@
               <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
               <!-- Dashboard-Child -->
               <ul class="dashboard-child borders ps-4">
-                <a href="test.blade.php">
+                <a href="#">
                   <li class="list borders d-flex p-2">
                     <img src="" alt="" />
                     <h6>New Test</h6>
                   </li>
                 </a>
-                <a href="test.blade.php">
+                <a href="#">
                   <li class="list borders d-flex p-2">
                     <img src="" alt="" />
                     <h6>Manage Test</h6>
                   </li>
                 </a>
-                <a href="test.blade.php">
+                <a href="#">
                   <li class="list borders d-flex p-2">
                     <img src="" alt="" />
                     <h6>Test Taker Result</h6>
@@ -38,5 +38,5 @@
             </div>
         <!-- Data-Table -->
         <div class="data-table col-9 borders">
-          
+        
 @endsection
