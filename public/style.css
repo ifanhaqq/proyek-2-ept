@@ -6,7 +6,7 @@
 .bg-image {
     background-image: url(../img/cover-blurred.png);
     background-size: cover;
-    height: 95vh;
+    height: 100vh;
     background-attachment: fixed;
   }
 
