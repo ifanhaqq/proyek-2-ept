@@ -12,30 +12,24 @@
             <div class="board borders p-3">
                 <!-- Dashboard -->
                 <div class="dashboard borders">
-                    <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
-                    <!-- Dashboard-Child -->
+                    <a href="#">
+                        <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
+                        <!-- Dashboard-Child -->
+                    </a>
                     <ul class="dashboard-child borders ps-4">
-                        <a href="test.blade.php">
+                        <a href="#">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6 class="bi bi-pencil">New Test</h6>
+                                <h6 class="bi bi-pencil-square me-3"> Start Test Now!</h6>
                             </li>
                         </a>
-                        <a href="test.blade.php">
+                        <a href="#">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6>Manage Test</h6>
-                            </li>
-                        </a>
-                        <a href="test.blade.php">
-                            <li class="list borders d-flex p-2">
-                                <img src="" alt="" />
-                                <h6>Test Taker Result</h6>
+                                <h6 class="bi bi-clock-history me-3"> Test Result</h6>
                             </li>
                         </a>
                     </ul>
                 </div>
             </div>
         </div>
-    
-
