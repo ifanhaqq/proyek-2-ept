@@ -18,7 +18,7 @@
                         <a href="test.blade.php">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6 class="bi bi-pencil">New Test</h6>
+                                <h6 class="bi bi-pencil"> New Test</h6>
                             </li>
                         </a>
                         <a href="test.blade.php">
