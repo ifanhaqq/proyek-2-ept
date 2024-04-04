@@ -3,7 +3,8 @@
     <div class="data-table col-9  ">
         <div class="row"></div>
         <div class="row">
-            <table class="table col-12">
+            <div class="col4"></div>
+            <table class="table col-8">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
