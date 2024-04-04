@@ -31,6 +31,13 @@ Route::get('/history', function(){
     return view('pages.user.test-history');
 });
 
+Route::get('/new', function(){
+    return view('pages.admin.new-test');
+});
+
+Route::get('/manage', function(){
+    return view('pages.admin.manage-test');
+});
 // 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'login')->name('login');
