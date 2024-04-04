@@ -38,48 +38,39 @@
 
                 </div>
                 <!-- form -->
-                <div class="col-6 " style="font-size:0.7vw">
-                    <form class="form-container  rounded-3 sub-font col-8 mb-5 bg-white " method="POST" action="">
+                <div class="col-6">
+                    <div class="register-box" style="font-size:0.7vw">
                         <h2 class="text-center fw-bolder">REGISTER</h2>
-                        <div class="mb-3 ms-3 me-3">
-                            <label for="exampleFormControlInput1" class="form-label ">Full Name</label>
-                            <input style="background-color:#D0DDEF;" type="name" class="form-control"
-                                id="exampleFormControlInput1">
-                        </div>
+                        <form class="form-container rounded-3 sub-font" method="POST" action="">
+                            <label for="name" class="form-label ">Full Name</label>
+                            <input type="text" class="form-control bg-input" id="name" name="name">
 
-                        <div class="mb-3 ms-3 me-3">
-                            <label for="exampleFormControlInput1" class="form-label">NIM</label>
-                            <input style="background-color:#D0DDEF;" type="NIM" class="form-control" id="NIM"
-                                name="NIM">
-                        </div>
+                            <label for="nim" class="form-label">NIM</label>
+                            <input type="number" class="form-control bg-input" id="nim" name="nim">
 
-                        <div class="mb-3 ms-3 me-3">
                             <label for="exampleFormControlInput1" class="form-label ">Email</label>
-                            <input style="background-color:#D0DDEF;" type="email" class="form-control"
-                                id="exampleFormControlInput1">
-                        </div>
+                            <input type="email" class="form-control bg-input" id="exampleFormControlInput1">
 
-                        <div class="mb-3 ms-3 me-3">
                             <label for="exampleFormControlInput1" class="form-label">Password</label>
-                            <input style="background-color:#D0DDEF;" type="password" class="form-control" id="password"
-                                name="password">
+                            <input type="password" class="form-control bg-input" id="password" name="password">
+
+                            <label for="exampleFormControlInput1" class="form-label">Repeat Password</label>
+                            <input type="password" class="form-control bg-input" id="password" name="password">
+
                             <a href="#">Forgot Password?</a>
-                        </div>
-
-                        <div class="text-left row  ms-2 ">
-                            <div class="col-3 fw-bolder">
-                                <button type="submit" class="btn btn-dark ">
-                                    <H4>REGISTER</H4>
-                                </button>
+                            <div class="text-left row  ms-2 ">
+                                <div class="col-3 fw-bolder">
+                                    <button type="submit" class="btn btn-dark ">
+                                        <H4>REGISTER</H4>
+                                    </button>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-6 ms-4 mb-5 ">
+                                    <p>Already have an account? Click<a href="#">Here</a></p>
+                                </div>
                             </div>
-                            <div class="col-1"></div>
-                            <div class="col-6 ms-4 mb-5 ">
-                                <p>Already have an account? Click<a href="#">Here</a></p>
-                            </div>
-                        </div>
-
-
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
 

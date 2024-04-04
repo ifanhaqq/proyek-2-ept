@@ -27,18 +27,16 @@ Route::get('/admin', function(){
     return view('pages.admin.test');
 });
 
-Route::get('/register', function(){
-    return view('pages.register');
-});
 Route::get('/history', function(){
     return view('pages.user.test-history');
 });
 
 // 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('login');
+    Route::get('/', 'login')->name('login');
     Route::post('/auth', 'authentication')->name('auth');
     Route::post('/logout', 'logout')->name('logout');
+    Route::get('/register', 'register')->name('register');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

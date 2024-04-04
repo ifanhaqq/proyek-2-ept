@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,11 @@ class AuthController extends Controller
     public function login()
     {
         return view('pages.login');
+    }
+
+    public function register()
+    {
+        return view('pages.register');
     }
 
     public function authentication(Request $request)
@@ -26,6 +32,16 @@ class AuthController extends Controller
         }
 
         return back()->with('failed', 'Your credentials do not match our record!');
+    }
+
+    public function store(Request $request)
+    {
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->nim = $request->nim;
+        $user->email = $request->email;
+        $user->password = $request->password;
     }
 
     public function logout(Request $request)
