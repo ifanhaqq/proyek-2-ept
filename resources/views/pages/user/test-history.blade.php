@@ -1,31 +1,13 @@
 @extends('layouts.user-layout')
 @section('content')
     <div class="data-table col-9  ">
-        <div class="row"></div>
-        <div class="row">
-            <div class="col4"></div>
-            <table class="table col-8">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                    </tr>  
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="card col-8 ms-5 mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Button</a>
+            </div>
+          </div>
     </div>
 
 

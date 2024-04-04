@@ -6,8 +6,9 @@
 .bg-image {
     background-image: url(../img/cover-blurred.png);
     background-size: cover;
-    height: 100vh;
+    height: 120vh;
     background-attachment: fixed;
+    background-repeat: repeat-y;
   }
 
 .login-box {
@@ -24,7 +25,7 @@
   margin-top: 12%;
   background-color: white;
   width: 80vh;
-  height: 75vh;
+  height: 85vh;
   padding: 5%;
   border-radius: 3%;
   border-style: groove;
