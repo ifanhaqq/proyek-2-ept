@@ -55,14 +55,14 @@
                         <input type="password" class="form-control bg-input" id="password" name="password">
 
                         <a href="#">Forgot Password?</a>
-                        <div class="text-left row  ">
-                            <div class="col-3 fw-bolder mt-3">
+
+                        <div class="register-flex">
+                            <div class="fw-bolder mt-3">
                                 <button type="submit" class="btn btn-dark ">
                                     <h5><small>REGISTER</h5>
                                 </button>
                             </div>
-
-                            <div class="col-6">
+                            <div class="" style="">
                                 <p>Already have an account? Click <a href="#">Here</a></p>
                             </div>
                         </div>
