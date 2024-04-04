@@ -20,6 +20,26 @@
   border-style: groove;
 }
 
+.register-box {
+  margin-top: 12%;
+  background-color: white;
+  width: 80vh;
+  height: 75vh;
+  padding: 5%;
+  border-radius: 3%;
+  border-style: groove;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bg-input {
+  background-color:#D0DDEF;
+}
+
 .sub-font {
     font-family: PT sans;
     font-size: larger
