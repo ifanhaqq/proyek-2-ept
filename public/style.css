@@ -12,7 +12,7 @@
   }
 
 .login-box {
-  margin-top: 18%;
+  margin-top: 5%;
   background-color: white;
   width: 80vh;
   height: 60vh;
@@ -22,10 +22,10 @@
 }
 
 .register-box {
-  margin-top: 12%;
+  margin-top: 3%;
   background-color: white;
   width: 80vh;
-  height: 85vh;
+  height: 90vh;
   padding: 5%;
   border-radius: 3%;
   border-style: groove;
@@ -122,9 +122,6 @@ nav {
   border-style: solid;
 }
 
-/* Board */
-.board {
-}
 
 /* Dashboard */
 .dashboard .title-dashboard {

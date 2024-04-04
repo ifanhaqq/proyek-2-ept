@@ -37,7 +37,7 @@
             <!-- form -->
             <div class="col-6 d-flex ">
 
-                <div class="login-box">
+                <div class="login-box ">
                     <h1 class="text-center fw-bolder">LOGIN</h1>
                     @if (session('failed'))
                         <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">
@@ -47,7 +47,7 @@
                         </div>
                     @endif
 
-                    <form class="form-container rounded-3 sub-font" method="POST" action="{{ route('auth') }}">
+                    <form class="form-container rounded-3 sub-font " style="font-size:1vw" method="POST" action="{{ route('auth') }}">
                         @csrf
                         <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control">
