@@ -38,7 +38,15 @@
             <div class="col-6">
                 <div class="register-box" style="font-size:0.75vw">
                     <h5 class="text-center fw-bolder ">REGISTER</h5>
-                    <form class="form-container rounded-3 sub-font" method="POST" action="">
+                    @if (session('failed'))
+                        <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">
+                            <div class="me-auto">{{ session('failed') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <form class="form-container rounded-3 sub-font" method="POST" action="{{ route('store') }}">
+                        @csrf
                         <label for="name" class="form-label ">Full Name</label>
                         <input type="text" class="form-control bg-input" id="name" name="name">
 
@@ -52,7 +60,7 @@
                         <input type="password" class="form-control bg-input" id="password" name="password">
 
                         <label for="exampleFormControlInput1" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control bg-input" id="password" name="password">
+                        <input type="password" class="form-control bg-input" id="password" name="pwdrpt">
 
                         <a href="#">Forgot Password?</a>
 

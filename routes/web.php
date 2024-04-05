@@ -44,6 +44,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth', 'authentication')->name('auth');
     Route::post('/logout', 'logout')->name('logout');
     Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

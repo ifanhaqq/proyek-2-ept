@@ -36,12 +36,18 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $user = new User;
+        if ($request->password !== $request->pwdrpt) {
+            return redirect()->route('register')->with('failed', 'Password is not same');
+        } else {
+            dd();
+        }
 
-        $user->name = $request->name;
-        $user->nim = $request->nim;
-        $user->email = $request->email;
-        $user->password = $request->password;
+        // $user = new User;
+
+        // $user->name = $request->name;
+        // $user->nim = $request->nim;
+        // $user->email = $request->email;
+        // $user->password = $request->password;
     }
 
     public function logout(Request $request)
