@@ -63,13 +63,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-});
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+//     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// });
 
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/index', [TestTakerController::class, 'index'])->name('user.dashboard');
-});
+// Route::middleware(['auth', 'role:user'])->group(function () {
+//     Route::get('/index', [TestTakerController::class, 'index'])->name('user.dashboard');
+// });
 
 
 
