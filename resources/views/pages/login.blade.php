@@ -47,6 +47,14 @@
                         </div>
                     @endif
 
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissable d-flex flex-row" role="alert">
+                            <div class="me-auto">{{ session('success') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <form class="form-container rounded-3 sub-font " style="font-size:1vw" method="POST" action="{{ route('auth') }}">
                         @csrf
                         <label class="form-label">Email</label>

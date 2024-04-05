@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestTakerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +65,10 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/index', [TestTakerController::class, 'index'])->name('user.dashboard');
 });
 
 

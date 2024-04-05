@@ -53,14 +53,14 @@
                         <label for="nim" class="form-label">NIM</label>
                         <input type="number" class="form-control bg-input" id="nim" name="nim">
 
-                        <label for="exampleFormControlInput1" class="form-label ">Email</label>
-                        <input type="email" class="form-control bg-input" id="exampleFormControlInput1">
+                        <label for="email" class="form-label ">Email</label>
+                        <input type="email" class="form-control bg-input" id="email" name="email">
 
-                        <label for="exampleFormControlInput1" class="form-label">Password</label>
+                        <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control bg-input" id="password" name="password">
 
-                        <label for="exampleFormControlInput1" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control bg-input" id="password" name="pwdrpt">
+                        <label for="pwdrpt" class="form-label">Repeat Password</label>
+                        <input type="password" class="form-control bg-input" id="pwdrpt" name="pwdrpt">
 
                         <a href="#">Forgot Password?</a>
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -36,18 +38,27 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->password !== $request->pwdrpt) {
-            return redirect()->route('register')->with('failed', 'Password is not same');
-        } else {
-            dd();
+        $validatePassword = Validator::make($request->all(), [
+            'password' => 'min:8'
+        ]);
+
+        if ($validatePassword->fails()) {
+            return redirect()->route('register')->with('failed', 'Please input the minimum password of 8 characters!');
+        } else if ($request->password !== $request->pwdrpt) {
+            return redirect()->route('register')->with('failed', 'Password is not the same!');
         }
 
-        // $user = new User;
+        $user = new User;
 
-        // $user->name = $request->name;
-        // $user->nim = $request->nim;
-        // $user->email = $request->email;
-        // $user->password = $request->password;
+        $user->name = $request->name;
+        $user->nim = $request->nim;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'user';
+
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Account succesfully registered! Please proceed to log in');
     }
 
     public function logout(Request $request)
