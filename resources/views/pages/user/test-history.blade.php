@@ -5,7 +5,7 @@
             <div class="card-body">
               <h5 class="card-title text-center fw-bolder font-2 mb-5">TEST HISTORY</h5>
               <table class="table">
-                <thead>
+                <thead class="">
                   <tr>
                     
                     <th scope="col">Test Batch</th>
@@ -16,8 +16,8 @@
                 <tbody>
                   <tr>
                    
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td>Hanifan Haqin</td>
+                    <td>26 April 2024</td>
                     <td class="bi bi-info-circle-fill "><a href=""> </a></td>
                   </tr>
             

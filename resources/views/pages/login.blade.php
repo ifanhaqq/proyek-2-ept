@@ -37,7 +37,7 @@
             <!-- form -->
             <div class="col-6 d-flex ">
 
-                <div class="login-box ">
+                <div class="login-box " style="font-size:0.75vw">
                     <h1 class="text-center fw-bolder">LOGIN</h1>
                     @if (session('failed'))
                         <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">
