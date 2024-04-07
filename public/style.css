@@ -4,12 +4,12 @@
 
 /* login */
 .bg-image {
-    background-image: url(../img/cover-blurred.png);
-    background-size: cover;
-    height: 120vh;
-    background-attachment: fixed;
-    background-repeat: repeat-y;
-  }
+  background-image: url(../img/cover-blurred.png);
+  background-size: cover;
+  height: 120vh;
+  background-attachment: fixed;
+  background-repeat: repeat-y;
+}
 
 .login-box {
   margin-top: 5%;
@@ -37,22 +37,22 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .bg-input {
-  background-color:#D0DDEF;
+  background-color: #D0DDEF;
 }
 
 .sub-font {
-    font-family: PT sans;
-    font-size: larger
+  font-family: PT sans;
+  font-size: larger
 }
 
 .main-font {
-    font-family: squada one;
-    font-weight: 500;
+  font-family: squada one;
+  font-weight: 500;
 
 }
 
@@ -69,17 +69,19 @@ input::-webkit-inner-spin-button {
 
 
 /* .header */
-.header-bg{
+.header-bg {
   background-color: #000E34;
   opacity: 0.8;
 }
+
 /* nav sidebar */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
-.responsive{
+
+.responsive {
   width: 100%;
   height: auto;
 }
@@ -111,7 +113,7 @@ nav {
 .menu-sidebar {
   /* background-color: blue; */
   font-family: rowdies;
-  
+
 }
 
 /* Grid */
@@ -167,7 +169,7 @@ nav {
 }
 
 /* Tab Menu */
-.tab-menu .row > div {
+.tab-menu .row>div {
   min-height: 90px;
   max-height: 90px;
 }
@@ -178,3 +180,42 @@ nav {
 }
 
 
+/* bg font di page test-3 */
+.vector {
+  background-color: #0e131c;
+}
+/* soal ujian */
+.options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #d4edda; /* Warna latar belakang saat hovered */
+        }
+
+        .options input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .options input[type="radio"]:checked + label {
+            background-color: #28a745; /* Warna latar belakang saat dipilih */
+            color: #fff;
+        }
+.bg-footer{
+  background-color: #D0DDEF;
+}

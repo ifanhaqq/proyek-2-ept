@@ -40,6 +40,30 @@ Route::get('/start-2', function(){
 Route::get('/start-3', function(){
     return view('pages.user.test-start-3');
 });
+Route::get('/section1-guide', function(){
+    return view('pages.user.section1-guide');
+});
+Route::get('/section1', function(){
+    return view('pages.user.section1');
+});
+Route::get('/section2-guide', function(){
+    return view('pages.user.section2-guide');
+});
+Route::get('/section2', function(){
+    return view('pages.user.section2');
+});
+Route::get('/section3-guide', function(){
+    return view('pages.user.section3-guide');
+});
+Route::get('/section3', function(){
+    return view('pages.user.section3');
+});
+Route::get('/submit', function(){
+    return view('pages.user.test-submit');
+});
+Route::get('/score', function(){
+    return view('pages.user.test-score');
+});
 
 // route admin Sementara 
 Route::get('/admin', function(){
