@@ -29,7 +29,7 @@
             <br>
             <br>
             <div class="col-12">
-                <a href="#" class="btn btn-dark text-left">START TEST!</a>
+                <a href="{{ route('listening-section') }}" class="btn btn-dark text-left">START TEST!</a>
             </div>
         </div>
 

@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // route user sementara
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/home', function(){
     return view('pages.user.home');
@@ -78,14 +75,21 @@ Route::get('/new', function(){
 Route::get('/manage', function(){
     return view('pages.admin.manage-test');
 });
+
 // yang dah fix
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/', 'login')->name('login');
+    Route::get('/', 'login')->middleware('guest')->name('login');
     Route::post('/auth', 'authentication')->name('auth');
     Route::post('/logout', 'logout')->name('logout');
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
 });
+
+Route::controller(TestTakerController::class)->group(function () {
+    Route::get('/welcome', 'index')->name('user.dashboard');
+    Route::get('/start-the-test/{index}', 'startTest');
+    Route::get('/listening-section', 'listeningSection')->name('listening-section');
+})->middleware(['auth', 'role:user']);
 
 // Route::middleware(['auth', 'role:admin'])->group(function () {
 //     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

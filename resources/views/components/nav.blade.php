@@ -17,7 +17,7 @@
                         <!-- Dashboard-Child -->
                     </a>
                     <ul class="dashboard-child borders ps-4">
-                        <a href="#">
+                        <a href="/start-the-test/1">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6 class="bi bi-pencil-square me-3"> Start Test Now!</h6>

@@ -31,10 +31,10 @@
                     <input type="email" class="form-control bg-input" id="exampleFormControlInput1">
                     <div class="row mt-3 text-center">
                         <div class="col-6">
-                            <a href="#test-start-1" class="btn btn-dark font-2">Previous</a>
+                            <a href="/start-the-test/1" class="btn btn-dark font-2">Previous</a>
                         </div>
                         <div class="col-6">
-                            <a href="#test-start-3" class="btn btn-dark font-2">Next</a>
+                            <a href="/start-the-test/3" class="btn btn-dark font-2">Next</a>
                         </div>
                         
                     </div>

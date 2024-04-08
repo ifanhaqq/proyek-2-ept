@@ -27,7 +27,7 @@
               <li>belum kelarr butuh diskusi ama ibu berli lagi....</li>
           </ol>
           <div class="text-center">
-          <a href="#" class="btn btn-dark text-center">NEXT</a>
+          <a href="/start-the-test/2" class="btn btn-dark text-center">NEXT</a>
         </div>
         </div>
       </div>
