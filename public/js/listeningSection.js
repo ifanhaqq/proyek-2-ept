@@ -3,6 +3,7 @@ $(document).ready(function () {
     const maxParams = $('#max_params').val()
     const showHide = (params) => {
         $('#list_question li').hide()
+        $('#list_question li ol li').show()
         $('#no' + params).show()
     }
 

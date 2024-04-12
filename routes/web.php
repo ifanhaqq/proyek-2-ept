@@ -89,8 +89,12 @@ Route::controller(TestTakerController::class)->group(function () {
     Route::get('/welcome', 'index')->name('user.dashboard');
     Route::get('/start-the-test/{index}', 'startTest');
     Route::get('/listening-section', 'listeningSection')->name('listening-section');
+    Route::get('/reading-section', 'readingSection')->name('reading-section');
+    Route::get('/grammar-section', 'grammarSection')->name('grammar-section');
 })->middleware(['auth', 'role:user']);
 
+
+Route::post('/dump', [TestTakerController::class, 'dump'])->name('dump');
 // Route::middleware(['auth', 'role:admin'])->group(function () {
 //     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // });
