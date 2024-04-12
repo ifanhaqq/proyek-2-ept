@@ -3,11 +3,14 @@
     <div class="container mt-5 test-box">
         <form action="{{ route('dump') }}" method="POST">
             @csrf
-            <input type="hidden" id="max_params" value="{{ $count }}">
+            <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
                 @foreach ($questions as $qs)
                     <input type="hidden" value="{{ $number++ }}">
                     <input type="hidden" id="params" value="{{ $number }}">
+                    <input type="hidden" name="wave_id" value="1">
+                    <input type="hidden" name="user_id" value="{{ $user_id }}">
+                    <input type="hidden" name="section" value="{{ $qs['section'] }}">
                     <input type="hidden" name="question_id_{{ $number }}" value="{{ $qs['question_id'] }}">
 
                     <li id="no{{ $number }}">

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\TestQuestion;
 use App\Models\TestResult;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TestTakerController extends Controller
 {
@@ -36,7 +38,8 @@ class TestTakerController extends Controller
 
         $data = [
             'questions' => $qs,
-            'number' => 0
+            'number' => 0,
+            'user_id' => Auth::user()->id,
         ];
 
         $count = count($data['questions']);
@@ -51,7 +54,8 @@ class TestTakerController extends Controller
 
         $data = [
             'questions' => $qs,
-            'number' => 0
+            'number' => 0,
+            'user_id' => Auth::user()->id,
         ];
 
         $count = count($data['questions']);
@@ -71,7 +75,8 @@ class TestTakerController extends Controller
 
         $data = [
             'questions' => $qs,
-            'number' => 0
+            'number' => 0,
+            'user_id' => Auth::user()->id,
         ];
 
         $count = count($data['questions']);
@@ -83,23 +88,23 @@ class TestTakerController extends Controller
     public function submit(Request $request)
     {
         
-
         for ($i = 1; $i <= $request->count; $i++) {
             $result = new TestResult;
 
             $result->wave_id = $request->wave_id;
             $result->user_id = $request->user_id;
+            $result->section = $request->section;
             $result->answer = $request->input('choice_' . $i);
             $result->question_id = $request->input('question_id_' . $i);  
             $result->save();
         }
-
-
-
     }
 
     public function dump(Request $request)
     {
-        echo dd($request);
+        $this->submit($request);
+
+        echo "Submitted succesfully";
+        
     }
 }
