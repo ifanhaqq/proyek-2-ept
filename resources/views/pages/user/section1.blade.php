@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout')
 @section('content')
     <div class="container mt-5 test-box">
-        <form action="{{ route('dump') }}" method="POST">
+        <form action="{{ route('dump-post') }}" method="POST">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">

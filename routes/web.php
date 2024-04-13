@@ -94,7 +94,9 @@ Route::controller(TestTakerController::class)->group(function () {
 })->middleware(['auth', 'role:user']);
 
 
-Route::post('/dump', [TestTakerController::class, 'dump'])->name('dump');
+Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
+Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');
+Route::get('/scoring', [TestTakerController::class, 'scoring'])->name('scoring');
 // Route::middleware(['auth', 'role:admin'])->group(function () {
 //     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // });

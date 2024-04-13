@@ -30,7 +30,8 @@ class TestTakerController extends Controller
 
     public function listeningSection()
     {
-        function putAsset($param) {
+        function putAsset($param)
+        {
             return asset("storage/audio/$param");
         }
 
@@ -67,11 +68,11 @@ class TestTakerController extends Controller
     public function readingSection()
     {
         $qs = DB::table('test_questions')
-              ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
-              ->select('test_questions.*', 'reading_sections.text')
-              ->inRandomOrder()
-              ->get()
-              ->toArray();
+            ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
+            ->select('test_questions.*', 'reading_sections.text')
+            ->inRandomOrder()
+            ->get()
+            ->toArray();
 
         $data = [
             'questions' => $qs,
@@ -87,24 +88,68 @@ class TestTakerController extends Controller
 
     public function submit(Request $request)
     {
-        
+        $correctAnswer = TestQuestion::where('wave_id', '1')->get();
+
         for ($i = 1; $i <= $request->count; $i++) {
             $result = new TestResult;
+            $question_id = $request->input('question_id_' . $i);
+            $answer = $request->input('choice_' . $i);
+            $correctAnswer = TestQuestion::where('question_id', $question_id)
+                ->get()->value('correct_answer');
 
+            $result->question_id = $question_id;
             $result->wave_id = $request->wave_id;
             $result->user_id = $request->user_id;
             $result->section = $request->section;
-            $result->answer = $request->input('choice_' . $i);
-            $result->question_id = $request->input('question_id_' . $i);  
+            $result->answer = $answer;
+
+            ($answer === $correctAnswer) ? $result->status = 'correct' : $result->status = 'incorrect';
+
             $result->save();
         }
     }
 
-    public function dump(Request $request)
+    public function scoring()
+    {
+        function convertScore($questionAmount, $convertRate) {
+            return $convertRate / $questionAmount;
+        }
+
+        function countCorrectAnswer($section) {
+            return count(TestResult::where('wave_id', 1)
+                                   ->where('user_id', 3)
+                                   ->where('section', $section)
+                                   ->where('status', 'correct')
+                                   ->get());
+        }
+
+        function countAmountSection($section) {
+            return count(
+                TestQuestion::where('wave_id', 1)->where('section', $section)->get()
+            );
+        }
+
+        $convertListening = convertScore(countAmountSection('listening'), 68) * countCorrectAnswer('listening');
+        $convertGrammar = convertScore(countAmountSection('grammar'), 68) * countCorrectAnswer('grammar');
+        $convertReading = convertScore(countAmountSection('reading'), 68) * countCorrectAnswer('reading');
+        
+        $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
+        dd(round($finalScore));
+    }
+
+    public function dumpPost(Request $request)
     {
         $this->submit($request);
 
         echo "Submitted succesfully";
-        
+
+    }
+
+    public function dumpGet()
+    {
+        $correctAnswer = TestQuestion::where('question_id', 3)
+            ->get();
+
+        dd($correctAnswer);
     }
 }
