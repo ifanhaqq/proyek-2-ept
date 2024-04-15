@@ -85,12 +85,17 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
 });
 
+Route::post('/section-guide/{index}', [TestTakerController::class, 'sectionGuide'])->name('section-guide');
+
 Route::controller(TestTakerController::class)->group(function () {
     Route::get('/welcome', 'index')->name('user.dashboard');
-    Route::get('/start-the-test/{index}', 'startTest');
+    Route::get('/start-the-test/{index}', 'startTest')->name('start-test');
+    Route::post('/score', 'score')->name('test_score');
+    Route::post('/submit-temp', 'tempScore')->name('submit-temp');
     Route::get('/listening-section', 'listeningSection')->name('listening-section');
-    Route::get('/reading-section', 'readingSection')->name('reading-section');
     Route::get('/grammar-section', 'grammarSection')->name('grammar-section');
+    Route::get('/reading-section', 'readingSection')->name('reading-section');
+    
 })->middleware(['auth', 'role:user']);
 
 

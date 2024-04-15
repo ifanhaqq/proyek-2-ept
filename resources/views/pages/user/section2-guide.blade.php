@@ -38,12 +38,8 @@
         <p>The sentence should read, "Guppies are sometimes called rainbow fish due to the bright colors of the males."
             Therefore, you should choose A.</p>
         <div class="row text-center mt-lg-5">
-            <div class="col-3"></div>
-            <div class="col-3">
-                <a href="#" class="btn btn-dark text-left">Previous</a>
-            </div>
-            <div class="col-3">
-                <a href="#" class="btn btn-dark text-left">Next</a>
+            <div class="col">
+                <a href="{{ route('grammar-section') }}" class="btn btn-dark text-left">Start next section</a>
             </div>
         </div>
     </div>

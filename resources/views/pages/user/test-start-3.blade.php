@@ -29,7 +29,11 @@
             <br>
             <br>
             <div class="col-12">
-                <a href="{{ route('listening-section') }}" class="btn btn-dark text-left">START TEST!</a>
+                <form action="{{ route('section-guide', 1)}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="start_test" value="1">
+                    <button type="submit" class="btn btn-dark text-center">NEXT</button>
+                </form>
             </div>
         </div>
 

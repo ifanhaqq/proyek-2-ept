@@ -19,7 +19,8 @@
                 <form action=""></form>
 
 
-                <form class="form-container rounded-3 sub-font fw-smaller" style="font-size:0.9vw" method="" action="">
+                <form class="form-container rounded-3 sub-font fw-smaller" style="font-size:0.9vw" method="POST"
+                    action="{{ route('submit-temp') }}">
                     @csrf
                     <label for="name" class="form-label ">Full Name</label>
                     <input type="text" class="form-control bg-input" id="name" name="name">
@@ -27,16 +28,16 @@
                     <label for="nim" class="form-label">NIM</label>
                     <input type="number" class="form-control bg-input" id="nim" name="nim">
 
-                    <label for="exampleFormControlInput1" class="form-label ">Email</label>
-                    <input type="email" class="form-control bg-input" id="exampleFormControlInput1">
+                    <label for="email" class="form-label ">Email</label>
+                    <input type="email" class="form-control bg-input" id="email" name="email">
                     <div class="row mt-3 text-center">
                         <div class="col-6">
                             <a href="/start-the-test/1" class="btn btn-dark font-2">Previous</a>
                         </div>
                         <div class="col-6">
-                            <a href="/start-the-test/3" class="btn btn-dark font-2">Next</a>
+                            <button type="submit" class="btn btn-dark font-2">Next</button>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>

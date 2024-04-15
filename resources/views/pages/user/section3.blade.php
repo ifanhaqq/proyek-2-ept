@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout')
 @section('content')
     <div class="container mt-5 test-box ">
-        <form action="{{ route('dump-post') }}" method="POST">
+        <form action="{{ route('test_score') }}" method="POST">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
@@ -47,7 +47,7 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <button type="submit" class="btn btn-dark text-left">Next section</button>
+                    <button type="submit" class="btn btn-dark text-left">Submit</button>
                 </div>
             </div>
         </form>
