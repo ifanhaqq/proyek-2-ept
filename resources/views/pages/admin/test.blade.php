@@ -5,7 +5,7 @@
     <div class="row font-2">
         <div class="col-sm-12 mb-3 mb-sm-0">
             <div class="card bg-card mt-lg-5">
-                <div class="card-body">
+                <div class="card-body bg-admin">
                     <table>
                         <tr>
                             <th class="col-4" style="width: 350px">Total Test</th>
