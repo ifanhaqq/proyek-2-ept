@@ -54,6 +54,9 @@ class TestTakerController extends Controller
         $testScore->nim = $request->nim;
         $testScore->email = $request->email;
         $testScore->score = 0;
+        $testScore->listening = 0;
+        $testScore->grammar = 0;
+        $testScore->reading = 0;
         $testScore->proficiency_level = "not finished yet";
 
         $testScore->save();
