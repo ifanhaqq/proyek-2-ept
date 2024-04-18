@@ -1,12 +1,12 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="pagination">
-                <a href="#">
-                  <button class="btn btn-primary-outline">1</button>
-                </a>
-            </div>
-
-        </div>
+  <div class="container">
+    <div class="flex-container">
+      <div>
+        <button class="btn btn-outline-dark">1</button>
+      </div>
+      
+      
     </div>
-</div>
+  </div>
+  
+  
+  
