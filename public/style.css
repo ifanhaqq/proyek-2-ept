@@ -227,3 +227,7 @@ nav {
   background: #FFE817;
 
 }
+/* nav-button css */
+.pagination a {
+  margin: 0 4px; /* 0 is for top and bottom. Feel free to change it */
+}
