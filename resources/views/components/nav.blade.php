@@ -17,12 +17,13 @@
                         <!-- Dashboard-Child -->
                     </a>
                     <ul class="dashboard-child borders ps-4">
-                        <a href="/start-the-test/1">
+                        <a href="/start-the-test/1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6 class="bi bi-pencil-square me-3"> Start Test Now!</h6>
                             </li>
                         </a>
+                        
                         <a href="#">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />

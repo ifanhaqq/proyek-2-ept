@@ -1,4 +1,4 @@
-@extends('layouts.start-test-layout')
+@extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box ">
         <form action="{{ route('section-guide', 3) }}" method="POST">

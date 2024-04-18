@@ -1,4 +1,4 @@
-@extends('layouts.start-test-layout')
+@extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box ">
         <form action="{{ route('test_score') }}" method="POST">
@@ -53,6 +53,35 @@
         </form>
 
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 font-2" id="exampleModalLabel">CONFIRM YOUR TOKEN!</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 class=" main-font display-6 text-center mb-5">SUBMIT YOUR ANSWER?</h4>
+
+                <p>Click SUBMIT button if you are done your test!
+                    <br>Don’t forget to make sure the answers already filled
+                </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary text-center">SUBMIT</a>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary font-2">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/listeningSection.js') }}"></script>
 @endsection
