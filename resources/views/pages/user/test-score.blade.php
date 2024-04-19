@@ -1,16 +1,7 @@
 @extends('layouts.start-test-layout')
 @section('content')
     <div class="card  col-11 ms-5 mb-3 me-5 mt-5">
-        <div class="row mt-3">
-            <div class="col-1 ms-5">
-                {{-- untuk back ke dashboard --}}
-                <button type="button" class="btn btn-outline-secondary">
-                    <a href="">
-                        <div class="bi bi-list  fw-bolder text-center" style="font-size: 2rem;"></div>
-                    </a>
-                </button>
-            </div>
-        </div>
+        
         <div class="card-body ">
             <h5 class="card-title text-center fw-bolder font-2 ">TOEFL ITP PREDICTION</h5>
             <p class="fst-italic text-center text-decoration-underline mb-5">Score Report</p>

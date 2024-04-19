@@ -29,6 +29,22 @@
                                 <img src="" alt="" />
                                 <h6 class="bi bi-clock-history me-3"> Test Result</h6>
                             </li>
+                        </a><br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <a href="test.blade.php">
+                            <li class="font-3">
+                                <img src="" alt="" />
+                                <h6>LOGOUT</h6>
+                            </li>
                         </a>
                     </ul>
                 </div>

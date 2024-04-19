@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout')
 @section('content')
     <div class="container mt-3">
-        <h4 class=" main-font display-6 text-center">Section 2 Reading Comprehension</h4>
+        <h4 class=" main-font display-6 text-center">Section 3 Reading Comprehension</h4>
 
         <p>contoh untuk sementara yah</p>
         <p>In this section you will read several passages. Each one is followed by a number of questions about it. Choose

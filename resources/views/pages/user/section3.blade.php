@@ -36,7 +36,7 @@
                             <label class="btn btn-light">
                                 <input type="radio" name="choice_{{ $number }}" value="{{ $qs->question_ch4 }}">
                                 {{ $qs->question_ch4 }}
-                            </label>
+                            </label> 
                         </div>
                     </li>
                 @endforeach

@@ -1,6 +1,7 @@
 @include('components.head')
 
 @include('components.header')
+@include('components.test-timer')
 
 
 

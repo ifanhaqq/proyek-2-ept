@@ -170,7 +170,7 @@ class TestTakerController extends Controller
 
         $convertListening = convertScore(countAmountSection('listening'), 68) * countCorrectAnswer('listening');
         $convertGrammar = convertScore(countAmountSection('grammar'), 68) * countCorrectAnswer('grammar');
-        $convertReading = convertScore(countAmountSection('reading'), 68) * countCorrectAnswer('reading');
+        $convertReading = convertScore(countAmountSection('reading'), 67) * countCorrectAnswer('reading');
         
         $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
 
