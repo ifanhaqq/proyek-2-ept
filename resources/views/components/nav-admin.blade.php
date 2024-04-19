@@ -15,7 +15,7 @@
                     <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
                     <!-- Dashboard-Child -->
                     <ul class="dashboard-child borders ps-4">
-                        <a href="test.blade.php">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6 class="bi bi-plus-circle-fill me-4"> New Test</h6>
