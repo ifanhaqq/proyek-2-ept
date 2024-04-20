@@ -17,65 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 // route user sementara
 
-Route::get('/home', function(){
-    return view('pages.user.home');
-});
-
-
-Route::get('/history', function(){
-    return view('pages.user.test-history');
-});
-Route::get('/history-detail', function(){
-    return view('pages.user.test-history-detail');
-});
-Route::get('/start-1', function(){
-    return view('pages.user.test-start-1');
-});
-Route::get('/start-2', function(){
-    return view('pages.user.test-start-2');
-});
-Route::get('/start-3', function(){
-    return view('pages.user.test-start-3');
-});
-Route::get('/section1-guide', function(){
-    return view('pages.user.section1-guide');
-});
-Route::get('/section1', function(){
-    return view('pages.user.section1');
-});
-Route::get('/section2-guide', function(){
-    return view('pages.user.section2-guide');
-});
-Route::get('/section2', function(){
-    return view('pages.user.section2');
-});
-Route::get('/section3-guide', function(){
-    return view('pages.user.section3-guide');
-});
-Route::get('/section3', function(){
-    return view('pages.user.section3');
-});
-Route::get('/submit', function(){
-    return view('pages.user.test-submit');
-});
-Route::get('/score', function(){
-    return view('pages.user.test-score');
-});
-
-// route admin Sementara 
-Route::get('/admin', function(){
-    return view('pages.admin.test');
-});
-
-
-Route::get('/new', function(){
-    return view('pages.admin.new-test');
-});
-
-Route::get('/manage', function(){
-    return view('pages.admin.manage-test');
-});
-
 // yang dah fix
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'login')->middleware('guest')->name('login');
@@ -85,30 +26,25 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
 });
 
-Route::post('/section-guide/{index}', [TestTakerController::class, 'sectionGuide'])->name('section-guide');
 
-Route::controller(TestTakerController::class)->group(function () {
-    Route::get('/welcome', 'index')->name('user.dashboard');
-    Route::get('/start-the-test/{index}', 'startTest')->name('start-test');
-    Route::post('/score', 'score')->name('test_score');
-    Route::post('/submit-temp', 'tempScore')->name('submit-temp');
-    Route::get('/listening-section', 'listeningSection')->name('listening-section');
-    Route::get('/grammar-section', 'grammarSection')->name('grammar-section');
-    Route::get('/reading-section', 'readingSection')->name('reading-section');
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/welcome', [TestTakerController::class, 'index'])->name('user.dashboard');
+    Route::post('/handle-token', [TestTakerController::class, 'handleToken'])->name('handle-token');
     
-})->middleware(['auth', 'role:user']);
-
+    Route::middleware('test-token')->group(function () {
+        Route::get('/start-the-test/{index}', [TestTakerController::class, 'startTest'])->name('start-test');
+        Route::post('/section-guide/{index}', [TestTakerController::class, 'sectionGuide'])->name('section-guide');
+        Route::get('/listening-section', [TestTakerController::class, 'listeningSection'])->name('listening-section');
+        Route::get('/grammar-section', [TestTakerController::class, 'grammarSection'])->name('grammar-section');
+        Route::get('/reading-section', [TestTakerController::class, 'readingSection'])->name('reading-section');
+        Route::post('/score', [TestTakerController::class, 'score'])->name('test_score');
+        Route::post('/submit-temp', [TestTakerController::class, 'tempScore'])->name('submit-temp');
+    });
+});
 
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
 Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');
 Route::get('/scoring', [TestTakerController::class, 'scoring'])->name('scoring');
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-//     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-// });
-
-// Route::middleware(['auth', 'role:user'])->group(function () {
-//     Route::get('/index', [TestTakerController::class, 'index'])->name('user.dashboard');
-// });
 
 
 

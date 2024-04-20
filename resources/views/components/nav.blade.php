@@ -17,7 +17,7 @@
                         <!-- Dashboard-Child -->
                     </a>
                     <ul class="dashboard-child borders ps-4">
-                        <a href="/start-the-test/1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <a href="{{ route('start-test', 1) }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6 class="bi bi-pencil-square me-3"> Start Test Now!</h6>
@@ -40,12 +40,12 @@
                         <br>
                         <br>
                         <br>
-                        <a href="test.blade.php">
-                            <li class="font-3">
-                                <img src="" alt="" />
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="font-3" style="border: none">
                                 <h6>LOGOUT</h6>
-                            </li>
-                        </a>
+                            </button>
+                        </form>
                     </ul>
                 </div>
             </div>

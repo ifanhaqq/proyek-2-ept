@@ -38,9 +38,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="">
+                    <form action="{{ route('handle-token') }}" method="POST">
+                        @csrf
                         <label for="token">TOKEN CODE</label>
-                        <input type="text">
+                        <input type="text" name="token">
 
                 </div>
                 <div class="modal-footer">

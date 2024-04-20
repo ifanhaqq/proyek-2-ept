@@ -5,30 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\TestQuestion;
 use App\Models\TestResult;
 use App\Models\TestScore;
+use App\Models\TestWave;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class TestTakerController extends Controller
 {
+
     public function index()
     {
         return view('pages.user.home');
     }
 
+    public function handleToken(Request $request)
+    {
+        $token = $request->token;
+        $questions = TestWave::where('token', $token)->get()->count();
+
+        // get questions based on token
+        if ($questions < 1) {
+            return redirect()->route('user.dashboard');
+        } else {
+            $wave_id = TestWave::where('token', $token)->get('wave_id')->value('wave_id');
+            
+            Session::put('wave_id', $wave_id);
+
+            return redirect()->route('start-test', 1);
+        }
+
+    }
+
     public function startTest($index)
     {
         return view("pages.user.test-start-$index");
-        // switch ($index) {
-        //     case 1:
-        //         return view('pages.user.test-start-1');
-        //     case 2:
-        //         return view('pages.user.test-start-2');
-        //     case 3:
-        //         return view('pages.user.test-start-3');
-        // }
     }
+
+
 
     public function sectionGuide(Request $request, $index)
     {
@@ -36,12 +52,11 @@ class TestTakerController extends Controller
             $this->submit($request);
 
             return view("pages.user.section$index-guide");
-            
-        } 
-        else {
+
+        } else {
             return view("pages.user.section$index-guide");
         }
-        
+
     }
 
     public function tempScore(Request $request)
@@ -49,7 +64,7 @@ class TestTakerController extends Controller
         $testScore = new TestScore;
 
         $testScore->user_id = Auth::user()->id;
-        $testScore->wave_id = 1;
+        $testScore->wave_id = Session::get('wave_id');
         $testScore->name = $request->name;
         $testScore->nim = $request->nim;
         $testScore->email = $request->email;
@@ -71,7 +86,9 @@ class TestTakerController extends Controller
             return asset("storage/audio/$param");
         }
 
-        $qs = TestQuestion::where('section', 'listening')->inRandomOrder()->get();
+        $qs = TestQuestion::where('wave_id', Session::get('wave_id'))
+            ->where('section', 'listening')
+            ->inRandomOrder()->get();
 
         $data = [
             'questions' => $qs,
@@ -87,7 +104,10 @@ class TestTakerController extends Controller
 
     public function grammarSection()
     {
-        $qs = TestQuestion::where('section', 'grammar')->inRandomOrder()->get();
+
+        $qs = TestQuestion::where('section', 'grammar')
+            ->where('wave_id', Session::get('wave_id'))
+            ->inRandomOrder()->get();
 
         $data = [
             'questions' => $qs,
@@ -103,13 +123,13 @@ class TestTakerController extends Controller
 
     public function readingSection()
     {
-        $qs = DB::table('test_questions')
+
+        $qs = DB::table('test_questions')->where('wave_id', Session::get('wave_id'))
             ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
             ->select('test_questions.*', 'reading_sections.text')
             ->inRandomOrder()
             ->get()
             ->toArray();
-
         $data = [
             'questions' => $qs,
             'number' => 0,
@@ -124,7 +144,6 @@ class TestTakerController extends Controller
 
     public function submit(Request $request)
     {
-        $correctAnswer = TestQuestion::where('wave_id', '1')->get();
 
         for ($i = 1; $i <= $request->count; $i++) {
             $result = new TestResult;
@@ -134,7 +153,7 @@ class TestTakerController extends Controller
                 ->get()->value('correct_answer');
 
             $result->question_id = $question_id;
-            $result->wave_id = $request->wave_id;
+            $result->wave_id = Session::get('wave_id');
             $result->user_id = $request->user_id;
             $result->section = $request->section;
             $result->answer = $answer;
@@ -150,31 +169,34 @@ class TestTakerController extends Controller
 
         $this->submit($request);
 
-        function convertScore($questionAmount, $convertRate) {
+        function convertScore($questionAmount, $convertRate)
+        {
             return $convertRate / $questionAmount;
         }
 
-        function countCorrectAnswer($section) {
-            return count(TestResult::where('wave_id', 1)
-                                   ->where('user_id', 3)
-                                   ->where('section', $section)
-                                   ->where('status', 'correct')
-                                   ->get());
+        function countCorrectAnswer($section)
+        {
+            return count(TestResult::where('wave_id', Session::get('wave_id'))
+                ->where('user_id', 3)
+                ->where('section', $section)
+                ->where('status', 'correct')
+                ->get());
         }
 
-        function countAmountSection($section) {
+        function countAmountSection($section)
+        {
             return count(
-                TestQuestion::where('wave_id', 1)->where('section', $section)->get()
+                TestQuestion::where('wave_id', Session::get('wave_id'))->where('section', $section)->get()
             );
         }
 
         $convertListening = convertScore(countAmountSection('listening'), 68) * countCorrectAnswer('listening');
         $convertGrammar = convertScore(countAmountSection('grammar'), 68) * countCorrectAnswer('grammar');
         $convertReading = convertScore(countAmountSection('reading'), 67) * countCorrectAnswer('reading');
-        
+
         $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
 
-        $scoreResult = TestScore::where('user_id', Auth::user()->id)->where('wave_id', 1)->first();
+        $scoreResult = TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->first();
         $scoreResult->listening = round($convertListening);
         $scoreResult->grammar = round($convertGrammar);
         $scoreResult->reading = round($convertReading);
@@ -183,7 +205,7 @@ class TestTakerController extends Controller
         $scoreResult->save();
 
         $data = [
-            'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', 1)->first()
+            'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->first()
         ];
 
         return view('pages.user.test-score', $data);
