@@ -35,7 +35,7 @@
                             <label class="btn btn-light">
                                 <input type="radio" name="choice_{{ $number }}" value="{{ $qs->question_ch4 }}">
                                 {{ $qs->question_ch4 }}
-                            </label> 
+                            </label>
                         </div>
                     </li>
                 @endforeach
@@ -50,10 +50,17 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <button type="submit" class="btn btn-dark text-left" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+                    <button type="submit" class="btn btn-dark text-left" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Submit</button>
                 </div>
             </div>
         </form>
+
+        <div class="flex-container mt-4" id="button-wrapper">
+            @for ($i = 1; $i <= $count; $i++)
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}">{{ $i }}</button>
+            @endfor
+        </div>
 
     </div>
 
@@ -68,7 +75,7 @@
                     <p>Click SUBMIT button if you are done your test!
                         <br>Don’t forget to make sure the answers already filled
                     </p>
-                    
+
                 </div>
                 <div class="modal-footer text-center">
                     <a href="#" class="btn btn-primary text-center">SUBMIT</a>
@@ -76,7 +83,8 @@
             </div>
         </div>
     </div>
-   
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/listeningSection.js') }}"></script>
+    <script src="{{ asset('js/navButton.js') }}"></script>
 @endsection

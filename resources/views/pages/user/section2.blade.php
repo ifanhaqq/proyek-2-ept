@@ -47,8 +47,14 @@
                 </div>
             </div>
         </form>
+        <div class="flex-container mt-4" id="button-wrapper">
+            @for ($i = 1; $i <= $count; $i++)
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}">{{ $i }}</button>
+            @endfor
+        </div>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/listeningSection.js') }}"></script>
+    <script src="{{ asset('js/navButton.js') }}"></script>
 @endsection

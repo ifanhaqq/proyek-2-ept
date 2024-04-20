@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box">
-        <form action="{{ route('section-guide', 2)}}" method="POST">
+        <form action="{{ route('section-guide', 2) }}" method="POST">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
@@ -16,21 +16,23 @@
                         <div class="text-center">
                             <audio controls src="{{ asset("storage/audio/{$qs['question']}") }}"></audio>
                         </div>
-                        <ol>
-                            <li></li>
-                        </ol>
+                        <p>{{ $number }}.</p>
                         <div class="options">
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch1'] }}"> {{ $qs['question_ch1'] }}
+                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch1'] }}">
+                                {{ $qs['question_ch1'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch2'] }}"> {{ $qs['question_ch2'] }}
+                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch2'] }}">
+                                {{ $qs['question_ch2'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch3'] }}"> {{ $qs['question_ch3'] }}
+                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch3'] }}">
+                                {{ $qs['question_ch3'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch4'] }}"> {{ $qs['question_ch4'] }}
+                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch4'] }}">
+                                {{ $qs['question_ch4'] }}
                             </label>
                         </div>
                     </li>
@@ -48,9 +50,14 @@
                     <button type="submit" class="btn btn-dark text-left">Next section</button>
                 </div>
             </div>
+        </form>
+
+        <div class="flex-container mt-4" id="button-wrapper">
+            @for ($i = 1; $i <= $count; $i++)
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}">{{ $i }}</button>
+            @endfor
+        </div>
     </div>
-    </ul>
-    </form>
 
 
 
@@ -62,4 +69,5 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/listeningSection.js') }}"></script>
+    <script src="{{ asset('js/navButton.js') }}"></script>
 @endsection

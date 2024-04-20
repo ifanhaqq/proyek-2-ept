@@ -17,7 +17,6 @@ $(document).ready(function () {
         const params = $('#params').val();
         const newParams = $('#params').val(parseInt(params) + 1).val()
         $('#prev').show()
-        console.log(maxParams)
         if (newParams === maxParams) {
             showHide(newParams)
             $('#submit_button').show()

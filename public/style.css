@@ -232,6 +232,8 @@ nav {
 .flex-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  border: #0e131c;
 
 }
 
