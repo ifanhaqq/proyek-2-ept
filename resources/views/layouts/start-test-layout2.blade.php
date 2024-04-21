@@ -1,7 +1,28 @@
-@include('components.head')
+<!DOCTYPE html>
+<html lang="en">
 
-@include('components.header')
+<head>
+    @include('components.head')
+</head>
 
-@yield('content')
+<body>
+    @include('components.header')
 
-@include('components.footer')
+    @yield('content')
+
+    @include('components.footer')
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

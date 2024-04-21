@@ -92,6 +92,7 @@ class TestTakerController extends Controller
 
         $data = [
             'questions' => $qs,
+            'title' => 'Listening Section',
             'number' => 0,
             'user_id' => Auth::user()->id,
         ];
@@ -113,6 +114,7 @@ class TestTakerController extends Controller
             'questions' => $qs,
             'number' => 0,
             'user_id' => Auth::user()->id,
+            'title' => 'Grammar Section'
         ];
 
         $count = count($data['questions']);
@@ -134,6 +136,7 @@ class TestTakerController extends Controller
             'questions' => $qs,
             'number' => 0,
             'user_id' => Auth::user()->id,
+            'title' => 'Reading Section'
         ];
 
         $count = count($data['questions']);

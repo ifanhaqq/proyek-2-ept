@@ -1,6 +1,3 @@
-<link href="{{ asset('../style.css') }}" rel="stylesheet" type="text/css">
-
-
 <div class="row">
     <div class="container-fluid">
         <div class="col-12 header-bg">
@@ -14,5 +11,4 @@
             </div>
         </div>
     </div>
-
 </div>
