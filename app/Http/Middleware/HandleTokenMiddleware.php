@@ -16,7 +16,7 @@ class HandleTokenMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::has('test_token')) {
+        if (Session::has('wave_id')) {
             return $next($request);
         } else {
             return redirect()->route('user.dashboard');
