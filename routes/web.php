@@ -16,7 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // route user sementara
-
+Route ::get('/manage1', function () {
+    return view('pages.admin.manage-test');
+});
+Route ::get('/manage2', function () {
+    return view('pages.admin.manage-test2');
+});
+Route ::get('/home', function () {
+    return view('pages.admin.home');
+});
+Route ::get('/result', function () {
+    return view('pages.admin.test-taker-result');
+});
+Route ::get('/result-more', function () {
+    return view('pages.admin.test-taker-score');
+});
 // yang dah fix
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'login')->middleware('guest')->name('login');
