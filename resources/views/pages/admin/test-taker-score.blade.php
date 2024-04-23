@@ -11,7 +11,7 @@
 
                         <th scope="col">Student Name</th>
                         <th scope="col">:</th>
-                        <th colspan="2">{{ $result->name }}</th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
 
                         <th scope="row">Test Date</th>
                         <th scope="row">:</th>
-                        <th scope="row">{{ $result->test_date }}</th>
+                        <th scope="row"></th>
                     </tr>
 
                 </tbody>
@@ -34,19 +34,19 @@
                 <tbody>
                     <tr>
                         <td>Listening Comprehension</td>
-                        <td>{{ $result->listening }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Structure and Written expression</td>
-                        <td>{{ $result->grammar }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Reading Comprehension</td>
-                        <td>{{ $result->reading }}</td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            <h5 class="text-center font-2">TOTAL SCORE : {{ $result->score }} </h5>
+            <h5 class="text-center font-2">TOTAL SCORE :  </h5>
         </div>
     </div>
     <div class="text-center bg-footer">

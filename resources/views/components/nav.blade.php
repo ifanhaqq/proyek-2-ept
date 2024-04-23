@@ -29,17 +29,7 @@
                                 <img src="" alt="" />
                                 <h6 class="bi bi-clock-history me-3"> Test Result</h6>
                             </li>
-                        </a><br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                        </a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button class="font-3" style="border: none">

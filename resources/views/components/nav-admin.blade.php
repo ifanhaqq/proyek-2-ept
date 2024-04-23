@@ -21,28 +21,18 @@
                                 <h6 class="bi bi-plus-circle-fill me-4" > New Test</h6>
                             </li>
                         </a>
-                        <a href="test.blade.php">
+                        <a href="">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6>Manage Test</h6>
                             </li>
                         </a>
-                        <a href="test.blade.php">
+                        <a href="">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6>Test Taker Result</h6>
                             </li>
-                        </a><br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                        </a>
                         <a href="test.blade.php">
                             <li class="font-3">
                                 <img src="" alt="" />
