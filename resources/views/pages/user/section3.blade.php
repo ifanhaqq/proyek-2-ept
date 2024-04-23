@@ -1,7 +1,23 @@
 @extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box ">
-        <form action="{{ route('test_score') }}" method="POST">
+        <div class="row mt-5 ">
+            <div class="col-12 text-end">
+                <form name="cd">
+                    <input type="hidden" name="" id="timeExamLimit" value="1">
+                    <input type="hidden" id="timeLimit" value="3">
+                    <label>Remaining Time : </label>
+                    <input style="border:none;background-color: transparent;color:#333e5d;font-size: 25px;" 
+                           name="disp"
+                           type="text" 
+                           class="clock" id="txt" 
+                           value="00:00" 
+                           size="5" 
+                           readonly="true" />
+                </form>
+            </div>
+        </div>
+        <form action="{{ route('test_score') }}" method="POST" id="testForm">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">

@@ -42,14 +42,29 @@ const redo = () => {
     secs--
 
     if (secs == -1) {
-        secs = 5;
+        secs = 1;
         mins--;
     }
 
     $('[name="disp"]').val(dis(mins, secs))
 
     if ((mins == 0) && (secs == 0)) {
-        console.log("Time's up!")
+        // $('#testForm').submit()
+        Swal.fire({
+            title: "Unfortunately, the test is over!",
+            allowOutsideClick: false,
+            confirmButtonText: "Ok",
+          }).then(() => {
+              $('#testForm').submit()
+
+            //   $.ajax({
+            //     url: "{{ route('dump-get') }}",
+            //     type: "GET",
+            //     success: () => {
+            //         console.log('success')
+            //     }
+            //   })
+          });
     } else {
         cd = setTimeout("redo()", 1000);
     }
