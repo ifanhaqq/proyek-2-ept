@@ -13,11 +13,13 @@ class TestWavesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('test_waves')->insert([
+        DB::table('test_waves')->insert(
+            [
             'title' => 'First Wave',
             'token' => 'DMYNT',
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ]
+    );
     }
 }

@@ -5,4 +5,6 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link href="{{ asset('../style.css') }}" rel="stylesheet" type="text/css">
-<title>{{ $title }}</title>
+<title>
+    {{ $title ?? 'POLINDRA TOEFL TEST PREDICTION' }}
+</title>

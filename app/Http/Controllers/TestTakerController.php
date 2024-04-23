@@ -18,7 +18,10 @@ class TestTakerController extends Controller
 
     public function index()
     {
-        return view('pages.user.home');
+        $data = [
+            'title' => "Welcome to Polindra TOEFL Test Prediction"
+        ];
+        return view('pages.user.home', $data);
     }
 
     public function handleToken(Request $request)
@@ -41,20 +44,27 @@ class TestTakerController extends Controller
 
     public function startTest($index)
     {
-        return view("pages.user.test-start-$index");
+        $data = [
+            'title' => 'Start Test'
+        ];
+        return view("pages.user.test-start-$index", $data);
     }
 
 
 
     public function sectionGuide(Request $request, $index)
     {
+        $data = [
+            'title' => "Instructions"
+        ];
+
         if (!$request->start_test) {
             $this->submit($request);
 
-            return view("pages.user.section$index-guide");
+            return view("pages.user.section$index-guide", $data);
 
         } else {
-            return view("pages.user.section$index-guide");
+            return view("pages.user.section$index-guide", $data);
         }
 
     }
@@ -169,6 +179,8 @@ class TestTakerController extends Controller
 
     public function score(Request $request)
     {
+        // $dump = 31 + (0 * (37/50));
+        // dd(round($dump));
 
         $this->submit($request);
 
@@ -186,16 +198,9 @@ class TestTakerController extends Controller
                 ->get());
         }
 
-        function countAmountSection($section)
-        {
-            return count(
-                TestQuestion::where('wave_id', Session::get('wave_id'))->where('section', $section)->get()
-            );
-        }
-
-        $convertListening = convertScore(countAmountSection('listening'), 68) * countCorrectAnswer('listening');
-        $convertGrammar = convertScore(countAmountSection('grammar'), 68) * countCorrectAnswer('grammar');
-        $convertReading = convertScore(countAmountSection('reading'), 67) * countCorrectAnswer('reading');
+        $convertListening = convertScore(50, 37) * countCorrectAnswer('listening') + 31;
+        $convertGrammar = convertScore(40, 37) * countCorrectAnswer('grammar') + 31;
+        $convertReading = convertScore(50, 36) * countCorrectAnswer('reading') + 31;
 
         $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
 
@@ -226,9 +231,38 @@ class TestTakerController extends Controller
 
     public function dumpGet()
     {
-        $correctAnswer = TestQuestion::where('question_id', 3)
-            ->get();
+        function convertScore($questionAmount, $convertRate)
+        {
+            return $convertRate / $questionAmount;
+        }
 
-        dd($correctAnswer);
+        function countCorrectAnswer($section)
+        {
+            return count(TestResult::where('wave_id', Session::get('wave_id'))
+                ->where('user_id', 3)
+                ->where('section', $section)
+                ->where('status', 'correct')
+                ->get());
+        }
+
+        $convertListening = convertScore(50, 37) * countCorrectAnswer('listening') + 31;
+        $convertGrammar = convertScore(40, 37) * countCorrectAnswer('grammar') + 31;
+        $convertReading = convertScore(50, 36) * countCorrectAnswer('reading') + 31;
+
+        $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
+
+        $scoreResult = TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->first();
+        $scoreResult->listening = round($convertListening);
+        $scoreResult->grammar = round($convertGrammar);
+        $scoreResult->reading = round($convertReading);
+        $scoreResult->score = round($finalScore);
+        $scoreResult->test_date = today();
+        $scoreResult->save();
+
+        $data = [
+            'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->first()
+        ];
+
+        return view('pages.user.test-score', $data);
     }
 }
