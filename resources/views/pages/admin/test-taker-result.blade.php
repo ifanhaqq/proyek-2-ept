@@ -7,6 +7,10 @@
                 <div class="">
                     <div class="card-body">
                         <h4 class="font-2">Test Taker Result</h4>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                            <button class="btn btn-outline-dark" type="submit">Search</button>
+                          </form>
                         <div class="container rounded border mt-4">
                             <table class="table table-striped ps-2">
                                 <thead>

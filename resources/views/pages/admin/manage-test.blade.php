@@ -11,8 +11,8 @@
                             <table class="table table-striped ps-2">
                                 <thead>
                                     <tr class="font-2">
+                                        <th scope="col" style="width: 350px">Token</th>
                                         <th scope="col" style="width: 350px">Test Title</th>
-                                        <th scope="col" style="width: 350px">Section</th>
                                         <th scope="col" style="width: 350px">Description</th>
                                         <th scope="col" style="width: 350px">Action</th>
                                     </tr>

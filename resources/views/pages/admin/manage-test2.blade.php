@@ -191,7 +191,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning font-2">Add</button>
+                    <button type="submit" class="btn btn-primary font-2">Update</button>
                 </div>
 
             </div>
