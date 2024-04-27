@@ -18,16 +18,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">TOEFL</th>
-                                        <td>Listening</td>
-                                        <td>Otto</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary">Manage</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                    
+                                    @foreach ($testWaves as $testWave)
+                                        <tr>
+                                            <th scope="row">{{ $testWave['token'] }}</th>
+                                            <td>{{ $testWave['title'] }}</td>
+                                            <td>Otto</td>
+                                            <td>
+                                                <a href="{{ route('manage-wave', $testWave['wave_id']) }}"><button class="btn btn-sm btn-primary">Manage</button></a>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -40,6 +43,4 @@
     {{-- penutup untuk nav --}}
     </div>
     </div>
-
-  
 @endsection

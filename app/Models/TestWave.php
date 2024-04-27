@@ -10,4 +10,6 @@ class TestWave extends Model
     use HasFactory;
 
     protected $table = 'test_waves';
+
+    protected $primaryKey = 'wave_id';
 }

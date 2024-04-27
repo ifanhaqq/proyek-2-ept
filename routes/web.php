@@ -40,7 +40,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
 });
 
-
+// Test taker routes
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/welcome', [TestTakerController::class, 'index'])->name('user.dashboard');
     Route::post('/handle-token', [TestTakerController::class, 'handleToken'])->name('handle-token');
@@ -54,6 +54,17 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/score', [TestTakerController::class, 'score'])->name('test_score');
         Route::post('/submit-temp', [TestTakerController::class, 'tempScore'])->name('submit-temp');
     });
+});
+
+// Admin routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/store-test-wave', [AdminCOntroller::class, 'storeTestWave'])->name('store-test-wave');
+    Route::get('/manage-test', [AdminController::class, 'manageTest'])->name('manage-test');
+    Route::get('/manage-wave/{wave_id}', [AdminController::class, 'manageWave'])->name('manage-wave');
+    Route::post('/update-wave', [AdminController::class, 'updateWave'])->name('update-wave');
+    Route::post('/store-question', [AdminController::class, 'storeQuestion'])->name('store-question');
+    Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
 });
 
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');

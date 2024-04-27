@@ -12,18 +12,22 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title ">Test Information</h5>
-                            <form class="form-container rounded-3  fw-smaller" style="font-size:0.9vw"
-                                method="" action="">
+                            <form class="form-container rounded-3  fw-smaller" style="font-size:0.9vw" method="POST"
+                                action="{{ route('update-wave') }}">
+                                @csrf
+                                <input type="hidden" name="wave_id" value="{{ $waveInfos->wave_id }}">
                                 <label for="token" class="form-label ">TOKEN</label>
-                                <input type="text" class="form-control fw-smaller " id="" name="">
+                                <input type="text" class="form-control fw-smaller " id="token" name="token"
+                                    value="{{ $waveInfos->token }}">
 
                                 <label for="test-name" class="form-label">Test Name</label>
-                                <input type="text" class="form-control " id="" name="">
+                                <input type="text" class="form-control " id="" name="title"
+                                    value="{{ $waveInfos->title }}">
 
                                 <label for="description" class="form-label ">Description</label>
                                 <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
 
-                                <a href="" class="btn btn-success text-end mt-5">Save</a href="">
+                                <button type="submit" href="" class="btn btn-success text-end mt-5">Save</button>
                             </form>
                         </div>
                     </div>
@@ -53,34 +57,151 @@
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1. soal nya ini ganti line wkwkwkwkwudynlkejwjijrweij kddjwijr lkloidjwioj
-                                                dlkadoiwio djnjajdnw dnjnwkn nknde eknwen knelnwenrl
-                                                jnscjhjfsjfjgjfkjhfkjgrk jkbjkajdgwakgekuwge jbjahwuhuiqwqyiqwurwksfksbfk
-                                                gfyehgfegvccccccccsfsdnajdjhhajfjhfrgytrhbndcejjfcc f</td>
-                                            <th ><a href="" class="btn btn-sm btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#updateModal">Update</a></th>
-                                            <th ><a href="" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></th>
-                                        </tr>
-                                        <tr>
-                                            <td>A. hihhhhhhhhhhh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>B. hhhhhhhhhh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>C. hadehhhh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>D. asdjeisfcj</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="answer-font fw-smaller">Correct Answer: </th>
-                                        </tr>
-                                        <tr>
+                                        @foreach ($listeningQuestions as $qs)
+                                            @php $number++ @endphp
                                             <td>
-                                                <hr class="solid">
+                                                <tr>
+                                                    <td>{{ $number }}. (Listening)</td>
+                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    </th>
+                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>A. {{ $qs['question_ch1'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>B. {{ $qs['question_ch2'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>C. {{ $qs['question_ch3'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>D. {{ $qs['question_ch4'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="answer-font fw-smaller">Correct Answer:
+                                                        {{ $qs['correct_answer'] }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <hr class="solid">
+                                                    </td>
+                                                </tr>
                                             </td>
-                                        </tr>
+                                        @endforeach
+
+                                        @foreach ($grammarQuestions as $qs)
+                                            @php $number++ @endphp
+                                            <td>
+                                                <tr>
+                                                    <td>{{ $number }}. {{ $qs['question'] }} (Structure & Written
+                                                        Expression)</td>
+                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    </th>
+                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>A. {{ $qs['question_ch1'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>B. {{ $qs['question_ch2'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>C. {{ $qs['question_ch3'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>D. {{ $qs['question_ch4'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="answer-font fw-smaller">Correct Answer:
+                                                        {{ $qs['correct_answer'] }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <hr class="solid">
+                                                    </td>
+                                                </tr>
+                                            </td>
+                                        @endforeach
+
+                                        @foreach ($grammarQuestions as $qs)
+                                            @php $number++ @endphp
+                                            <td>
+                                                <tr>
+                                                    <td>{{ $number }}. {{ $qs['question'] }} (Structure & Written
+                                                        Expression)</td>
+                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    </th>
+                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>A. {{ $qs['question_ch1'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>B. {{ $qs['question_ch2'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>C. {{ $qs['question_ch3'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>D. {{ $qs['question_ch4'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="answer-font fw-smaller">Correct Answer:
+                                                        {{ $qs['correct_answer'] }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <hr class="solid">
+                                                    </td>
+                                                </tr>
+                                            </td>
+                                        @endforeach
+
+                                        @foreach ($readingQuestions as $qs)
+                                            @php $number++ @endphp
+                                            <td>
+                                                <tr>
+                                                    <td>{{ $number }}. {{ $qs['question'] }} (Reading)</td>
+                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    </th>
+                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
+                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>A. {{ $qs['question_ch1'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>B. {{ $qs['question_ch2'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>C. {{ $qs['question_ch3'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>D. {{ $qs['question_ch4'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="answer-font fw-smaller">Correct Answer:
+                                                        {{ $qs['correct_answer'] }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <hr class="solid">
+                                                    </td>
+                                                </tr>
+                                            </td>
+                                        @endforeach
                                     </tbody>
 
                                 </table>
@@ -115,8 +236,58 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body sub-font">
-                    <form class="form-container rounded-3 fw-smaller" method="POST" action="">
+                    <form class="form-container rounded-3 fw-smaller" method="POST"
+                        action="{{ route('store-question') }}">
+                        @csrf
                         <label for="token" class="form-label fw-bolder">Question</label>
+                        <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="" class="fw-bolder">Option</label><br>
+                        <label for="test-name" class="form-label">A. </label>
+                        <input type="text" class="form-control " id="" name="choice_1">
+
+                        <label for="test-name" class="form-label">B. </label>
+                        <input type="text" class="form-control " id="" name="choice_2">
+
+                        <label for="test-name" class="form-label">C. </label>
+                        <input type="text" class="form-control " id="" name="choice_3">
+
+                        <label for="test-name" class="form-label">D. </label>
+                        <input type="text" class="form-control " id="" name="choice_4">
+
+                        <label for="test-name" class="form-label answer-font">Answer: </label>
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                            <option selected>Open this select answer</option>
+
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning font-2">Add</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    {{-- modal update questions --}}
+    <!-- Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 font-2" id="updateModal">Update Question</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sub-font">
+                    <form class="form-container rounded-3 fw-smaller" method="POST" action="">
+                        <label for="token" class="form-label fw-bolder ">Question</label>
                         <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
                         <label for="" class="fw-bolder">Option</label><br>
                         <label for="test-name" class="form-label">A. </label>
@@ -132,62 +303,16 @@
                         <input type="text" class="form-control " id="" name="">
 
                         <label for="test-name" class="form-label answer-font">Answer: </label>
-                        <select class="form-select form-select-lg mb-3" aria-label="Large select example"><option selected>Open this select answer</option>
-                           
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                            <option selected>Open this select answer</option>
+
                             <option value="">A</option>
                             <option value="">B</option>
                             <option value="">C</option>
                             <option value="">D</option>
-                          </select>
+                        </select>
 
-                        </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning font-2">Add</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    {{-- modal update questions--}}
-    <!-- Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 font-2" id="updateModal">Update Question</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body sub-font">
-                    <form class="form-container rounded-3 fw-smaller" method="POST" action="">
-                        <label for="token" class="form-label fw-bolder ">Question</label>
-                        <textarea class="form-control"  id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="" class="fw-bolder">Option</label><br>
-                        <label for="test-name" class="form-label">A. </label>
-                        <input type="text" class="form-control " id="" name="">
-
-                        <label for="test-name" class="form-label">B. </label>
-                        <input type="text" class="form-control " id="" name="">
-
-                        <label for="test-name" class="form-label">C. </label>
-                        <input type="text" class="form-control " id="" name="">
-
-                        <label for="test-name" class="form-label">D. </label>
-                        <input type="text" class="form-control " id="" name="">
-
-                        <label for="test-name" class="form-label answer-font">Answer: </label>
-                        <select class="form-select form-select-lg mb-3" aria-label="Large select example"><option selected>Open this select answer</option>
-                           
-                            <option value="">A</option>
-                            <option value="">B</option>
-                            <option value="">C</option>
-                            <option value="">D</option>
-                          </select>
-
-                        </form>
+                    </form>
 
                 </div>
                 <div class="modal-footer">
@@ -217,7 +342,7 @@
                         <br>
                         <label for="myfile">Upload File</label>
                         <input type="file" id="myfile" name="myfile"><br><br>
-                        
+
                     </form>
                 </div>
                 <div class="modal-footer">
