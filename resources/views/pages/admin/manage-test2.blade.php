@@ -38,8 +38,16 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-4">
                                     <h5 class="card-title font-2 ">Test Questions </h5>
+                                </div>
+                                <div class="col-4">
+                                    <label for="" class="font-2">Choose Section: </label>
+                                    <select  class="btn btn-outline-dark font-white" id="section" >
+                                        <option value="listening" selected>Listening</option>
+                                        <option value="reading">Reading</option>
+                                        <option value="grammar">Grammar</option>
+                                      </select>
                                 </div>
                                 <div class="col-4 text-end">
                                     <a href="" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -239,6 +247,12 @@
                     <form class="form-container rounded-3 fw-smaller" method="POST"
                         action="{{ route('store-question') }}">
                         @csrf
+                        <label class="font-2" for="">Choose Section</label>
+                        <select class="btn btn-outline-dark" name="" id="">
+                            <option value="listening">1. Listening</option>
+                            <option value="greammar">2. Grammar</option>
+                            <option value="reading">3. Reading</option>
+                        </select><br>
                         <label for="token" class="form-label fw-bolder">Question</label>
                         <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
                         <label for="" class="fw-bolder">Option</label><br>
@@ -287,6 +301,9 @@
                 </div>
                 <div class="modal-body sub-font">
                     <form class="form-container rounded-3 fw-smaller" method="POST" action="">
+                        <label for="disabledSelect" class="form-label">Disabled select menu</label>
+                        <select id="disabledSelect" class="form-select">
+                        </select>
                         <label for="token" class="form-label fw-bolder ">Question</label>
                         <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
                         <label for="" class="fw-bolder">Option</label><br>
