@@ -38,18 +38,18 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <h5 class="card-title font-2 ">Test Questions </h5>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <label for="" class="font-2">Choose Section: </label>
-                                    <select  class="btn btn-outline-dark font-white" id="section" >
-                                        <option value="listening" selected>Listening</option>
-                                        <option value="reading">Reading</option>
-                                        <option value="grammar">Grammar</option>
-                                      </select>
+                                    <select class="btn btn-outline-dark font-white" id="sectionSelect">
+                                        <option value="1" selected>Listening</option>
+                                        <option value="2">Structure & Written Expression</option>
+                                        <option value="3">Reading</option>
+                                    </select>
                                 </div>
-                                <div class="col-4 text-end">
+                                <div class="col-3 text-end">
                                     <a href="" class="btn btn-outline-success" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop">Export Here!</a>
                                     <a href="" class="btn btn-sm btn-primary bi bi-plus sub-font "
@@ -61,155 +61,91 @@
                             <div class="row">
                                 <table class="table-borderless " style="overflow-x:auto;">
                                     <thead>
-                                        <th>Question List</th>
-                                        <th>Action</th>
+                                        <tr>
+                                            <th>Question List</th>
+                                            <th>Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($listeningQuestions as $qs)
                                             @php $number++ @endphp
-                                            <td>
-                                                <tr>
-                                                    <td>{{ $number }}. (Listening)</td>
-                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    </th>
-                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>A. {{ $qs['question_ch1'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>B. {{ $qs['question_ch2'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C. {{ $qs['question_ch3'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>D. {{ $qs['question_ch4'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="answer-font fw-smaller">Correct Answer:
-                                                        {{ $qs['correct_answer'] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <hr class="solid">
-                                                    </td>
-                                                </tr>
-                                            </td>
+                                            <tr class="mb-3 section-1">
+                                                <td>
+                                                    {{ $number }}.<br>
+                                                    A. {{ $qs['question_ch1'] }}<br>
+                                                    B. {{ $qs['question_ch2'] }}<br>
+                                                    C. {{ $qs['question_ch3'] }}<br>
+                                                    D. {{ $qs['question_ch4'] }}<br>
+                                                    <div class="answer-font fw-smaller">
+                                                        Correct Answer:
+                                                        {{ $qs['correct_answer'] }}
+                                                    </div><br>
+                                                </td>
+                                                <td class="align-top text-start">
+                                                    <a href="" class="btn btn-sm btn-primary mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    <a href="" class="btn btn-sm btn-danger mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                </td>
+                                            </tr>
                                         @endforeach
-
+                                        @php $number = 0 @endphp
                                         @foreach ($grammarQuestions as $qs)
                                             @php $number++ @endphp
-                                            <td>
-                                                <tr>
-                                                    <td>{{ $number }}. {{ $qs['question'] }} (Structure & Written
-                                                        Expression)</td>
-                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    </th>
-                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>A. {{ $qs['question_ch1'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>B. {{ $qs['question_ch2'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C. {{ $qs['question_ch3'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>D. {{ $qs['question_ch4'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="answer-font fw-smaller">Correct Answer:
-                                                        {{ $qs['correct_answer'] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <hr class="solid">
-                                                    </td>
-                                                </tr>
-                                            </td>
+                                            <tr class="mb-3 section-2">
+                                                <td>
+                                                    {{ $number }}. {{ $qs['question'] }}<br>
+                                                    A. {{ $qs['question_ch1'] }}<br>
+                                                    B. {{ $qs['question_ch2'] }}<br>
+                                                    C. {{ $qs['question_ch3'] }}<br>
+                                                    D. {{ $qs['question_ch4'] }}<br>
+                                                    <div class="answer-font fw-smaller">
+                                                        Correct Answer:
+                                                        {{ $qs['correct_answer'] }}
+                                                    </div><br>
+                                                </td>
+                                                <td class="align-top text-start">
+                                                    <a href="" class="btn btn-sm btn-primary mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    <a href="" class="btn btn-sm btn-danger mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                </td>
+                                            </tr>
                                         @endforeach
-
-                                        @foreach ($grammarQuestions as $qs)
-                                            @php $number++ @endphp
-                                            <td>
-                                                <tr>
-                                                    <td>{{ $number }}. {{ $qs['question'] }} (Structure & Written
-                                                        Expression)</td>
-                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    </th>
-                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>A. {{ $qs['question_ch1'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>B. {{ $qs['question_ch2'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C. {{ $qs['question_ch3'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>D. {{ $qs['question_ch4'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="answer-font fw-smaller">Correct Answer:
-                                                        {{ $qs['correct_answer'] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <hr class="solid">
-                                                    </td>
-                                                </tr>
-                                            </td>
-                                        @endforeach
-
+                                        @php $number = 0 @endphp
                                         @foreach ($readingQuestions as $qs)
                                             @php $number++ @endphp
-                                            <td>
-                                                <tr>
-                                                    <td>{{ $number }}. {{ $qs['question'] }} (Reading)</td>
-                                                    <th><a href="" class="btn btn-sm btn-primary mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    </th>
-                                                    <th><a href="" class="btn btn-sm btn-danger mb-1"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>A. {{ $qs['question_ch1'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>B. {{ $qs['question_ch2'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C. {{ $qs['question_ch3'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>D. {{ $qs['question_ch4'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="answer-font fw-smaller">Correct Answer:
-                                                        {{ $qs['correct_answer'] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <hr class="solid">
-                                                    </td>
-                                                </tr>
-                                            </td>
+                                            <tr class="mb-3 section-3">
+                                                <td>
+                                                    {{ $number }}. {{ $qs['question'] }}<br>
+                                                    A. {{ $qs['question_ch1'] }}<br>
+                                                    B. {{ $qs['question_ch2'] }}<br>
+                                                    C. {{ $qs['question_ch3'] }}<br>
+                                                    D. {{ $qs['question_ch4'] }}<br>
+                                                    <div class="answer-font fw-smaller">
+                                                        Correct Answer:
+                                                        {{ $qs['correct_answer'] }}
+                                                    </div><br>
+                                                </td>
+                                                <td class="align-top text-start">
+                                                    <a href="" class="btn btn-sm btn-primary mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    <a href="" class="btn btn-sm btn-danger mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                </td>
+                                            </tr>
                                         @endforeach
+
+                                        {{-- <tr id="firstRow">
+                                            <td>a</td>
+                                            <td>b</td>
+                                        </tr> --}}
+
+                                        {{-- <tr>
+                                            <td>c</td>
+                                            <td>d</td>
+                                        </tr> --}}
+
                                     </tbody>
 
                                 </table>
