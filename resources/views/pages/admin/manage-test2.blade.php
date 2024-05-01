@@ -66,7 +66,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="sections">
                                         @foreach ($listeningQuestions as $qs)
                                             @php $number++ @endphp
                                             <tr class="mb-3 section-1">
@@ -82,10 +82,10 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <a href="" class="btn btn-sm btn-primary mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    <a href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
+                                                    <button href="" class="btn btn-sm btn-danger mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -105,8 +105,8 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <a href="" class="btn btn-sm btn-primary mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
                                                     <a href="" class="btn btn-sm btn-danger mb-1"
                                                         data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                                                 </td>
@@ -128,10 +128,10 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <a href="" class="btn btn-sm btn-primary mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
-                                                    <a href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
+                                                    <button href="" class="btn btn-sm btn-danger mb-1"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -237,23 +237,23 @@
                 </div>
                 <div class="modal-body sub-font">
                     <form class="form-container rounded-3 fw-smaller" method="POST" action="">
-                        <label for="disabledSelect" class="form-label">Disabled select menu</label>
+                        <label for="disabledSelect" class="form-label">Section</label>
                         <select id="disabledSelect" class="form-select">
                         </select>
                         <label for="token" class="form-label fw-bolder ">Question</label>
-                        <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <textarea class="form-control" id="floatingTextarea2" id="updating-question" style="height: 100px"></textarea>
                         <label for="" class="fw-bolder">Option</label><br>
                         <label for="test-name" class="form-label">A. </label>
-                        <input type="text" class="form-control " id="" name="">
+                        <input type="text" class="form-control " id="updating-questionch1" name="">
 
                         <label for="test-name" class="form-label">B. </label>
-                        <input type="text" class="form-control " id="" name="">
+                        <input type="text" class="form-control " id="updating-questionch2" name="">
 
                         <label for="test-name" class="form-label">C. </label>
-                        <input type="text" class="form-control " id="" name="">
+                        <input type="text" class="form-control " id="updating-questionch3" name="">
 
                         <label for="test-name" class="form-label">D. </label>
-                        <input type="text" class="form-control " id="" name="">
+                        <input type="text" class="form-control " id="updating-questionch4" name="">
 
                         <label for="test-name" class="form-label answer-font">Answer: </label>
                         <select class="form-select form-select-lg mb-3" aria-label="Large select example">
