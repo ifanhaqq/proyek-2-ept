@@ -4,12 +4,40 @@ $(document).ready( function () {
 
     $('#sections tr').hide()
     $('.reading-text').hide()
+    $('.questionInput').hide()
+    $('.readingTextQuestion').hide()
     $('#sections tr.section-' + section).show()
+    $('#questionInput').removeAttr('required')
+    $('#readingTextQuestion').removeAttr('required')
 
     for (let index = 0; index < readingAmount; index++) {
         $('.reading_text_' + index).hide().first().show()
     }
     
+    $('#addQuestionSection').change(function () {
+        const newSection = $('#addQuestionSection').val()
+        $('.clonedElems').remove();
+
+        if (newSection == 'listening') {
+            $('.audioQuestion').show()
+            $('.readingTextQuestion').hide()
+            $('.questionInput').hide()
+            $('#questionInput').removeAttr('required')
+            $('#readingTextQuestion').removeAttr('required')
+        } else if (newSection == 'reading') {
+            $('.readingTextQuestion').show()
+            $('.audioQuestion').hide()
+            $('.questionInput').show()
+            $('#questionInput').prop('required', true)
+            $('#readingTextQuestion').prop('required', true)
+        } else {
+            $('.readingTextQuestion').hide()
+            $('.audioQuestion').hide()
+            $('.questionInput').show()
+            $('#questionInput').prop('required', true)
+            $('#readingTextQuestion').removeAttr('required')
+        }
+    })
 
     $('#sectionSelect').change(function () {
         const newSection = $('#sectionSelect').val()
@@ -87,4 +115,33 @@ $(document).ready( function () {
             }
         })
     })
+
+    $('#addNewQuestion').click(function (e) { 
+        const questionElems = $('.questionElems')
+        const questionElemParam  = $('#questionElemParam').val()
+        const newParam = $('#questionElemParam').val(parseInt(questionElemParam) + 1)
+
+        let questionClones = questionElems.clone().attr('class', 'clonedElems')
+
+        questionClones.find('input').each(function () {
+            const originalName = $(this).attr('name')
+            const newName = originalName + '_' + newParam.val()
+            $(this).attr('name', newName)
+        })
+
+        questionClones.find('textarea').each(function () {
+            const originalName = $(this).attr('name')
+            const newName = originalName + '_' + newParam.val()
+            $(this).attr('name', newName)
+        })
+
+        questionClones.find('select').each(function () {
+            const originalName = $(this).attr('name')
+            const newName = originalName + '_' + newParam.val()
+            $(this).attr('name', newName)
+        })
+
+        $('#questionsContainer').append(questionClones)
+        
+    });
 })

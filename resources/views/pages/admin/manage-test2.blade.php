@@ -50,10 +50,10 @@
                                     </select>
                                 </div>
                                 <div class="col-3 text-end">
-                                    <a href="" class="btn btn-outline-success" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">Export Here!</a>
-                                    <a href="" class="btn btn-sm btn-primary bi bi-plus sub-font "
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Add</a>
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">Export Here!</button>
+                                    <button class="btn btn-sm btn-primary bi bi-plus sub-font " data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -124,11 +124,11 @@
                                         {{-- Reading Section --}}
                                         <input type="hidden" id="amountOfReading" value="{{ count($readingQuestions) }}">
                                         @foreach ($readingQuestions as $qs)
-                                            
                                             @php $number++ @endphp
                                             <tr class="mb-3 section-3">
                                                 <td>
-                                                    <p class="reading_text_{{ $qs['reading_id'] }}">{{ $qs['text'] }}</p>
+                                                    <p class="reading_text_{{ $qs['reading_id'] }}">{{ $qs['text'] }}
+                                                    </p>
                                                     {{ $number }}. {{ $qs['question'] }}<br>
                                                     A. {{ $qs['question_ch1'] }}<br>
                                                     B. {{ $qs['question_ch2'] }}<br>
@@ -151,16 +151,9 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-
                                 </table>
-
                             </div>
-
-
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
@@ -188,41 +181,59 @@
                         action="{{ route('store-question') }}">
                         @csrf
                         <label class="font-2" for="">Choose Section</label>
-                        <select class="btn btn-outline-dark" name="" id="">
-                            <option value="listening">1. Listening</option>
-                            <option value="greammar">2. Grammar</option>
-                            <option value="reading">3. Reading</option>
+                        <select class="btn btn-outline-dark mb-3" name="addQuestionSection" id="addQuestionSection">
+                            <option value="listening">Listening</option>
+                            <option value="grammar">Structure & Written Expression</option>
+                            <option value="reading">Reading</option>
                         </select><br>
-                        <label for="token" class="form-label fw-bolder">Question</label>
-                        <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="" class="fw-bolder">Option</label><br>
-                        <label for="test-name" class="form-label">A. </label>
-                        <input type="text" class="form-control " id="" name="choice_1">
 
-                        <label for="test-name" class="form-label">B. </label>
-                        <input type="text" class="form-control " id="" name="choice_2">
+                        {{-- Optional option for listening section only --}}
+                        <label for="audioQuestion" class="form-label fw-bolder audioQuestion mt-3">Upload an MP3
+                            File</label>
+                        <input type="file" accept="audio/*" class="form-control mb-3 audioQuestion"
+                            name="audioQuestion" id="audioQuestion">
 
-                        <label for="test-name" class="form-label">C. </label>
-                        <input type="text" class="form-control " id="" name="choice_3">
+                        {{-- Optional option for reading section only --}}
+                        <label for="readingTextQuestion" class="form-label fw-bolder readingTextQuestion">Text</label>
+                        <textarea name="readingTextQuestion" id="readingTextQuestion" class="form-control readingTextQuestion"
+                            style="height: 100px" required></textarea>
 
-                        <label for="test-name" class="form-label">D. </label>
-                        <input type="text" class="form-control " id="" name="choice_4">
+                        <div id="questionsContainer">
+                            <div class="questionElems">
+                                <input type="hidden" id="questionElemParam" value="1">
+                                <label for="token" class="form-label fw-bolder questionInput">Question</label>
+                                <textarea class="form-control questionInput" name="question" id="questionInput" style="height: 100px" required></textarea>
 
-                        <label for="test-name" class="form-label answer-font">Answer: </label>
-                        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                            <option selected>Open this select answer</option>
+                                <label for="" class="fw-bolder">Option</label><br>
+                                <label for="test-name" class="form-label">A. </label>
+                                <input type="text" class="form-control " id="" name="choice_1" required>
 
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
+                                <label for="test-name" class="form-label">B. </label>
+                                <input type="text" class="form-control " id="" name="choice_2" required>
 
-                    </form>
+                                <label for="test-name" class="form-label">C. </label>
+                                <input type="text" class="form-control " id="" name="choice_3" required>
 
+                                <label for="test-name" class="form-label">D. </label>
+                                <input type="text" class="form-control " id="" name="choice_4" required>
+
+                                <label for="test-name" class="form-label answer-font">Answer: </label>
+                                <select class="form-select form-select-lg mb-3" name="correct_answer"
+                                    aria-label="Large select example">
+                                    <option selected>Open this select answer</option>
+
+                                    <option value="1">A</option>
+                                    <option value="2">B</option>
+                                    <option value="3">C</option>
+                                    <option value="4">D</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addNewQuestion">Add Question</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning font-2">Add</button>
+                    </form>
                 </div>
 
             </div>
@@ -280,13 +291,13 @@
     </div>
     {{-- modal import file --}}
 
-    <!-- Modal -->
+    <!-- Modal export -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eksport file</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Export file</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

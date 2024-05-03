@@ -76,7 +76,7 @@ class AdminController extends Controller
 
     public function storeQuestion(Request $request)
     {
-
+        dd($request);
     }
 
     public function updateQuestion(Request $request)
