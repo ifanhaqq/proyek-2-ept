@@ -29,6 +29,7 @@ class TestQuestionResource extends JsonResource
         return [
             'question_id' => $this->question_id,
             'section' => $this->section,
+            'text' => $this->text,
             'question' => $this->question,
             'question_ch1' => $this->question_ch1,
             'question_ch2' => $this->question_ch2,

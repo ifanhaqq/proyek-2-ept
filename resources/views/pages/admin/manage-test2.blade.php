@@ -58,6 +58,9 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <div class="text-center mt-4 mb-3" id="audio">
+                                <audio controls src=""></audio>
+                            </div>
                             <div class="row">
                                 <table class="table-borderless " style="overflow-x:auto;">
                                     <thead>
@@ -82,8 +85,10 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
+                                                    <button href=""
+                                                        class="btn btn-sm btn-primary mb-1 update-question-listening"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-id="{{ $qs['question_id'] }}">Update</button>
                                                     <button href="" class="btn btn-sm btn-danger mb-1"
                                                         data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                 </td>
@@ -105,18 +110,25 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
+                                                    <button href=""
+                                                        class="btn btn-sm btn-primary mb-1 update-question-grammar"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-id="{{ $qs['question_id'] }}">Update</button>
                                                     <a href="" class="btn btn-sm btn-danger mb-1"
                                                         data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                         @php $number = 0 @endphp
+
+                                        {{-- Reading Section --}}
+                                        <input type="hidden" id="amountOfReading" value="{{ count($readingQuestions) }}">
                                         @foreach ($readingQuestions as $qs)
+                                            
                                             @php $number++ @endphp
                                             <tr class="mb-3 section-3">
                                                 <td>
+                                                    <p class="reading_text_{{ $qs['reading_id'] }}">{{ $qs['text'] }}</p>
                                                     {{ $number }}. {{ $qs['question'] }}<br>
                                                     A. {{ $qs['question_ch1'] }}<br>
                                                     B. {{ $qs['question_ch2'] }}<br>
@@ -128,24 +140,16 @@
                                                     </div><br>
                                                 </td>
                                                 <td class="align-top text-start">
-                                                    <button href="" class="btn btn-sm btn-primary mb-1 update-question"
-                                                        data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $qs['question_id']}}">Update</button>
+                                                    <button href=""
+                                                        class="btn btn-sm btn-primary mb-1 update-question-reading"
+                                                        data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                        data-id="{{ $qs['question_id'] }}">Update</button>
                                                     <button href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">Delete</button>
                                                 </td>
                                             </tr>
                                         @endforeach
-
-                                        {{-- <tr id="firstRow">
-                                            <td>a</td>
-                                            <td>b</td>
-                                        </tr> --}}
-
-                                        {{-- <tr>
-                                            <td>c</td>
-                                            <td>d</td>
-                                        </tr> --}}
-
                                     </tbody>
 
                                 </table>
@@ -237,11 +241,10 @@
                 </div>
                 <div class="modal-body sub-font">
                     <form class="form-container rounded-3 fw-smaller" method="POST" action="">
-                        <label for="disabledSelect" class="form-label">Section</label>
-                        <select id="disabledSelect" class="form-select">
-                        </select>
+                        <label for="section" class="form-label">Section</label>
+                        <input class="form-control" type="text" id="updating-section" disabled>
                         <label for="token" class="form-label fw-bolder ">Question</label>
-                        <textarea class="form-control" id="floatingTextarea2" id="updating-question" style="height: 100px"></textarea>
+                        <textarea class="form-control" id="updating-question" style="height: 100px"></textarea>
                         <label for="" class="fw-bolder">Option</label><br>
                         <label for="test-name" class="form-label">A. </label>
                         <input type="text" class="form-control " id="updating-questionch1" name="">

@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/test-question', App\Http\Controllers\Api\TestQuestionController::class);
 
 Route::get('/test-question/{question_id}', [TestQuestionController::class, 'show']);
+
+Route::get('/test-question-reading/{question_id}/{reading_id}', [TestQuestionController::class, 'showReadingQuestion']);

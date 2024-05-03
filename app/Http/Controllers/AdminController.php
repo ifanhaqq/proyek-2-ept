@@ -53,10 +53,11 @@ class AdminController extends Controller
             'grammarQuestions' => TestQuestion::where('wave_id', $wave_id)
                 ->where('section', 'grammar')
                 ->get(),
-            'readingQuestions' => TestQuestion::where('reading_id', 1)->get(),
+            'readingQuestions' => TestQuestion::select('test_questions.*', 'reading_sections.*')
+                ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
+                ->get(),
             'number' => 0
         ];
-
 
         return view('pages.admin.manage-test2', $data);
     }
@@ -75,7 +76,7 @@ class AdminController extends Controller
 
     public function storeQuestion(Request $request)
     {
-        
+
     }
 
     public function updateQuestion(Request $request)

@@ -20,4 +20,14 @@ class TestQuestionController extends Controller
 
         return new TestQuestionResource(true, 'Success', $testQuestion);
     }
+
+    public function showReadingQuestion($question_id, $reading_id)
+    {
+        $testQuestion = TestQuestion::select('test_questions.*', 'reading_sections.text')
+                        ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
+                        ->where('test_questions.question_id', $question_id)->where('test_questions.reading_id', $reading_id)
+                        ->first();
+
+        return new TestQuestionResource(true, 'Success', $testQuestion);
+    }
 }
