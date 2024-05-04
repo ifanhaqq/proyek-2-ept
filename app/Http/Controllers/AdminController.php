@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListeningAudio;
 use App\Models\ReadingSection;
 use App\Models\TestQuestion;
 use App\Models\TestWave;
@@ -26,16 +27,24 @@ class AdminController extends Controller
         $audio = $request->file('audio_wave');
         $audioFileName = $request->token . '_audio.' . $audio->getClientOriginalExtension();
 
-        $audio->storeAs('public/audio', $audioFileName);
+        $manualIncrementAudioTable = count(ListeningAudio::get()) + 1;
+        
+
+        $newAudio = new ListeningAudio;
+
+        $newAudio->audio_id = $manualIncrementAudioTable;
+        $newAudio->audio_title = $audioFileName;
 
         $newTest = new TestWave;
 
         $newTest->title = $request->test_name;
         $newTest->token = $request->token;
         $newTest->description = $request->description;
-        $newTest->
+        $newTest->audio_id = $manualIncrementAudioTable;
 
+        $newAudio->save();
         $newTest->save();
+        $audio->storeAs('public/audio', $audioFileName);
 
         return redirect()->route('admin.dashboard');
     }
@@ -61,6 +70,7 @@ class AdminController extends Controller
                 ->where('section', 'grammar')
                 ->get(),
             'readingQuestions' => TestQuestion::select('test_questions.*', 'reading_sections.*')
+                ->where('wave_id', $wave_id)
                 ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
                 ->get(),
             'number' => 0
@@ -77,6 +87,15 @@ class AdminController extends Controller
         $testWave->title = $request->title;
 
         $testWave->save();
+
+        return redirect()->route('manage-test');
+    }
+
+    public function deleteWave(Request $request)
+    {
+        $wave = TestWave::find($request->wave_id, 'wave_id');
+
+        $wave->delete();
 
         return redirect()->route('manage-test');
     }

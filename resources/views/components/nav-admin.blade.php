@@ -58,18 +58,18 @@
                             @csrf
                             <label for="token" class="form-label">TOKEN</label>
                             <input type="text" class="form-control fw-smaller "
-                                placeholder="Code must contain various character" id="token" name="token">
+                                placeholder="Code must contain various character" id="token" name="token" required>
 
                             <label for="test-name" class="form-label">Test Name</label>
-                            <input type="text" class="form-control " id="test-name" name="test_name">
+                            <input type="text" class="form-control " id="test-name" name="test_name" required>
 
                             <label for="description" class="form-label ">Description</label>
                             <textarea class="form-control" placeholder="About test..." id="floatingTextarea2" name="description"
-                                style="height: 100px"></textarea>
+                                style="height: 100px" required></textarea>
 
                             <label for="audio" class="form-label">Upload an Audio for the Listening Section</label>
                             <input type="file" class="form-control " id="audio" name="audio_wave"
-                                accept="audio/*">
+                                accept="audio/*" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary font-2">Close</button>
