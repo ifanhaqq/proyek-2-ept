@@ -63,6 +63,10 @@ class AdminController extends Controller
         $testQuestions = new TestQuestion;
         $data = [
             'waveInfos' => TestWave::where('wave_id', $wave_id)->first(),
+            'audioFile' => TestWave::select('test_waves.*', 'listening_audios.*')
+                           ->where('wave_id', $wave_id)
+                           ->join('listening_audios', 'test_waves.audio_id', '=', 'listening_audios.audio_id')
+                           ->first(),
             'listeningQuestions' => TestQuestion::where('wave_id', $wave_id)
                 ->where('section', 'listening')
                 ->get(),
@@ -85,6 +89,7 @@ class AdminController extends Controller
 
         $testWave->token = $request->token;
         $testWave->title = $request->title;
+        $testWave->description = $request->description;
 
         $testWave->save();
 

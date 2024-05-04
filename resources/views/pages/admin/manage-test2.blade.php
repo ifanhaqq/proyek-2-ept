@@ -18,14 +18,14 @@
                                 <input type="hidden" name="wave_id" value="{{ $waveInfos->wave_id }}">
                                 <label for="token" class="form-label ">TOKEN</label>
                                 <input type="text" class="form-control fw-smaller " id="token" name="token"
-                                    value="{{ $waveInfos->token }}">
+                                    value="{{ $waveInfos->token }}" readonly>
 
                                 <label for="test-name" class="form-label">Test Name</label>
                                 <input type="text" class="form-control " id="" name="title"
                                     value="{{ $waveInfos->title }}">
 
                                 <label for="description" class="form-label ">Description</label>
-                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" name="description">{{ $waveInfos->description }}</textarea>
 
                                 <button type="submit" href="" class="btn btn-success text-end mt-5">Save</button>
                             </form>
@@ -58,9 +58,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="text-center mt-4 mb-3" id="audio">
-                                <audio controls src=""></audio>
-                            </div>
+                            @if ($audioFile !== null)
+                                <div class="text-center mt-4 mb-3" id="audio">
+                                    <audio controls src="{{ asset("storage/audio/{$audioFile->audio_title}") }}"></audio>
+                                </div>
+                            @endif
+
                             <div class="row">
                                 <table class="table-borderless " style="overflow-x:auto;">
                                     <thead>
@@ -223,7 +226,8 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" id="addNewQuestion">Add Question For This Text</button>
+                        <button type="button" class="btn btn-primary" id="addNewQuestion">Add Question For This
+                            Text</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning font-2">Add</button>
