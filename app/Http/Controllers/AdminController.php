@@ -23,10 +23,17 @@ class AdminController extends Controller
 
     public function storeTestWave(Request $request)
     {
+        $audio = $request->file('audio_wave');
+        $audioFileName = $request->token . '_audio.' . $audio->getClientOriginalExtension();
+
+        $audio->storeAs('public/audio', $audioFileName);
+
         $newTest = new TestWave;
 
         $newTest->title = $request->test_name;
         $newTest->token = $request->token;
+        $newTest->description = $request->description;
+        $newTest->
 
         $newTest->save();
 

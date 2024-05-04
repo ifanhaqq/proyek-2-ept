@@ -61,8 +61,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/store-test-wave', [AdminCOntroller::class, 'storeTestWave'])->name('store-test-wave');
     Route::get('/manage-test', [AdminController::class, 'manageTest'])->name('manage-test');
+    
     Route::get('/manage-wave/{wave_id}', [AdminController::class, 'manageWave'])->name('manage-wave');
     Route::post('/update-wave', [AdminController::class, 'updateWave'])->name('update-wave');
+    Route::post('/delete-wave', [AdminController::class, 'deleteWave'])->name('delete-wave');
+
     Route::post('/store-question', [AdminController::class, 'storeQuestion'])->name('store-question');
     Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
 });

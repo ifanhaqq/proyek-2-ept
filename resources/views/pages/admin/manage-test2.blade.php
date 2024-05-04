@@ -187,12 +187,6 @@
                             <option value="reading">Reading</option>
                         </select><br>
 
-                        {{-- Optional option for listening section only --}}
-                        <label for="audioQuestion" class="form-label fw-bolder audioQuestion mt-3">Upload an MP3
-                            File</label>
-                        <input type="file" accept="audio/*" class="form-control mb-3 audioQuestion"
-                            name="audioQuestion" id="audioQuestion">
-
                         {{-- Optional option for reading section only --}}
                         <label for="readingTextQuestion" class="form-label fw-bolder readingTextQuestion">Text</label>
                         <textarea name="readingTextQuestion" id="readingTextQuestion" class="form-control readingTextQuestion"
@@ -229,7 +223,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" id="addNewQuestion">Add Question</button>
+                        <button type="button" class="btn btn-primary" id="addNewQuestion">Add Question For This Text</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning font-2">Add</button>

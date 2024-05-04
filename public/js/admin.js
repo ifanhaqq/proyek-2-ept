@@ -6,6 +6,8 @@ $(document).ready( function () {
     $('.reading-text').hide()
     $('.questionInput').hide()
     $('.readingTextQuestion').hide()
+    $('#addNewQuestion').hide()
+
     $('#sections tr.section-' + section).show()
     $('#questionInput').removeAttr('required')
     $('#readingTextQuestion').removeAttr('required')
@@ -19,20 +21,20 @@ $(document).ready( function () {
         $('.clonedElems').remove();
 
         if (newSection == 'listening') {
-            $('.audioQuestion').show()
             $('.readingTextQuestion').hide()
             $('.questionInput').hide()
+            $('#addNewQuestion').hide()
             $('#questionInput').removeAttr('required')
             $('#readingTextQuestion').removeAttr('required')
         } else if (newSection == 'reading') {
             $('.readingTextQuestion').show()
-            $('.audioQuestion').hide()
+            $('#addNewQuestion').show()
             $('.questionInput').show()
             $('#questionInput').prop('required', true)
             $('#readingTextQuestion').prop('required', true)
         } else {
             $('.readingTextQuestion').hide()
-            $('.audioQuestion').hide()
+            $('#addNewQuestion').hide()
             $('.questionInput').show()
             $('#questionInput').prop('required', true)
             $('#readingTextQuestion').removeAttr('required')
