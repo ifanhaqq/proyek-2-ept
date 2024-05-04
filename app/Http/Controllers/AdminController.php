@@ -28,7 +28,7 @@ class AdminController extends Controller
         $audioFileName = $request->token . '_audio.' . $audio->getClientOriginalExtension();
 
         $manualIncrementAudioTable = count(ListeningAudio::get()) + 1;
-        
+
 
         $newAudio = new ListeningAudio;
 
@@ -64,9 +64,9 @@ class AdminController extends Controller
         $data = [
             'waveInfos' => TestWave::where('wave_id', $wave_id)->first(),
             'audioFile' => TestWave::select('test_waves.*', 'listening_audios.*')
-                           ->where('wave_id', $wave_id)
-                           ->join('listening_audios', 'test_waves.audio_id', '=', 'listening_audios.audio_id')
-                           ->first(),
+                ->where('wave_id', $wave_id)
+                ->join('listening_audios', 'test_waves.audio_id', '=', 'listening_audios.audio_id')
+                ->first(),
             'listeningQuestions' => TestQuestion::where('wave_id', $wave_id)
                 ->where('section', 'listening')
                 ->get(),
@@ -107,7 +107,85 @@ class AdminController extends Controller
 
     public function storeQuestion(Request $request)
     {
-        dd($request);
+        // dd($request);
+        $testQuestion = new TestQuestion;
+        $audio_id = TestWave::where('wave_id', $request->wave_id)->value('audio_id');
+
+        if ($request->addQuestionSection == 'listening') {
+
+            $testQuestion->wave_id = $request->wave_id;
+            $testQuestion->audio_id = $audio_id;
+            $testQuestion->section = $request->addQuestionSection;
+            $testQuestion->question_ch1 = $request->choice_1;
+            $testQuestion->question_ch2 = $request->choice_2;
+            $testQuestion->question_ch3 = $request->choice_3;
+            $testQuestion->question_ch4 = $request->choice_4;
+
+            $testQuestion->correct_answer = $request->input("choice_$request->correct_answer");
+
+            $testQuestion->save();
+
+            return redirect()->route('manage-wave', $request->wave_id);
+
+
+        } else if ($request->addQuestionSection == 'grammar') {
+            $testQuestion->wave_id = $request->wave_id;
+
+            $testQuestion->section = $request->addQuestionSection;
+            $testQuestion->question = $request->question;
+
+            $testQuestion->question_ch1 = $request->choice_1;
+            $testQuestion->question_ch2 = $request->choice_2;
+            $testQuestion->question_ch3 = $request->choice_3;
+            $testQuestion->question_ch4 = $request->choice_4;
+            $testQuestion->correct_answer = $request->input("choice_$request->correct_answer");
+
+            $testQuestion->save();
+
+            return redirect()->route('manage-wave', $request->wave_id);
+
+        } else if ($request->addQuestionSection == 'reading') {
+
+
+            dd($request);
+
+            $testQuestion->wave_id = $request->wave_id;
+
+            $testQuestion->section = $request->addQuestionSection;
+            $testQuestion->question = $request->question;
+
+            $testQuestion->question_ch1 = $request->choice_1;
+            $testQuestion->question_ch2 = $request->choice_2;
+            $testQuestion->question_ch3 = $request->choice_3;
+            $testQuestion->question_ch4 = $request->choice_4;
+
+            $testQuestion->correct_answer = $request->input("choice_$request->correct_answer");
+
+            $testQuestion->save();
+
+            if ($request->questionElemParam > 1) {
+                for ($i = 2; $i <= $request->questionElemParam; $i++) {
+                    $testQuestion->question = $request->input("question_$i");
+
+                    $correctAnswer = $request->input("correct_answer_$i");
+
+                    echo $correctAnswer;
+
+                    $testQuestion->question_ch1 = $request->input("choice_1_$i");
+                    $testQuestion->question_ch2 = $request->input("choice_2_$i");
+                    $testQuestion->question_ch3 = $request->input("choice_3_$i");
+                    $testQuestion->question_ch4 = $request->input("choice_4_$i");
+                    $testQuestion->correct_answer = $request->input("choice_" . $correctAnswer  . "_$i");
+
+                    $testQuestion->save();
+                }
+
+                return redirect()->route('manage-wave', $request->wave_id);
+            } else {
+                return redirect()->route('manage-wave', $request->wave_id);
+            }
+
+        }
     }
 
     public function updateQuestion(Request $request)

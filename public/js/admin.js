@@ -45,14 +45,14 @@ $(document).ready( function () {
         const newSection = $('#sectionSelect').val()
 
         if (newSection == '1') {
-            $('#audio').show()
+            $('#audioPlayer').show()
             $('.reading-text').hide()
         } else if (newSection == '3') {
             $('.reading-text').show()
-            $('#audio').hide()
+            $('#audioPlayer').hide()
         } else {
             $('.reading-text').hide()
-            $('#audio').hide()
+            $('#audioPlayer').hide()
         }
 
         $('#sections tr').hide()

@@ -59,8 +59,8 @@
                         </div>
                         <div class="card-body">
                             @if ($audioFile !== null)
-                                <div class="text-center mt-4 mb-3" id="audio">
-                                    <audio controls src="{{ asset("storage/audio/{$audioFile->audio_title}") }}"></audio>
+                                <div class="text-center mt-4 mb-3" id="audioPlayer">
+                                    <audio controls src="{{ asset("storage/audio/{$audioFile->audio_title}") }}" ></audio>
                                 </div>
                             @endif
 
@@ -183,6 +183,7 @@
                     <form class="form-container rounded-3 fw-smaller" method="POST"
                         action="{{ route('store-question') }}">
                         @csrf
+                        <input type="hidden" name="wave_id" value="{{ $waveInfos->wave_id}}">
                         <label class="font-2" for="">Choose Section</label>
                         <select class="btn btn-outline-dark mb-3" name="addQuestionSection" id="addQuestionSection">
                             <option value="listening">Listening</option>
@@ -197,7 +198,7 @@
 
                         <div id="questionsContainer">
                             <div class="questionElems">
-                                <input type="hidden" id="questionElemParam" value="1">
+                                <input type="hidden" id="questionElemParam" value="1" name="questionElemParam">
                                 <label for="token" class="form-label fw-bolder questionInput">Question</label>
                                 <textarea class="form-control questionInput" name="question" id="questionInput" style="height: 100px" required></textarea>
 
