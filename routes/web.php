@@ -68,7 +68,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::post('/store-question', [AdminController::class, 'storeQuestion'])->name('store-question');
     Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
-});
+    Route::post('/delete-question', [AdminController::class, 'deleteQuestion'])->name('delete-question');
+}); 
 
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
 Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');

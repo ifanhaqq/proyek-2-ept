@@ -92,8 +92,17 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-listening"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <button href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="question_id"
+                                                            value="{{ $qs['question_id'] }}">
+                                                        <input type="hidden" name="wave_id"
+                                                            value="{{ $waveInfos->wave_id }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-question"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -117,15 +126,25 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-grammar"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <a href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="question_id"
+                                                            value="{{ $qs['question_id'] }}">
+                                                        <input type="hidden" name="wave_id"
+                                                            value="{{ $waveInfos->wave_id }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-question"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                         @php $number = 0 @endphp
 
                                         {{-- Reading Section --}}
-                                        <input type="hidden" id="amountOfReading" value="{{ count($readingQuestions) }}">
+                                        <input type="hidden" id="amountOfReading"
+                                            value="{{ count($readingQuestions) }}">
                                         @foreach ($readingQuestions as $qs)
                                             @php $number++ @endphp
                                             <tr class="mb-3 section-3">
@@ -146,10 +165,19 @@
                                                     <button href=""
                                                         class="btn btn-sm btn-primary mb-1 update-question-reading"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                        data-id="{{ $qs['question_id'] }}" data-reading="{{ $qs['reading_id'] }}">Update</button>
-                                                    <button href="" class="btn btn-sm btn-danger mb-1"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal">Delete</button>
+                                                        data-id="{{ $qs['question_id'] }}"
+                                                        data-reading="{{ $qs['reading_id'] }}">Update</button>
+                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="question_id"
+                                                            value="{{ $qs['question_id'] }}">
+                                                        <input type="hidden" name="wave_id"
+                                                            value="{{ $waveInfos->wave_id }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-question"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -250,7 +278,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body sub-font">
-                    <form class="form-container rounded-3 fw-smaller" method="POST" action="{{ route('update-question') }}">
+                    <form class="form-container rounded-3 fw-smaller" method="POST"
+                        action="{{ route('update-question') }}">
                         @csrf
                         <input type="hidden" name="question_id" id="updating-question-id">
                         <input type="hidden" name="wave_id" id="updating-wave-id" value="{{ $waveInfos->wave_id }}">
@@ -258,16 +287,17 @@
                         <input type="hidden" name="reading_id" id="updating-reading-id">
 
                         <label for="section" class="form-label">Section</label>
-                        <input class="form-control" name="section" type="text" id="updating-section-display" disabled>
-                        
+                        <input class="form-control" name="section" type="text" id="updating-section-display"
+                            disabled>
+
                         <label for="text" class="form-label fw-bolder updating-text">Text</label>
                         <textarea class="form-control updating-text" name="text" id="updating-text" style="height: 100px"></textarea>
-                        
+
                         <label for="question" class="form-label fw-bolder ">Question</label>
                         <textarea class="form-control" name="question" id="updating-question" style="height: 100px"></textarea>
-                        
 
-                        <label for=""  class="fw-bolder">Option</label><br>
+
+                        <label for="" class="fw-bolder">Option</label><br>
                         <label for="test-name" class="form-label">A. </label>
                         <input type="text" class="form-control" id="updating-questionch1" name="choice_1">
 
@@ -281,7 +311,8 @@
                         <input type="text" class="form-control " id="updating-questionch4" name="choice_4">
 
                         <label for="test-name" class="form-label answer-font">Answer: </label>
-                        <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="correct_answer">
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example"
+                            name="correct_answer">
                             <option value="1">A</option>
                             <option value="2">B</option>
                             <option value="3">C</option>

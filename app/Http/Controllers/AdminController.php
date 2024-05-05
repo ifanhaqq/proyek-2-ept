@@ -232,4 +232,13 @@ class AdminController extends Controller
         return redirect()->route('manage-wave', $request->wave_id);
 
     }
+
+    public function deleteQuestion(Request $request)
+    {
+        $question = TestQuestion::find($request->question_id, 'question_id');
+
+        $question->delete();
+
+        return redirect()->route('manage-wave', $request->wave_id);
+    }
 }
