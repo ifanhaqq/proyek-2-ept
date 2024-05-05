@@ -62,6 +62,7 @@ $(document).ready( function () {
     $('.update-question-grammar').click(function () {
         const questionId = $(this).data('id')
         $('#updating-question').show()
+        $('.updating-text').hide()
         
 
         $.ajax({
@@ -69,12 +70,15 @@ $(document).ready( function () {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+                console.log(data.data)
+                $('#updating-question-id').val(data.data.question_id)
                 $('#updating-questionch1').val(data.data.question_ch1)
                 $('#updating-questionch2').val(data.data.question_ch2)
                 $('#updating-questionch3').val(data.data.question_ch3)
                 $('#updating-questionch4').val(data.data.question_ch4)
                 $('#updating-question').val(data.data.question)
-                $('#updating-section').val('Structure & Written Expression')
+                $('#updating-section-display').val('Structure & Written Expression')
+                $('#updating-section').val(data.data.section)
             }
         })
     })
@@ -82,6 +86,7 @@ $(document).ready( function () {
     $('.update-question-listening').click(function () {
         const questionId = $(this).data('id')
         $('#updating-question').hide()
+        $('.updating-text').hide()
         
 
         $.ajax({
@@ -89,31 +94,42 @@ $(document).ready( function () {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+
+                $('#updating-question-id').val(data.data.question_id)
                 $('#updating-questionch1').val(data.data.question_ch1)
                 $('#updating-questionch2').val(data.data.question_ch2)
                 $('#updating-questionch3').val(data.data.question_ch3)
                 $('#updating-questionch4').val(data.data.question_ch4)
-                $('#updating-section').val('Listening')
+                $('#updating-section-display').val('Listening')
+                $('#updating-section').val(data.data.section)
             }
         })
     })
 
     $('.update-question-reading').click(function () {
         const questionId = $(this).data('id')
+        const readingId = $(this).data('reading')
         $('#updating-question').show()
+        $('.updating-text').show()
         
 
         $.ajax({
-            url: 'http://localhost:8000/api/test-question/' + questionId,
+            url: 'http://localhost:8000/api/test-question-reading/' + questionId + '/' + readingId,
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+                $('#updating-question-id').val(data.data.question_id)
+                $('#updating-reading-id').val(data.data.reading_id)
+
                 $('#updating-questionch1').val(data.data.question_ch1)
                 $('#updating-questionch2').val(data.data.question_ch2)
                 $('#updating-questionch3').val(data.data.question_ch3)
                 $('#updating-questionch4').val(data.data.question_ch4)
+
+                $('#updating-text').val(data.data.text)
                 $('#updating-question').val(data.data.question)
-                $('#updating-section').val('Reading')
+                $('#updating-section-display').val('Reading')
+                $('#updating-section').val(data.data.section)
             }
         })
     })

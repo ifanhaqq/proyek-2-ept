@@ -28,6 +28,8 @@ class TestQuestionResource extends JsonResource
     {
         return [
             'question_id' => $this->question_id,
+            'wave_id' => $this->wave_id,
+            'reading_id' => $this->reading_id,
             'section' => $this->section,
             'text' => $this->text,
             'question' => $this->question,

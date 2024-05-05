@@ -207,5 +207,29 @@ class AdminController extends Controller
     public function updateQuestion(Request $request)
     {
 
+        // dd($request);
+        $question = TestQuestion::where("question_id", $request->question_id)->first();
+
+        $question->question_ch1 = $request->choice_1;
+        $question->question_ch2 = $request->choice_2;
+        $question->question_ch3 = $request->choice_3;
+        $question->question_ch4 = $request->choice_4;
+
+        $question->correct_answer = $request->input("choice_$request->correct_answer");
+
+        if ($request->section == 'grammar') {
+            $question->question = $request->question;
+        } else if ($request->section == 'reading') {
+            $readingText = ReadingSection::where('reading_id', $request->reading_id)->first();
+
+            $readingText->text = $request->text;
+            $question->question = $request->question;
+            $readingText->save();
+        }
+
+        $question->save();
+
+        return redirect()->route('manage-wave', $request->wave_id);
+
     }
 }

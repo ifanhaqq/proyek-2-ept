@@ -60,7 +60,7 @@
                         <div class="card-body">
                             @if ($audioFile !== null)
                                 <div class="text-center mt-4 mb-3" id="audioPlayer">
-                                    <audio controls src="{{ asset("storage/audio/{$audioFile->audio_title}") }}" ></audio>
+                                    <audio controls src="{{ asset("storage/audio/{$audioFile->audio_title}") }}"></audio>
                                 </div>
                             @endif
 
@@ -146,7 +146,7 @@
                                                     <button href=""
                                                         class="btn btn-sm btn-primary mb-1 update-question-reading"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                        data-id="{{ $qs['question_id'] }}">Update</button>
+                                                        data-id="{{ $qs['question_id'] }}" data-reading="{{ $qs['reading_id'] }}">Update</button>
                                                     <button href="" class="btn btn-sm btn-danger mb-1"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteModal">Delete</button>
@@ -183,7 +183,7 @@
                     <form class="form-container rounded-3 fw-smaller" method="POST"
                         action="{{ route('store-question') }}">
                         @csrf
-                        <input type="hidden" name="wave_id" value="{{ $waveInfos->wave_id}}">
+                        <input type="hidden" name="wave_id" value="{{ $waveInfos->wave_id }}">
                         <label class="font-2" for="">Choose Section</label>
                         <select class="btn btn-outline-dark mb-3" name="addQuestionSection" id="addQuestionSection">
                             <option value="listening">Listening</option>
@@ -250,39 +250,50 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body sub-font">
-                    <form class="form-container rounded-3 fw-smaller" method="POST" action="">
+                    <form class="form-container rounded-3 fw-smaller" method="POST" action="{{ route('update-question') }}">
+                        @csrf
+                        <input type="hidden" name="question_id" id="updating-question-id">
+                        <input type="hidden" name="wave_id" id="updating-wave-id" value="{{ $waveInfos->wave_id }}">
+                        <input type="hidden" name="section" id="updating-section">
+                        <input type="hidden" name="reading_id" id="updating-reading-id">
+
                         <label for="section" class="form-label">Section</label>
-                        <input class="form-control" type="text" id="updating-section" disabled>
-                        <label for="token" class="form-label fw-bolder ">Question</label>
-                        <textarea class="form-control" id="updating-question" style="height: 100px"></textarea>
-                        <label for="" class="fw-bolder">Option</label><br>
+                        <input class="form-control" name="section" type="text" id="updating-section-display" disabled>
+                        
+                        <label for="text" class="form-label fw-bolder updating-text">Text</label>
+                        <textarea class="form-control updating-text" name="text" id="updating-text" style="height: 100px"></textarea>
+                        
+                        <label for="question" class="form-label fw-bolder ">Question</label>
+                        <textarea class="form-control" name="question" id="updating-question" style="height: 100px"></textarea>
+                        
+
+                        <label for=""  class="fw-bolder">Option</label><br>
                         <label for="test-name" class="form-label">A. </label>
-                        <input type="text" class="form-control " id="updating-questionch1" name="">
+                        <input type="text" class="form-control" id="updating-questionch1" name="choice_1">
 
                         <label for="test-name" class="form-label">B. </label>
-                        <input type="text" class="form-control " id="updating-questionch2" name="">
+                        <input type="text" class="form-control " id="updating-questionch2" name="choice_2">
 
                         <label for="test-name" class="form-label">C. </label>
-                        <input type="text" class="form-control " id="updating-questionch3" name="">
+                        <input type="text" class="form-control " id="updating-questionch3" name="choice_3">
 
                         <label for="test-name" class="form-label">D. </label>
-                        <input type="text" class="form-control " id="updating-questionch4" name="">
+                        <input type="text" class="form-control " id="updating-questionch4" name="choice_4">
 
                         <label for="test-name" class="form-label answer-font">Answer: </label>
-                        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                            <option selected>Open this select answer</option>
-
-                            <option value="">A</option>
-                            <option value="">B</option>
-                            <option value="">C</option>
-                            <option value="">D</option>
+                        <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="correct_answer">
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">C</option>
+                            <option value="4">D</option>
                         </select>
 
-                    </form>
+
 
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary font-2">Update</button>
+                    </form>
                 </div>
 
             </div>
