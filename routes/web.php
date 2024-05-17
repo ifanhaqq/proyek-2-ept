@@ -77,7 +77,7 @@ Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get
 Route::get('/scoring', [TestTakerController::class, 'scoring'])->name('scoring');
 Route::get('/dump-spreadsheet', [SpreadsheetController::class, 'index']);
 Route::get('/download-template', [SpreadsheetController::class, 'downloadTemplate'])->name('download-template');
-Route::post('/import-spreadsheet', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
+Route::post('/import-spreadsheet/{wave_id}', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
 
 
 

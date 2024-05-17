@@ -343,7 +343,7 @@
                 </div>
                 <div class="modal-body">
                     <h3>Select file that contain question:</h3>
-                    <form action="{{ route('import-spreadsheet') }}" method="POST" class="form-container"
+                    <form action="{{ route('import-spreadsheet', $waveInfos->wave_id ) }}" method="POST" class="form-container"
                         enctype="multipart/form-data">
                         @csrf
                         {{-- download excel template file  --}}

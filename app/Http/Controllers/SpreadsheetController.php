@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TestQuestion;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -52,7 +53,7 @@ class SpreadsheetController extends Controller
         }
 
         if ($foundCellRow !== null) {
-            return $foundCellRow;
+            return $foundCellRow - 1;
         } else {
             echo "Cell not found";
         }
@@ -91,7 +92,31 @@ class SpreadsheetController extends Controller
         return $readingTextsRow;
     }
 
-    public function importSpreadsheet(Request $request)
+    public function choiceConverter($arrayWorksheet)
+    {
+        switch ($arrayWorksheet) {
+            case "A":
+                $arrayWorksheet = "1";
+                break;
+            case "B":
+                $arrayWorksheet = "2";
+                break;
+            case "C":
+                $arrayWorksheet = "3";
+                break;
+            case "D":
+                $arrayWorksheet = "4";
+                break;
+        }
+
+        $choice = 'choice_';
+        $correctAnswer = $choice . $arrayWorksheet;
+
+
+        return $correctAnswer;
+    }
+
+    public function importSpreadsheet(Request $request, $wave_id)
     {
         $file = $request->file('excel');
 
@@ -105,9 +130,32 @@ class SpreadsheetController extends Controller
         $firstReadingIndex = $this->searchCell($worksheet, "Reading");
 
         // Find cells containing reading text
-        $readingTextsRow = $this->searchReadingTextCell($worksheet, 200);
+        // $readingTextsRow = $this->searchReadingTextCell($worksheet, 200);
 
-        dd($readingTextsRow);
+        for ($i = 1; $i < $firstReadingIndex; $i++) {
+            $correctAnswerString = $this->choiceConverter($arrayWorksheet[$i][6]);
+
+            $section = $arrayWorksheet[$i][0];
+            $question = $arrayWorksheet[$i][1];
+            $choice_1 = $arrayWorksheet[$i][2];
+            $choice_2 = $arrayWorksheet[$i][3];
+            $choice_3 = $arrayWorksheet[$i][4];
+            $choice_4 = $arrayWorksheet[$i][5];
+            $correct_answer = $$correctAnswerString;
+
+            $testQuestion = new TestQuestion;
+
+            $testQuestion->wave_id = $wave_id;
+            $testQuestion->section = $section;
+            $testQuestion->question = $question;
+            $testQuestion->question_ch1 = $choice_1;
+            $testQuestion->question_ch2 = $choice_2;
+            $testQuestion->question_ch3 = $choice_3;
+            $testQuestion->question_ch4 = $choice_4;
+            $testQuestion->correct_answer = $correct_answer;
+
+            $testQuestion->save();
+        }
 
 
     }
