@@ -343,19 +343,23 @@
                 </div>
                 <div class="modal-body">
                     <h3>Select file that contain question:</h3>
-                    <form action="/action_page.php">
+                    <form action="{{ route('import-spreadsheet') }}" method="POST" class="form-container"
+                        enctype="multipart/form-data">
+                        @csrf
                         {{-- download excel template file  --}}
-                        <p>files must be based on a template, click download if didn't have any!</p>
-                        <a href="../img/cover.png" class="btn btn-sm btn-success mb-3" download>Download </a>
+                        <p>The file must be based on a template, click download if didn't have any!</p>
+                        <a href="{{ route('download-template') }}" class="btn btn-sm btn-success mb-3" download>Download
+                        </a>
                         <br>
-                        <label for="myfile">Upload File</label>
-                        <input type="file" id="myfile" name="myfile"><br><br>
+                        <label class="form-label" for="excel">Upload File</label>
+                        <input class="form-control" type="file" id="excel" name="excel"><br><br>
 
-                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

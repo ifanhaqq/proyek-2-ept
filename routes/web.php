@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\TestTakerController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +75,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
 Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');
 Route::get('/scoring', [TestTakerController::class, 'scoring'])->name('scoring');
+Route::get('/dump-spreadsheet', [SpreadsheetController::class, 'index']);
+Route::get('/download-template', [SpreadsheetController::class, 'downloadTemplate'])->name('download-template');
+Route::post('/import-spreadsheet', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
 
 
 
