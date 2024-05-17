@@ -71,7 +71,7 @@
                                 </button>
                             </div>
                             <div class="col-9">
-                                <p><small>Don’t have an account? Click <a href="{{ route('register') }}">Here</a></p>
+                                <p><small>Don’t have an account? Click <a href="{{ route('register') }}" id="register-btn">Here</a></p>
                             </div>
                         </div>
                     </form>
