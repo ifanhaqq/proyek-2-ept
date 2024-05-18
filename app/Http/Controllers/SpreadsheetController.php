@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\DB;
 
 class SpreadsheetController extends Controller
 {
@@ -130,32 +131,79 @@ class SpreadsheetController extends Controller
         $firstReadingIndex = $this->searchCell($worksheet, "Reading");
 
         // Find cells containing reading text
-        // $readingTextsRow = $this->searchReadingTextCell($worksheet, 200);
+        $readingTextsCell = $this->searchReadingTextCell($worksheet, 200);
+        $readingTexts = [];
 
-        for ($i = 1; $i < $firstReadingIndex; $i++) {
-            $correctAnswerString = $this->choiceConverter($arrayWorksheet[$i][6]);
+        // dd($readingTextsCell);
 
-            $section = $arrayWorksheet[$i][0];
-            $question = $arrayWorksheet[$i][1];
-            $choice_1 = $arrayWorksheet[$i][2];
-            $choice_2 = $arrayWorksheet[$i][3];
-            $choice_3 = $arrayWorksheet[$i][4];
-            $choice_4 = $arrayWorksheet[$i][5];
-            $correct_answer = $$correctAnswerString;
-
-            $testQuestion = new TestQuestion;
-
-            $testQuestion->wave_id = $wave_id;
-            $testQuestion->section = $section;
-            $testQuestion->question = $question;
-            $testQuestion->question_ch1 = $choice_1;
-            $testQuestion->question_ch2 = $choice_2;
-            $testQuestion->question_ch3 = $choice_3;
-            $testQuestion->question_ch4 = $choice_4;
-            $testQuestion->correct_answer = $correct_answer;
-
-            $testQuestion->save();
+        for ($i=0; $i < count($readingTextsCell); $i++) { 
+            $readingText = $worksheet->getCell("B$readingTextsCell[$i]")->getValue();
+            $readingTexts[] = $readingText;
         }
+
+        for ($i=0; $i < count($readingTextsCell) - 1; $i++) {
+            echo $readingTexts[$i] . "<br>";
+            for ($j = $readingTextsCell[$i]; $j < $readingTextsCell[$i + 1]; $j++) {
+                
+                $section = $arrayWorksheet[$j][0];
+                $question = $arrayWorksheet[$j][1];
+                $choice_1 = $arrayWorksheet[$j][2];
+                $choice_2 = $arrayWorksheet[$j][3];
+                $choice_3 = $arrayWorksheet[$j][4];
+                $choice_4 = $arrayWorksheet[$j][5];
+
+                echo $choice_4 . "<br>";
+
+                
+            }
+            echo "<br>";
+        }
+
+        
+
+        // insert the queries
+        // DB::beginTransaction();
+        // try {
+        //     // Inserting listening and grammar sections
+        //     for ($i = 1; $i < $firstReadingIndex; $i++) {
+        //         $correctAnswerString = $this->choiceConverter($arrayWorksheet[$i][6]);
+
+        //         $section = $arrayWorksheet[$i][0];
+        //         $question = $arrayWorksheet[$i][1];
+        //         $choice_1 = $arrayWorksheet[$i][2];
+        //         $choice_2 = $arrayWorksheet[$i][3];
+        //         $choice_3 = $arrayWorksheet[$i][4];
+        //         $choice_4 = $arrayWorksheet[$i][5];
+        //         $correct_answer = $$correctAnswerString;
+
+        //         $testQuestion = new TestQuestion;
+
+        //         $testQuestion->wave_id = $wave_id;
+        //         $testQuestion->section = $section;
+        //         $testQuestion->question = $question;
+        //         $testQuestion->question_ch1 = $choice_1;
+        //         $testQuestion->question_ch2 = $choice_2;
+        //         $testQuestion->question_ch3 = $choice_3;
+        //         $testQuestion->question_ch4 = $choice_4;
+        //         $testQuestion->correct_answer = $correct_answer;
+
+        //         // $testQuestion->save();
+        //     }
+
+        //     $checkingInsertedQuery = TestQuestion::where("question_ch1", "(A) There are many different airline fares available.")->first();
+
+        //     if ($checkingInsertedQuery) {
+        //         echo "Question's found: " . $checkingInsertedQuery->question_id;
+        //     } else {
+        //         echo "Question's not found!";
+        //     }
+
+        // } catch (\Throwable $th) {
+        //     dd($th);
+        // } finally {
+        //     DB::rollBack();
+        // }
+
 
 
     }
