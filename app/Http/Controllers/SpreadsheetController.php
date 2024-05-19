@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReadingSection;
 use App\Models\TestQuestion;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -117,6 +118,33 @@ class SpreadsheetController extends Controller
         return $correctAnswer;
     }
 
+    public function submitQuestion(
+        $wave_id,
+        $question,
+        $section,
+        $reading_id,
+        $question_ch1,
+        $question_ch2,
+        $question_ch3,
+        $question_ch4,
+        $correct_answer
+    ) {
+
+        $testQuestion = new TestQuestion;
+
+        $testQuestion->wave_id = $wave_id;
+        $testQuestion->section = $section;
+        $testQuestion->reading_id = $reading_id;
+        $testQuestion->question = $question;
+        $testQuestion->question_ch1 = $question_ch1;
+        $testQuestion->question_ch2 = $question_ch2;
+        $testQuestion->question_ch3 = $question_ch3;
+        $testQuestion->question_ch4 = $question_ch4;
+        $testQuestion->correct_answer = $correct_answer;
+
+        $testQuestion->save();
+    }
+
     public function importSpreadsheet(Request $request, $wave_id)
     {
         $file = $request->file('excel');
@@ -125,8 +153,6 @@ class SpreadsheetController extends Controller
 
         $arrayWorksheet = $worksheet->toArray();
 
-        // dd($arrayWorksheet);
-
         // Search row of cell that contain value of Reading
         $firstReadingIndex = $this->searchCell($worksheet, "Reading");
 
@@ -134,77 +160,78 @@ class SpreadsheetController extends Controller
         $readingTextsCell = $this->searchReadingTextCell($worksheet, 200);
         $readingTexts = [];
 
-        // dd($readingTextsCell);
-
-        for ($i=0; $i < count($readingTextsCell); $i++) { 
+        for ($i = 0; $i < count($readingTextsCell); $i++) {
             $readingText = $worksheet->getCell("B$readingTextsCell[$i]")->getValue();
             $readingTexts[] = $readingText;
         }
 
-        for ($i=0; $i < count($readingTextsCell) - 1; $i++) {
-            echo $readingTexts[$i] . "<br>";
-            for ($j = $readingTextsCell[$i]; $j < $readingTextsCell[$i + 1]; $j++) {
-                
-                $section = $arrayWorksheet[$j][0];
-                $question = $arrayWorksheet[$j][1];
-                $choice_1 = $arrayWorksheet[$j][2];
-                $choice_2 = $arrayWorksheet[$j][3];
-                $choice_3 = $arrayWorksheet[$j][4];
-                $choice_4 = $arrayWorksheet[$j][5];
+        // insert the queries
+        try {
+            // Inserting listening and grammar sections
+            for ($i = 1; $i < $firstReadingIndex; $i++) {
+                $correctAnswerString = $this->choiceConverter($arrayWorksheet[$i][6]);
 
-                echo $choice_4 . "<br>";
+                $section = $arrayWorksheet[$i][0];
+                $question = $arrayWorksheet[$i][1];
+                $choice_1 = $arrayWorksheet[$i][2];
+                $choice_2 = $arrayWorksheet[$i][3];
+                $choice_3 = $arrayWorksheet[$i][4];
+                $choice_4 = $arrayWorksheet[$i][5];
+                $correct_answer = $$correctAnswerString;
 
-                
+                $this->submitQuestion($wave_id, $question, $section, null, $choice_1, $choice_2, $choice_3, $choice_4, $correct_answer);
             }
-            echo "<br>";
+
+            // Inserting reading section
+            for ($i = 0; $i < count($readingTextsCell) - 1; $i++) {
+                // echo $readingTexts[$i] . "<br><br>";
+                $manualIncrement = ReadingSection::max("reading_id") + 1;
+
+                $readingSection = new ReadingSection;
+                $readingSection->reading_id = $manualIncrement;
+                $readingSection->text = $readingTexts[$i];
+                $readingSection->save();
+
+
+                for ($j = $readingTextsCell[$i]; $j < $readingTextsCell[$i + 1] - 1; $j++) {
+                    $correctAnswerString = $this->choiceConverter($arrayWorksheet[$j][6]);
+
+                    $section = $arrayWorksheet[$j][0];
+                    $question = $arrayWorksheet[$j][1];
+                    $choice_1 = $arrayWorksheet[$j][2];
+                    $choice_2 = $arrayWorksheet[$j][3];
+                    $choice_3 = $arrayWorksheet[$j][4];
+                    $choice_4 = $arrayWorksheet[$j][5];
+                    $correct_answer = $$correctAnswerString;
+
+                    // echo $section . "<br>";
+                    $this->submitQuestion($wave_id, $question, $section, $manualIncrement, $choice_1, $choice_2, $choice_3, $choice_4, $correct_answer);
+                }
+            }
+
+            $checkingInsertedQuery = TestQuestion::where("question_ch1", "(A) There are many different airline fares available.")->first();
+            $maxID = ReadingSection::max("reading_id");
+            $questionMaxID = TestQuestion::max("question_id");
+            
+            $readingSectionQuery = ReadingSection::where("reading_id", $maxID)->first();
+            $testQuestionQuery = TestQuestion::where("question_id", $questionMaxID)->first();
+
+            $result = "Maximum text is: $readingSectionQuery->text and Maximum question is: $testQuestionQuery->question";
+
+            
+
+            if ($checkingInsertedQuery) {
+                echo "Question's found: " . $checkingInsertedQuery->question_id;
+                echo "Max question is: " .  $questionMaxID;
+                dd($result);
+            } else {
+                echo "Question's not found!";
+            }
+
+        } catch (\Throwable $th) {
+            dd($th);
         }
 
-        
-
-        // insert the queries
-        // DB::beginTransaction();
-        // try {
-        //     // Inserting listening and grammar sections
-        //     for ($i = 1; $i < $firstReadingIndex; $i++) {
-        //         $correctAnswerString = $this->choiceConverter($arrayWorksheet[$i][6]);
-
-        //         $section = $arrayWorksheet[$i][0];
-        //         $question = $arrayWorksheet[$i][1];
-        //         $choice_1 = $arrayWorksheet[$i][2];
-        //         $choice_2 = $arrayWorksheet[$i][3];
-        //         $choice_3 = $arrayWorksheet[$i][4];
-        //         $choice_4 = $arrayWorksheet[$i][5];
-        //         $correct_answer = $$correctAnswerString;
-
-        //         $testQuestion = new TestQuestion;
-
-        //         $testQuestion->wave_id = $wave_id;
-        //         $testQuestion->section = $section;
-        //         $testQuestion->question = $question;
-        //         $testQuestion->question_ch1 = $choice_1;
-        //         $testQuestion->question_ch2 = $choice_2;
-        //         $testQuestion->question_ch3 = $choice_3;
-        //         $testQuestion->question_ch4 = $choice_4;
-        //         $testQuestion->correct_answer = $correct_answer;
-
-        //         // $testQuestion->save();
-        //     }
-
-        //     $checkingInsertedQuery = TestQuestion::where("question_ch1", "(A) There are many different airline fares available.")->first();
-
-        //     if ($checkingInsertedQuery) {
-        //         echo "Question's found: " . $checkingInsertedQuery->question_id;
-        //     } else {
-        //         echo "Question's not found!";
-        //     }
-
-        // } catch (\Throwable $th) {
-        //     dd($th);
-        // } finally {
-        //     DB::rollBack();
-        // }
-
-
-
+        return redirect()->route('manage-wave', $wave_id);
     }
 }
