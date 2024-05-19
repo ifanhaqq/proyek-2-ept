@@ -209,25 +209,6 @@ class SpreadsheetController extends Controller
                 }
             }
 
-            $checkingInsertedQuery = TestQuestion::where("question_ch1", "(A) There are many different airline fares available.")->first();
-            $maxID = ReadingSection::max("reading_id");
-            $questionMaxID = TestQuestion::max("question_id");
-            
-            $readingSectionQuery = ReadingSection::where("reading_id", $maxID)->first();
-            $testQuestionQuery = TestQuestion::where("question_id", $questionMaxID)->first();
-
-            $result = "Maximum text is: $readingSectionQuery->text and Maximum question is: $testQuestionQuery->question";
-
-            
-
-            if ($checkingInsertedQuery) {
-                echo "Question's found: " . $checkingInsertedQuery->question_id;
-                echo "Max question is: " .  $questionMaxID;
-                dd($result);
-            } else {
-                echo "Question's not found!";
-            }
-
         } catch (\Throwable $th) {
             dd($th);
         }
