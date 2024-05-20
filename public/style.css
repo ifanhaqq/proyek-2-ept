@@ -250,3 +250,9 @@ nav {
 .answer-font{
   color: #28a745;
 }
+
+.checkbox-wrapper {
+  background-color: yellow;
+  padding: 10px;
+  display: inline-block;
+}

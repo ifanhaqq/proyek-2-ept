@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListeningAudio;
 use App\Models\TestQuestion;
 use App\Models\TestResult;
 use App\Models\TestScore;
@@ -96,6 +97,9 @@ class TestTakerController extends Controller
             return asset("storage/audio/$param");
         }
 
+        $wave = TestWave::where('wave_id', Session::get('wave_id'))->first();
+        $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();
+
         $qs = TestQuestion::where('wave_id', Session::get('wave_id'))
             ->where('section', 'listening')
             ->inRandomOrder()->get();
@@ -104,6 +108,7 @@ class TestTakerController extends Controller
             'questions' => $qs,
             'title' => 'Listening Section',
             'number' => 0,
+            'audio' => $audio,
             'user_id' => Auth::user()->id,
         ];
 
@@ -177,6 +182,20 @@ class TestTakerController extends Controller
         }
     }
 
+    public function convertScore($questionAmount, $convertRate)
+    {
+        return $convertRate / $questionAmount;
+    }
+
+    public function countCorrectAnswer($section)
+    {
+        return count(TestResult::where('wave_id', Session::get('wave_id'))
+               ->where('user_id', Auth::user()->id)
+               ->where('section', $section)
+               ->where('status', 'correct')
+               ->get());
+    }
+
     public function score(Request $request)
     {
         // $dump = 31 + (0 * (37/50));
@@ -184,23 +203,9 @@ class TestTakerController extends Controller
 
         $this->submit($request);
 
-        function convertScore($questionAmount, $convertRate)
-        {
-            return $convertRate / $questionAmount;
-        }
-
-        function countCorrectAnswer($section)
-        {
-            return count(TestResult::where('wave_id', Session::get('wave_id'))
-                ->where('user_id', 3)
-                ->where('section', $section)
-                ->where('status', 'correct')
-                ->get());
-        }
-
-        $convertListening = convertScore(50, 37) * countCorrectAnswer('listening') + 31;
-        $convertGrammar = convertScore(40, 37) * countCorrectAnswer('grammar') + 31;
-        $convertReading = convertScore(50, 36) * countCorrectAnswer('reading') + 31;
+        $convertListening = $this->convertScore(50, 37) * $this->countCorrectAnswer('listening') + 31;
+        $convertGrammar = $this->convertScore(40, 37) * $this->countCorrectAnswer('grammar') + 31;
+        $convertReading = $this->convertScore(50, 36) * $this->countCorrectAnswer('reading') + 31;
 
         $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
 
@@ -231,23 +236,10 @@ class TestTakerController extends Controller
 
     public function dumpGet()
     {
-        function convertScore($questionAmount, $convertRate)
-        {
-            return $convertRate / $questionAmount;
-        }
 
-        function countCorrectAnswer($section)
-        {
-            return count(TestResult::where('wave_id', Session::get('wave_id'))
-                ->where('user_id', 3)
-                ->where('section', $section)
-                ->where('status', 'correct')
-                ->get());
-        }
-
-        $convertListening = convertScore(50, 37) * countCorrectAnswer('listening') + 31;
-        $convertGrammar = convertScore(40, 37) * countCorrectAnswer('grammar') + 31;
-        $convertReading = convertScore(50, 36) * countCorrectAnswer('reading') + 31;
+        $convertListening = $this->convertScore(50, 37) * $this->countCorrectAnswer('listening') + 31;
+        $convertGrammar = $this->convertScore(40, 37) * $this->countCorrectAnswer('grammar') + 31;
+        $convertReading = $this->convertScore(50, 36) * $this->countCorrectAnswer('reading') + 31;
 
         $finalScore = (($convertGrammar + $convertReading + $convertListening) * 10) / 3;
 

@@ -39,4 +39,17 @@ $(document).ready(function () {
         showHide(newParams)
     })
 
+    
+
+    for (let index = 1; index <= maxParams; index++) {
+        let radioInput = $('.radio_' + index)
+        let navButton = $('#nav-button-' + index)
+
+        radioInput.click(() =>  {
+            navButton.removeClass("btn-outline-dark")
+            navButton.addClass("btn-dark btn-outline-white text-white")
+        })
+        
+    }
+
 })
