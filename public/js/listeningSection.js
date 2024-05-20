@@ -39,17 +39,35 @@ $(document).ready(function () {
         showHide(newParams)
     })
 
-    
+
 
     for (let index = 1; index <= maxParams; index++) {
         let radioInput = $('.radio_' + index)
         let navButton = $('#nav-button-' + index)
+        let checkbox = $('#checkbox-' + index)
 
-        radioInput.click(() =>  {
-            navButton.removeClass("btn-outline-dark")
-            navButton.addClass("btn-dark btn-outline-white text-white")
+        radioInput.click(() => {
+            if (checkbox.is(":checked")) {
+                navButton.removeClass("btn-outline-dark")
+                navButton.addClass("btn-warning btn-outline-dark text-black")
+            } else {
+                navButton.removeClass("btn-outline-dark")
+                navButton.addClass("btn-dark btn-outline-white text-white")
+            }
+
         })
-        
+
+        checkbox.change(() => {
+            if (checkbox.is(":checked")) {
+                navButton.removeClass("btn-outline-dark btn-dark text-white")
+                navButton.addClass("btn-warning btn-outline-dark text-black")
+            } else {
+                navButton.removeClass("btn-outline-dark")
+                navButton.addClass("btn-dark btn-outline-white text-white")
+            }
+
+        })
+
     }
 
 })

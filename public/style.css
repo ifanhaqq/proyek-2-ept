@@ -251,8 +251,11 @@ nav {
   color: #28a745;
 }
 
+/* Checkbox */
 .checkbox-wrapper {
   background-color: yellow;
   padding: 10px;
   display: inline-block;
 }
+
+
