@@ -65,8 +65,7 @@
 
         <div class="flex-container mt-4" id="button-wrapper">
             @for ($i = 1; $i <= $count; $i++)
-                <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}"
-                    style="invert(1)">{{ $i }}</button>
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1 nav-button" id="nav-button-{{ $i }}" data-id="{{$i}}">{{ $i }}</button>
             @endfor
         </div>
     </div>
