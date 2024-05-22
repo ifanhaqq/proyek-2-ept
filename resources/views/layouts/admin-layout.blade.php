@@ -13,6 +13,8 @@
 
     @include('components.footer-admin')
 
+    @yield('scripts')
+
     
 </body>
 </html>

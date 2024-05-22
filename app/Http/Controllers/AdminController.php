@@ -46,7 +46,7 @@ class AdminController extends Controller
         $newTest->save();
         $audio->storeAs('public/audio', $audioFileName);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('manage-test')->with('success', 'Test wave added succesfully!');
     }
 
     public function manageTest()
@@ -93,7 +93,7 @@ class AdminController extends Controller
 
         $testWave->save();
 
-        return redirect()->route('manage-test');
+        return redirect()->route('manage-wave', $request->wave_id)->with('success-update', 'Test wave updated succesfully!');
     }
 
     public function deleteWave(Request $request)
@@ -102,7 +102,7 @@ class AdminController extends Controller
 
         $wave->delete();
 
-        return redirect()->route('manage-test');
+        return redirect()->route('manage-test')->with('success', 'Test wave deleted succesfully!');
     }
 
     public function storeQuestion(Request $request)
@@ -129,7 +129,7 @@ class AdminController extends Controller
 
             $testQuestion->save();
 
-            return redirect()->route('manage-wave', $request->wave_id);
+            return redirect()->route('manage-wave', $request->wave_id)->with('success', 'Question added sucesfully!');
 
 
         } else if ($request->addQuestionSection == 'grammar') {
@@ -146,7 +146,7 @@ class AdminController extends Controller
 
             $testQuestion->save();
 
-            return redirect()->route('manage-wave', $request->wave_id);
+            return redirect()->route('manage-wave', $request->wave_id)->with('success', 'Question added sucesfully!');
 
         } else if ($request->addQuestionSection == 'reading') {
 
@@ -196,9 +196,9 @@ class AdminController extends Controller
                     $testQuestion->save();
                 }
 
-                return redirect()->route('manage-wave', $request->wave_id);
+                return redirect()->route('manage-wave', $request->wave_id)->with('success', 'Question added sucesfully!');
             } else {
-                return redirect()->route('manage-wave', $request->wave_id);
+                return redirect()->route('manage-wave', $request->wave_id)->with('success', 'Question added sucesfully!');
             }
 
         }
@@ -229,7 +229,7 @@ class AdminController extends Controller
 
         $question->save();
 
-        return redirect()->route('manage-wave', $request->wave_id);
+        return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question updaated succesfully!");
 
     }
 
@@ -239,6 +239,6 @@ class AdminController extends Controller
 
         $question->delete();
 
-        return redirect()->route('manage-wave', $request->wave_id);
+        return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question deleted sucessfully!");
     }
 }

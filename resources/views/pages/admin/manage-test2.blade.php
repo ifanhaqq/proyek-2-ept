@@ -7,6 +7,12 @@
                 <h4 class="font-2">Manage Test</h4>
                 <p class="sub-font">Add your Question!</p>
             </div>
+            @if (session('success-update'))
+                <div class="alert alert-success alert-dismissable d-flex flex-row" role="alert">
+                    <div class="me-auto">{{ session('success-update') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row ">
                 <div class="col-12">
                     <div class="card">
@@ -26,7 +32,21 @@
 
                                 <label for="description" class="form-label ">Description</label>
                                 <textarea class="form-control" id="floatingTextarea2" style="height: 100px" name="description">{{ $waveInfos->description }}</textarea>
-
+                                {{-- new feature --}}
+                                <div class="row font-2 mt-3">
+                                    <div class="col-3">
+                                        <h6>Total Questions  </h6>
+                                        <p>Listening  </p>
+                                        <p>Structure And Written Expression </p>
+                                        <p>Reaading </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>: {{ count($listeningQuestions) + count($grammarQuestions) + count($readingQuestions) }}</p>
+                                        <p>: {{ count($listeningQuestions) }}</p>
+                                        <p>: {{ count($grammarQuestions) }}</p>
+                                        <p>: {{ count($readingQuestions) }}</p>
+                                    </div>
+                                </div>
                                 <button type="submit" href="" class="btn btn-success text-end mt-5">Save</button>
                             </form>
                         </div>
@@ -35,6 +55,12 @@
             </div>
             <div class="row">
                 <div class="col-12 mt-4">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissable d-flex flex-row" role="alert">
+                            <div class="me-auto">{{ session('success') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
@@ -56,6 +82,7 @@
                                         data-bs-target="#exampleModal">Add</button>
                                 </div>
                             </div>
+
                         </div>
                         <div class="card-body">
                             @if ($audioFile !== null)
@@ -330,7 +357,6 @@
             </div>
         </div>
     </div>
-    {{-- modal import file --}}
 
     <!-- Modal export -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -343,8 +369,8 @@
                 </div>
                 <div class="modal-body">
                     <h3>Select file that contain question:</h3>
-                    <form action="{{ route('import-spreadsheet', $waveInfos->wave_id ) }}" method="POST" class="form-container"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('import-spreadsheet', $waveInfos->wave_id) }}" method="POST"
+                        class="form-container" enctype="multipart/form-data">
                         @csrf
                         {{-- download excel template file  --}}
                         <p>The file must be based on a template, click download if didn't have any!</p>
@@ -352,7 +378,8 @@
                         </a>
                         <br>
                         <label class="form-label" for="excel">Upload File</label>
-                        <input class="form-control" type="file" id="excel" name="excel"><br><br>
+                        <input class="form-control" type="file" id="excel" name="excel"
+                            accept=".xlsx, .xls"><br><br>
 
 
                 </div>

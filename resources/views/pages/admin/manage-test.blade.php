@@ -7,6 +7,19 @@
                 <div class="">
                     <div class="card-body">
                         <h4 class="font-2">MANAGE TEST</h4>
+                        {{-- @if (session('failed'))
+                            <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">
+                                <div class="me-auto">{{ session('failed') }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif --}}
+
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissable d-flex flex-row" role="alert">
+                                <div class="me-auto">{{ session('success') }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="container rounded border mt-4">
                             <table class="table table-striped ps-2">
                                 <thead>
@@ -31,12 +44,14 @@
                                                     </div>
 
                                                     <div class="col-6 text-center">
-                                                        <form action="{{ route('delete-wave') }}" method="POST">
+                                                        <form action="{{ route('delete-wave') }}" method="POST"
+                                                            id="delete-wave-{{ $testWave['wave_id'] }}">
                                                             @csrf
                                                             <input type="hidden" name="wave_id"
                                                                 value="{{ $testWave['wave_id'] }}">
                                                             <button type="submit"
-                                                                class="btn btn-sm btn-danger">Delete</button>
+                                                                class="btn btn-sm btn-danger delete-wave-button"
+                                                                data-id="{{ $testWave['wave_id'] }}">Delete</button>
                                                         </form>
                                                     </div>
 
@@ -59,4 +74,8 @@
     {{-- penutup untuk nav --}}
     </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/script-admin.js') }}"></script>
 @endsection

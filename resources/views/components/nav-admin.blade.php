@@ -18,7 +18,7 @@
                         <a href="" data-bs-toggle="modal" data-bs-target="#newTest">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6 class="bi bi-plus-circle-fill me-4">New Test</h6>
+                                <h6 class="bi bi-plus-circle-fill me-4"> New Test</h6>
                             </li>
                         </a>
                         <a href="{{ route('manage-test') }}">

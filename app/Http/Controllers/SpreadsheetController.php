@@ -213,6 +213,6 @@ class SpreadsheetController extends Controller
             dd($th);
         }
 
-        return redirect()->route('manage-wave', $wave_id);
+        return redirect()->route('manage-wave', $wave_id)->with('success', 'Questions imported sucessfully');
     }
 }
