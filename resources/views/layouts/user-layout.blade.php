@@ -1,10 +1,21 @@
-@include('components.head')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @include('components.head')
+</head>
+<body>
 
-@include('components.header')
+    @include('components.header')
 
+    @include('components.nav')
 
-@include('components.nav') 
+    @yield('content')
 
-@yield('content')
+    @include('components.footer')
 
-@include('components.footer')
+    @yield('scripts')
+
+    
+</body>
+</html>
+

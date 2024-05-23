@@ -32,7 +32,10 @@ class TestTakerController extends Controller
 
         // get questions based on token
         if ($questions < 1) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.dashboard')->with('sweetalert', [
+                'icon' => 'error',
+                'title' => 'You inserted the wrong token!'
+            ]);
         } else {
             $wave_id = TestWave::where('token', $token)->get('wave_id')->value('wave_id');
             

@@ -45,10 +45,21 @@
 
                 </div>
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-primary font-2">Confirm</button>
+                    <button type="submit" class="btn btn-primary font-2">Confirm</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @if (session('sweetalert'))
+        <script>
+            Swal.fire({
+                icon: '{{ session('sweetalert.icon') }}',
+                title: '{{ session('sweetalert.title') }}'
+            })
+        </script>
+    @endif
 @endsection
