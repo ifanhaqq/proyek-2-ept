@@ -229,7 +229,7 @@ class AdminController extends Controller
 
         $question->save();
 
-        return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question updaated succesfully!");
+        return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question updated succesfully!");
 
     }
 
