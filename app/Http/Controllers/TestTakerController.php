@@ -81,8 +81,6 @@ class TestTakerController extends Controller
             return redirect()->route('start-test', 2)->with('failed', "Use the same email as the email you used when registering!");
         }
 
-        dd($request);
-
 
 
         $testScore = new TestScore;
