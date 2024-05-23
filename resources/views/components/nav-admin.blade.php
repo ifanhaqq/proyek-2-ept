@@ -14,7 +14,7 @@
                 <div class="dashboard borders">
                     <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
                     <!-- Dashboard-Child -->
-                    <ul class="dashboard-child borders ps-4">
+                    <ul class="dashboard-child borders ps-4 d-flex flex-column" style="height: 80vh">
                         <a href="" data-bs-toggle="modal" data-bs-target="#newTest">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
@@ -24,21 +24,24 @@
                         <a href="{{ route('manage-test') }}">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6>Manage Test</h6>
+                                <h6 class="bi bi-clipboard-fill me-4"> Manage Test</h6>
                             </li>
                         </a>
                         <a href="">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
-                                <h6>Test Taker Result</h6>
+                                <h6 class="bi bi-clipboard-check-fill me-4"> Test Taker Result</h6>
                             </li>
                         </a>
-                        <a href="test.blade.php">
-                            <li class="font-3">
-                                <img src="" alt="" />
-                                <h6>LOGOUT</h6>
-                            </li>
-                        </a>
+                        <li class="font-3 mt-auto">
+                            <img src="" alt="" />
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn">
+                                    <h6 class="bi bi-arrow-right-square-fill me-4"> LOGOUT</h6>
+                                </button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -49,7 +52,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5 font-2" id="newTest"> NEW TEST</h1>
+                        <h1 class="modal-title fs-5 font-2" id="newTest">NEW TEST</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -58,7 +61,8 @@
                             @csrf
                             <label for="token" class="form-label">TOKEN</label>
                             <input type="text" class="form-control fw-smaller "
-                                placeholder="Code must contain various character" id="token" name="token" required>
+                                placeholder="Code must contain various character" id="token" name="token"
+                                required>
 
                             <label for="test-name" class="form-label">Test Name</label>
                             <input type="text" class="form-control " id="test-name" name="test_name" required>
