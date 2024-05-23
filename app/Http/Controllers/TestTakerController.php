@@ -72,6 +72,19 @@ class TestTakerController extends Controller
 
     public function tempScore(Request $request)
     {
+        // Filter the requests
+        if ($request->name !== Auth::user()->name) {
+            return redirect()->route('start-test', 2)->with('failed', "Use the same name as the name you used when registering!");
+        } else if ($request->nim !== Auth::user()->nim) {
+            return redirect()->route('start-test', 2)->with('failed', "Use the same NIM as the NIM you used when registering!");
+        } else if ($request->email !== Auth::user()->email) {
+            return redirect()->route('start-test', 2)->with('failed', "Use the same email as the email you used when registering!");
+        }
+
+        dd($request);
+
+
+
         $testScore = new TestScore;
 
         $testScore->user_id = Auth::user()->id;
