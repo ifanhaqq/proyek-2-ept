@@ -3,14 +3,10 @@
     
 
     {{-- content --}}
-    <div class="container text-center">
+    <div class="container text-center mt-5">
         <h3 class="font-2  ">AUDIO TESTING</h3>
         <p class="sub-font">Play the audio make sure that it’s sounds good!</p>
-        <audio controls>
-            <source src="horse.ogg" type="audio/ogg">
-            <source src="horse.mp3" type="audio/mpeg">
-            Your browser does not support the audio tag.
-        </audio>
+        <audio controls src="{{ asset("storage/audio/{$audioTest}") }}"></audio>
         <br>
         <br>
         <br>

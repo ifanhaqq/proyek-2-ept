@@ -41,7 +41,7 @@ class TestTakerController extends Controller
             
             Session::put('wave_id', $wave_id);
 
-            return redirect()->route('start-test', 1);
+            return redirect()->route('start-test', "rules");
         }
 
     }
@@ -49,9 +49,18 @@ class TestTakerController extends Controller
     public function startTest($index)
     {
         $data = [
-            'title' => 'Start Test'
+            'title' => 'Start Test',
+            'audioTest' => 'audio-test.mp3'
         ];
-        return view("pages.user.test-start-$index", $data);
+
+        switch ($index) {
+            case 'rules':
+                return view("pages.user.test-start-1", $data);
+            case 'credentials':
+                return view("pages.user.test-start-2", $data);
+            case 'audio-test':
+                return view("pages.user.test-start-3", $data);   
+        }
     }
 
 
@@ -77,14 +86,12 @@ class TestTakerController extends Controller
     {
         // Filter the requests
         if ($request->name !== Auth::user()->name) {
-            return redirect()->route('start-test', 2)->with('failed', "Use the same name as the name you used when registering!");
+            return redirect()->route('start-test', 'credentials')->with('failed', "Use the same name as the name you used when registering!");
         } else if ($request->nim !== Auth::user()->nim) {
-            return redirect()->route('start-test', 2)->with('failed', "Use the same NIM as the NIM you used when registering!");
+            return redirect()->route('start-test', 'credentials')->with('failed', "Use the same NIM as the NIM you used when registering!");
         } else if ($request->email !== Auth::user()->email) {
-            return redirect()->route('start-test', 2)->with('failed', "Use the same email as the email you used when registering!");
+            return redirect()->route('start-test', 'credentials')->with('failed', "Use the same email as the email you used when registering!");
         }
-
-
 
         $testScore = new TestScore;
 
@@ -101,7 +108,7 @@ class TestTakerController extends Controller
 
         $testScore->save();
 
-        return redirect()->route('start-test', 3);
+        return redirect()->route('start-test', 'audio-test');
     }
 
     public function listeningSection()

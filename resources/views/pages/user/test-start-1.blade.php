@@ -12,7 +12,7 @@
               <li>belum kelarr butuh diskusi ama ibu berli lagi....</li>
           </ol>
           <div class="text-center">
-          <a href="{{ route('start-test', 2)}}" class="btn btn-dark text-center">NEXT</a>
+          <a href="{{ route('start-test', 'credentials')}}" class="btn btn-dark text-center">NEXT</a>
         </div>
         </div>
       </div>
