@@ -27,7 +27,7 @@
                                 <h6 class="bi bi-clipboard-fill me-4"> Manage Test</h6>
                             </li>
                         </a>
-                        <a href="">
+                        <a href="{{ route("test-results") }}">
                             <li class="list borders d-flex p-2">
                                 <img src="" alt="" />
                                 <h6 class="bi bi-clipboard-check-fill me-4"> Test Taker Result</h6>

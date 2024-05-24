@@ -10,7 +10,7 @@
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
                             <button class="btn btn-outline-dark" type="submit">Search</button>
-                          </form>
+                        </form>
                         <div class="container rounded border mt-4">
                             <table class="table table-striped ps-2">
                                 <thead>
@@ -20,21 +20,25 @@
                                         <th scope="col" style="width: 350px">Test Title</th>
                                         <th scope="col" style="width: 350px">Test Date</th>
                                         <th scope="col" style="width: 350px">Scores</th>
-                                        <th scope="col" style="width: 350px" >View</th>
+                                        <th scope="col" style="width: 350px">View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <th scope="row">Hanifan Haqin</th>
-                                        <td>Batch 1</td>
-                                        <td>12 November 2022</td>
-                                        <td>566</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info bi bi-search"> more</button>
-                                        </td>
-                                    </tr>
-                                    
+                                    @foreach ($testScores as $testScore)
+                                        <tr>
+                                            <td>{{ $number }}</td>
+                                            <th scope="row">{{ $testScore['name'] }}</th>
+                                            <td>{{ $testScore['title'] }}</td>
+                                            <td>{{ $testScore['test_date'] }}</td>
+                                            <td>{{ $testScore['score'] }}</td>
+                                            <td>
+                                                <a href="{{ route('test-score', $testScore['id']) }}" class="btn btn-sm btn-info bi bi-search"> more</a>
+                                            </td>
+                                        </tr>
+                                        @php $number++ @endphp
+                                    @endforeach
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -47,6 +51,4 @@
     {{-- penutup untuk nav --}}
     </div>
     </div>
-
-  
 @endsection

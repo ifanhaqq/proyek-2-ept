@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ListeningAudio;
 use App\Models\ReadingSection;
 use App\Models\TestQuestion;
+use App\Models\TestScore;
 use App\Models\TestWave;
 use App\Models\User;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -56,6 +58,36 @@ class AdminController extends Controller
             'testWaves' => TestWave::get()
         ];
         return view('pages.admin.manage-test', $data);
+    }
+
+    public function testResults()
+    {
+        $testScores = TestScore::orderBy('test_date', 'desc')->get();
+
+        foreach ($testScores as $testScore) {
+            $testScore['test_date'] = Carbon::parse($testScore['test_date'])->format('F jS Y');
+
+            $testScore['title'] = TestWave::where('wave_id', $testScore['wave_id'])->get()->value('title');
+        }
+
+        $data = [
+            'testScores' => $testScores,
+            'title' => 'Test Results',
+            'number' => 1
+        ];
+
+        return view('pages.admin.test-taker-result', $data);
+    }
+
+    public function testScores($index)
+    {
+        $testScore = TestScore::where('id', $index)->first();
+
+        $data = [
+            'testScore' => $testScore,
+        ];
+
+        return view('pages.admin.test-taker-score', $data);
     }
 
     public function manageWave($wave_id)
