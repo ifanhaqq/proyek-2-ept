@@ -122,8 +122,7 @@ class TestTakerController extends Controller
         $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();
 
         $qs = TestQuestion::where('wave_id', Session::get('wave_id'))
-            ->where('section', 'listening')
-            ->inRandomOrder()->get();
+            ->where('section', 'listening')->get();
 
         $data = [
             'questions' => $qs,

@@ -273,4 +273,67 @@ class AdminController extends Controller
 
         return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question deleted sucessfully!");
     }
+
+    public function listeningPreview($wave_id)
+    {
+
+        $wave = TestWave::where('wave_id', $wave_id)->first();
+        $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();
+
+        $qs = TestQuestion::where('wave_id', $wave_id)
+            ->where('section', 'listening')->get();
+
+        $data = [
+            'questions' => $qs,
+            'title' => 'Listening Section',
+            'number' => 0,
+            'audio' => $audio,
+            'wave_id' => $wave_id
+        ];
+
+        $count = count($data['questions']);
+        $data['count'] = $count;
+
+        return view('pages.admin.test-listening-preview', $data);
+    }
+
+    public function grammarPreview($wave_id)
+    {
+        $qs = TestQuestion::where('section', 'grammar')
+            ->where('wave_id', $wave_id)
+            ->inRandomOrder()->get();
+
+        $data = [
+            'questions' => $qs,
+            'number' => 0,
+            'title' => 'Grammar Section',
+            'wave_id' => $wave_id
+        ];
+
+        $count = count($data['questions']);
+        $data['count'] = $count;
+
+        return view('pages.admin.test-grammar-preview', $data);
+    }
+
+    public function readingPreview($wave_id)
+    {
+        $qs = DB::table('test_questions')->where('wave_id', $wave_id)
+            ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
+            ->select('test_questions.*', 'reading_sections.text')
+            ->inRandomOrder()
+            ->get()
+            ->toArray();
+        $data = [
+            'questions' => $qs,
+            'number' => 0,
+            'title' => 'Reading Section',
+            'wave_id' => $wave_id
+        ];
+
+        $count = count($data['questions']);
+        $data['count'] = $count;
+
+        return view('pages.admin.test-reading-preview', $data);
+    }
 }

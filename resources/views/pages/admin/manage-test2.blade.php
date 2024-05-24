@@ -35,20 +35,26 @@
                                 {{-- new feature --}}
                                 <div class="row font-2 mt-3">
                                     <div class="col-3">
-                                        <h6>Total Questions  </h6>
-                                        <p>Listening  </p>
+                                        <h6>Total Questions </h6>
+                                        <p>Listening </p>
                                         <p>Structure And Written Expression </p>
                                         <p>Reaading </p>
                                     </div>
                                     <div class="col-2">
-                                        <p>: {{ count($listeningQuestions) + count($grammarQuestions) + count($readingQuestions) }}</p>
+                                        <p>: {{ count($listeningQuestions) + count($grammarQuestions) + count($readingQuestions) }}
+                                        </p>
                                         <p>: {{ count($listeningQuestions) }}</p>
                                         <p>: {{ count($grammarQuestions) }}</p>
                                         <p>: {{ count($readingQuestions) }}</p>
                                     </div>
                                 </div>
-                                <button type="submit" href="" class="btn btn-success text-end mt-5">Save</button>
+                                <div class="d-flex col-7">
+                                    <button type="submit" href=""
+                                        class="btn btn-success text-end mt-5">Save</button>
+                                    <a href="{{ route("listening-preview", $waveInfos->wave_id) }}" class="btn btn-primary mt-5 ms-auto">Test preview</a>
+                                </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

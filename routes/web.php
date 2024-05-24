@@ -67,6 +67,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/update-wave', [AdminController::class, 'updateWave'])->name('update-wave');
     Route::post('/delete-wave', [AdminController::class, 'deleteWave'])->name('delete-wave');
 
+    Route::get('/listening-section-preview/{wave_id}', [AdminController::class, 'listeningPreview'])->name("listening-preview");
+    Route::get('/grammar-section-preview/{wave_id}', [AdminController::class, 'grammarPreview'])->name("grammar-preview");
+    Route::get('/reading-section-preview/{wave_id}', [AdminController::class, 'readingPreview'])->name("reading-preview");
+
     Route::get('/test-results', [AdminController::class, 'testResults'])->name('test-results');
     Route::get('/test-result/{index}', [AdminController::class, 'testScores'])->name('test-score');
 
