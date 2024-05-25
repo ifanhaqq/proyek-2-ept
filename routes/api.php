@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MobileAuthController;
 use App\Http\Controllers\Api\TestQuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(["middleware" => "auth:sanctum"], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/test-csrf', fn () => [1, 2, 3]);
+
+    Route::post('/mobile-logout', [MobileAuthController::class, 'logout']);
+    
+    
 });
+
+Route::post('/mobile-login', [MobileAuthController::class, 'login']);
+
+
 
 
 Route::get('/test-question/{question_id}', [TestQuestionController::class, 'show']);
