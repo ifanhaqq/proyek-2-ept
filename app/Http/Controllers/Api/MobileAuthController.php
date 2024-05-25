@@ -31,6 +31,33 @@ class MobileAuthController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'min:8'],
+        ]);
+
+        if ($request->password !== $request->password_confirmation) {
+            throw ValidationException::withMessages([
+                'password_confirmation' => ['You entered the wrong password']
+            ]);
+        }
+
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->nim = $request->nim;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'user';
+
+        $user->save();
+
+        return response()->noContent();
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

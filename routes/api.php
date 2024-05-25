@@ -30,6 +30,8 @@ Route::group(["middleware" => "auth:sanctum"], function () {
 
 Route::post('/mobile-login', [MobileAuthController::class, 'login']);
 
+Route::post('/mobile-register', [MobileAuthController::class, 'store']);
+
 
 
 
