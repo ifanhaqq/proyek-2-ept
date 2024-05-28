@@ -77,7 +77,7 @@
                                 <div class="col-6">
                                     <label for="" class="font-2">Choose Section: </label>
                                     <select class="btn btn-outline-dark font-white" id="sectionSelect">
-                                        <option value="1" selected>Listening</option>
+                                        <option value="1">Listening</option>
                                         <option value="2">Structure & Written Expression</option>
                                         <option value="3">Reading</option>
                                     </select>
@@ -126,13 +126,13 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-listening"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST" class="delete-question-form" id="delete-question-{{ $qs['question_id'] }}">
+                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button" data-id="{{ $qs['question_id'] }}">Delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -157,16 +157,13 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-grammar"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger mb-1 delete-question"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal">Delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -198,16 +195,13 @@
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}"
                                                         data-reading="{{ $qs['reading_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger mb-1 delete-question"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal">Delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>

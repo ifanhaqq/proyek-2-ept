@@ -132,6 +132,8 @@ class AdminController extends Controller
     {
         $wave = TestWave::find($request->wave_id, 'wave_id');
 
+        DB::delete("DELETE FROM test_questions WHERE wave_id = ?", [$request->wave_id]);
+
         $wave->delete();
 
         return redirect()->route('manage-test')->with('success', 'Test wave deleted succesfully!');

@@ -77,5 +77,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/script-admin.js') }}"></script>
+    <script src="{{ asset('js/admin-responses.js') }}"></script>
 @endsection
