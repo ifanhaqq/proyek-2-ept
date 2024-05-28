@@ -1,7 +1,7 @@
 <div class="row">
     <div class="container-fluid">
         <div class="col-12 header-bg">
-            <a href="#">
+            <a href="/">
             <img src="../img/Group 1.png" alt="Logo" width="120" height=""
                 class="d-inline-block align-text-top">
             </a>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\MobileAuthController;
 use App\Http\Controllers\Api\TestQuestionController;
+use App\Http\Controllers\Api\TestScoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     });
 
     Route::post('/test-csrf', fn () => [1, 2, 3]);
+
+    Route::get('/mobile-get-score', [TestScoreController::class, 'getScore']);
 
     Route::post('/mobile-logout', [MobileAuthController::class, 'logout']);
     

@@ -51,7 +51,8 @@
                                 <div class="d-flex col-7">
                                     <button type="submit" href=""
                                         class="btn btn-success text-end mt-5">Save</button>
-                                    <a href="{{ route("listening-preview", $waveInfos->wave_id) }}" class="btn btn-primary mt-5 ms-auto">Test preview</a>
+                                    <a href="{{ route('listening-preview', $waveInfos->wave_id) }}"
+                                        class="btn btn-primary mt-5 ms-auto">Test preview</a>
                                 </div>
                             </form>
 
@@ -125,16 +126,13 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-listening"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST">
+                                                    <form action="{{ route('delete-question') }}" method="POST" class="delete-question-form" id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger mb-1 delete-question"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal">Delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button" data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -397,4 +395,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/admin-responses.js') }}"></script>
 @endsection
