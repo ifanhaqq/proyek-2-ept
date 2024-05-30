@@ -3,17 +3,13 @@
     <div class="container ">
         <div class="row mt-5 ">
             <div class="col-12 text-end">
-                <form name="cd">
-                    <input type="hidden" name="" id="timeExamLimit" value="1">
+                <form name="cd" id="cd">
+                    <input type="hidden" name="" id="timeExamLimit" value="25">
                     <input type="hidden" id="timeLimit" value="3">
                     <label>Remaining Time : </label>
-                    <input style="border:none;background-color: transparent;color:#333e5d;font-size: 25px;" 
-                           name="disp"
-                           type="text" 
-                           class="clock" id="txt" 
-                           value="00:00" 
-                           size="5" 
-                           readonly="true" />
+                    <input style="border:none;background-color: transparent;color:#333e5d;font-size: 25px;" name="disp"
+                        id="timer" type="text" class="clock" id="txt" value="00:00" size="5"
+                        readonly="true" />
                 </form>
             </div>
         </div>
@@ -27,9 +23,10 @@
                 @foreach ($questions as $qs)
                     <input type="hidden" value="{{ $number++ }}">
                     <input type="hidden" id="params" value="{{ $number }}">
-                    <input type="hidden" name="user_id" value="{{ $user_id }}">
-                    <input type="hidden" name="section" value="{{ $qs['section'] }}">
-                    <input type="hidden" name="question_id_{{ $number }}" value="{{ $qs['question_id'] }}">
+                    <input type="hidden" id="user_id" name="user_id" value="{{ $user_id }}">
+                    <input type="hidden" id="section" name="section" value="{{ $qs['section'] }}">
+                    <input type="hidden" id="question_id_{{ $number }}" name="question_id_{{ $number }}"
+                        value="{{ $qs['question_id'] }}">
 
 
                     <li id="no{{ $number }}">
@@ -78,4 +75,8 @@
         </div>
 
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/testTimer.js') }}"></script>
 @endsection

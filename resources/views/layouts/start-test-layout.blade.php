@@ -1,9 +1,19 @@
-@include('components.head')
+<!DOCTYPE html>
+<html lang="en">
 
-@include('components.header')
+<head>
+    @include('components.head')
+</head>
 
+<body>
+    @include('components.header')
 
+    @yield('content')
 
-@yield('content')
+    @include('components.footer')
 
-@include('components.footer')
+    @yield('scripts')
+
+</body>
+
+</html>

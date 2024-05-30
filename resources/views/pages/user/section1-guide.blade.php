@@ -35,7 +35,11 @@
                 choice is A.</li>
         </ol>
         <div class="text-center">
-            <a href="{{ route('listening-section' )}}" class="btn btn-dark text-center">NEXT</a>
+            <a href="{{ route('listening-section') }}" class="btn btn-dark text-center">NEXT</a>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/guide.js') }}"></script>
 @endsection

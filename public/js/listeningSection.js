@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     const params = $('#params').val()
     const maxParams = $('#max_params').val()
 

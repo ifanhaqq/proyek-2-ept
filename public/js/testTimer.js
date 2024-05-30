@@ -42,29 +42,20 @@ const redo = () => {
     secs--
 
     if (secs == -1) {
-        secs = 1;
+        secs = 59;
         mins--;
     }
 
     $('[name="disp"]').val(dis(mins, secs))
 
     if ((mins == 0) && (secs == 0)) {
-        // $('#testForm').submit()
         Swal.fire({
             title: "Unfortunately, the test is over!",
             allowOutsideClick: false,
             confirmButtonText: "Ok",
-          }).then(() => {
-              $('#testForm').submit()
-
-            //   $.ajax({
-            //     url: "{{ route('dump-get') }}",
-            //     type: "GET",
-            //     success: () => {
-            //         console.log('success')
-            //     }
-            //   })
-          });
+        }).then(() => {
+            $('#testForm').submit()
+        });
     } else {
         cd = setTimeout("redo()", 1000);
     }
@@ -76,4 +67,25 @@ const init = () => {
 
 $(document).ready(function () {
     init()
+    
+    const maxParams = $("#max_params").val
+    console.log(maxParams)
+
+    $(window).on('beforeunload', function () {
+        sessionStorage.setItem('refreshFlag', 'true');
+    });
+
+    // When the page loads, check the flag
+    $(window).on('load', function () {
+        if (sessionStorage.getItem('refreshFlag') === 'true') {
+            $("#testForm").submit()
+
+            sessionStorage.removeItem('refreshFlag');
+        }
+    });
+
+    $("#clickme").click(function () {
+        console.log(1)
+        console.log($("#testForm").attr("method"))
+    })
 })

@@ -3,8 +3,9 @@
     <div class="container mt-5 test-box ">
         <div class="row mt-5 ">
             <div class="col-12 text-end">
+                <button id="clickme">clickme</button>
                 <form name="cd">
-                    <input type="hidden" name="" id="timeExamLimit" value="1">
+                    <input type="hidden" name="" id="timeExamLimit" value="55">
                     <input type="hidden" id="timeLimit" value="3">
                     <label>Remaining Time : </label>
                     <input style="border:none;background-color: transparent;color:#333e5d;font-size: 25px;" 
@@ -103,4 +104,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('js/listeningSection.js') }}"></script>
     <script src="{{ asset('js/navButton.js') }}"></script>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/testTimer.js') }}"></script>
 @endsection
