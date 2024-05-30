@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\MobileAuthController;
 use App\Http\Controllers\Api\TestQuestionController;
 use App\Http\Controllers\Api\TestScoreController;
+use App\Models\TestScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::get('/mobile-get-score', [TestScoreController::class, 'getScore']);
 
     Route::post('/mobile-logout', [MobileAuthController::class, 'logout']);
+
+    Route::post('/store', [TestScoreController::class, "store"]);
+
+    Route::post('/store-score', [TestScoreController::class, "store"]);
+
+    Route::put("/update-score/{id}", [TestScoreController::class, "updateScore"]);
+    Route::delete("/delete-score/{id}", [TestScoreController::class, "deleteScore"]);
     
     
 });
