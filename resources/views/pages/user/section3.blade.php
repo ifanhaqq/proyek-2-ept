@@ -3,7 +3,6 @@
     <div class="container mt-5 test-box ">
         <div class="row mt-5 ">
             <div class="col-12 text-end">
-                <button id="clickme">clickme</button>
                 <form name="cd">
                     <input type="hidden" name="" id="timeExamLimit" value="55">
                     <input type="hidden" id="timeLimit" value="3">

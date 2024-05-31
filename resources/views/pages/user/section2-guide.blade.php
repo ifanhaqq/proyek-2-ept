@@ -39,7 +39,7 @@
             Therefore, you should choose A.</p>
         <div class="row text-center mt-lg-5">
             <div class="col">
-                <a href="{{ route('grammar-section') }}" class="btn btn-dark text-left">Start next section</a>
+                <a href="{{ route('grammar-section') }}" class="btn btn-dark text-left mb-5">Start next section</a>
             </div>
         </div>
     </div>

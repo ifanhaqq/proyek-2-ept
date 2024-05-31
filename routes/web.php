@@ -32,6 +32,9 @@ Route ::get('/result', function () {
 Route ::get('/result-more', function () {
     return view('pages.admin.test-taker-score');
 });
+
+
+
 // yang dah fix
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'login')->middleware('guest')->name('login');
@@ -54,6 +57,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/reading-section', [TestTakerController::class, 'readingSection'])->name('reading-section');
         Route::post('/score', [TestTakerController::class, 'score'])->name('test_score');
         Route::post('/submit-temp', [TestTakerController::class, 'tempScore'])->name('submit-temp');
+        
+        Route::get("/user-history", [TestTakerController::class, "testHistory"])->name("user-history");
+        Route::get("/user-history/{id}", [TestTakerController::class, "historyDetail"])->name("history-detail");
     });
 });
 
