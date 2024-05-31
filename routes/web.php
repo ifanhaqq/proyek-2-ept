@@ -32,6 +32,9 @@ Route::get('/result', function () {
 Route::get('/result-more', function () {
     return view('pages.admin.test-taker-score');
 });
+Route::get('/verify-email', function () {
+    return view('pages.verify-email');
+});
 
 
 
@@ -42,6 +45,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
+});
+
+Route::middleware('auth')->group(function () {
+
 });
 
 // Test taker routes
@@ -85,14 +92,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/store-question', [AdminController::class, 'storeQuestion'])->name('store-question');
     Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
     Route::post('/delete-question', [AdminController::class, 'deleteQuestion'])->name('delete-question');
+
+    Route::get('/download-template', [SpreadsheetController::class, 'downloadTemplate'])->name('download-template');
+    Route::post('/import-spreadsheet/{wave_id}', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
 });
 
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
 Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');
 Route::get('/scoring', [TestTakerController::class, 'scoring'])->name('scoring');
 Route::get('/dump-spreadsheet', [SpreadsheetController::class, 'index']);
-Route::get('/download-template', [SpreadsheetController::class, 'downloadTemplate'])->name('download-template');
-Route::post('/import-spreadsheet/{wave_id}', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
+
 
 
 
