@@ -218,8 +218,6 @@ class TestTakerController extends Controller
 
     public function score(Request $request)
     {
-        // $dump = 31 + (0 * (37/50));
-        // dd(round($dump));
 
         $this->submit($request);
 
@@ -237,13 +235,33 @@ class TestTakerController extends Controller
         $scoreResult->test_date = today();
         $scoreResult->save();
 
+        TestResult::where("wave_id", Session::get('wave_id'))->where("user_id", Auth::user()->id)->delete();
+
         $data = [
-            'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->first()
+            'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->latest()->first()
         ];
 
         return view('pages.user.test-score', $data);
 
 
+    }
+
+    public function testHistory()
+    {
+        $data = [
+            "testResults" => TestScore::where("user_id", Auth::user()->id)->get(),
+        ];
+
+        return view("pages.user.test-history", $data);
+    }
+
+    public function historyDetail($id)
+    {
+        $data = [
+            "detail" => TestScore::where("id", $id)->first()
+        ];
+
+        return view("pages.user.test-history-detail", $data);
     }
 
     public function dumpPost(Request $request)
