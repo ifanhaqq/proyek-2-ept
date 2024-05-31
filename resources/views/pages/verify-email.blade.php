@@ -14,7 +14,7 @@
 <body>
     <div class="bg-image">
         <div class="container d-flex flex-column">
-            <div class="row justify-content-center" style="margin-top: 30vh">
+            <div class="row justify-content-center" style="margin-top: 25vh">
                 <div class="col-sm-5 d-flex flex-column rounded border border-5"
                     style="background-color: rgba(255, 255, 255, 1);">
                     <div class="align-self-center mt-3 mb-3">
