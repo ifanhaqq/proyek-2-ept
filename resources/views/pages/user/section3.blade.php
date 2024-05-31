@@ -66,45 +66,22 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <button type="submit" class="btn btn-dark text-left" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Submit</button>
+                    <button type="submit" class="btn btn-dark text-left" id="submitTest">Submit</button>
                 </div>
             </div>
         </form>
 
-        <div class="flex-container mt-4" id="button-wrapper">
+        <div class="flex-container mt-4 mb-5" id="button-wrapper">
             @for ($i = 1; $i <= $count; $i++)
                 <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}">{{ $i }}</button>
             @endfor
         </div>
 
     </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 font-2" id="exampleModalLabel">SUBMIT YOUR ANSWER?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Click SUBMIT button if you are done your test!
-                        <br>Don’t forget to make sure the answers already filled
-                    </p>
-
-                </div>
-                <div class="modal-footer text-center">
-                    <a href="#" class="btn btn-primary text-center">SUBMIT</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('js/listeningSection.js') }}"></script>
-    <script src="{{ asset('js/navButton.js') }}"></script>
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/testTimer.js') }}"></script>
+    <script src="{{ asset('js/test-responses.js') }}"></script>
+    <script src="{{ asset('js/preventReload.js') }}"></script>
 @endsection

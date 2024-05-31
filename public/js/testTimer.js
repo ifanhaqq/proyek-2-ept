@@ -67,25 +67,4 @@ const init = () => {
 
 $(document).ready(function () {
     init()
-    
-    const maxParams = $("#max_params").val
-    console.log(maxParams)
-
-    $(window).on('beforeunload', function () {
-        sessionStorage.setItem('refreshFlag', 'true');
-    });
-
-    // When the page loads, check the flag
-    $(window).on('load', function () {
-        if (sessionStorage.getItem('refreshFlag') === 'true') {
-            $("#testForm").submit()
-
-            sessionStorage.removeItem('refreshFlag');
-        }
-    });
-
-    $("#clickme").click(function () {
-        console.log(1)
-        console.log($("#testForm").attr("method"))
-    })
 })

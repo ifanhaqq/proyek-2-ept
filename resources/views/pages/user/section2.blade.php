@@ -63,7 +63,7 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <button type="submit" class="btn btn-dark text-left">Next section</button>
+                    <button type="submit" class="btn btn-dark text-left" id="submitTest">Next section</button>
                 </div>
             </div>
         </form>
@@ -79,4 +79,6 @@
 
 @section('scripts')
     <script src="{{ asset('js/testTimer.js') }}"></script>
+    <script src="{{ asset('js/test-responses.js') }}"></script>
+    <script src="{{ asset('js/preventReload.js') }}"></script>
 @endsection

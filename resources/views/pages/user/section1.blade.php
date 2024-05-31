@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box">
-        <form action="{{ route('section-guide', 2) }}" method="POST">
+        <form action="{{ route('section-guide', 2) }}" method="POST" id="testForm">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
@@ -58,15 +58,21 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <button type="submit" class="btn btn-dark text-left">Next section</button>
+                    <button type="submit" class="btn btn-dark text-left" id="submitTest">Next section</button>
                 </div>
             </div>
         </form>
 
         <div class="flex-container mt-4" id="button-wrapper">
             @for ($i = 1; $i <= $count; $i++)
-                <button class="btn btn-outline-dark mb-2 ms-1 me-1 nav-button" id="nav-button-{{ $i }}" data-id="{{$i}}">{{ $i }}</button>
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1 nav-button" id="nav-button-{{ $i }}"
+                    data-id="{{ $i }}">{{ $i }}</button>
             @endfor
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/test-responses.js') }}"></script>
+    <script src="{{ asset('js/preventReload.js') }}"></script>
 @endsection
