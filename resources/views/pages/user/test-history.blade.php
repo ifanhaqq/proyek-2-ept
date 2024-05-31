@@ -8,7 +8,7 @@
                     <thead class="">
                         <tr>
 
-                            <th scope="col">Test Batch</th>
+                            <th scope="col">Test Title</th>
                             <th scope="col">Date</th>
                             <th scope="col">Detail</th>
                         </tr>
@@ -16,9 +16,9 @@
                     <tbody>
                         @foreach ($testResults as $testResult)
                             <tr>
-                                <td>{{ $testResult['name'] }}</td>
-                                <td>{{ $testResult['test_date'] }}</td>
-                                <td><a href="{{ route("history-detail", $testResult['id']) }}" class="bi bi-info-circle-fill" style="color: black"></a></td>
+                                <td>{{ $testResult->title }}</td>
+                                <td>{{ $testResult->test_date }}</td>
+                                <td><a href="{{ route("history-detail", $testResult->id) }}" class="bi bi-info-circle-fill" style="color: black"></a></td>
                             </tr>
                         @endforeach
 

@@ -251,6 +251,8 @@ class TestTakerController extends Controller
             'result' => TestScore::where('user_id', Auth::user()->id)->where('wave_id', Session::get('wave_id'))->latest()->first()
         ];
 
+
+        Session::forget("wave_id");
         return view('pages.user.test-score', $data);
 
 
@@ -258,8 +260,14 @@ class TestTakerController extends Controller
 
     public function testHistory()
     {
+        $testResults = DB::table('test_scores')->where('user_id', Auth::user()->id)
+                        ->join('test_waves', 'test_scores.wave_id', '=', 'test_waves.wave_id')
+                        ->select('test_scores.*', 'test_waves.title')
+                        ->get()
+                        ->toArray();
+
         $data = [
-            "testResults" => TestScore::where("user_id", Auth::user()->id)->get(),
+            "testResults" => $testResults,
         ];
 
         return view("pages.user.test-history", $data);

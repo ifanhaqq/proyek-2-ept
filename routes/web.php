@@ -17,19 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // route user sementara
-Route ::get('/manage1', function () {
+Route::get('/manage1', function () {
     return view('pages.admin.manage-test');
 });
-Route ::get('/manage2', function () {
+Route::get('/manage2', function () {
     return view('pages.admin.manage-test2');
 });
-Route ::get('/home', function () {
+Route::get('/home', function () {
     return view('pages.admin.home');
 });
-Route ::get('/result', function () {
+Route::get('/result', function () {
     return view('pages.admin.test-taker-result');
 });
-Route ::get('/result-more', function () {
+Route::get('/result-more', function () {
     return view('pages.admin.test-taker-score');
 });
 
@@ -48,7 +48,10 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/welcome', [TestTakerController::class, 'index'])->name('user.dashboard');
     Route::post('/handle-token', [TestTakerController::class, 'handleToken'])->name('handle-token');
-    
+
+    Route::get("/user-history", [TestTakerController::class, "testHistory"])->name("user-history");
+    Route::get("/user-history/{id}", [TestTakerController::class, "historyDetail"])->name("history-detail");
+
     Route::middleware('test-token')->group(function () {
         Route::get('/start-the-test/{index}', [TestTakerController::class, 'startTest'])->name('start-test');
         Route::post('/section-guide/{index}', [TestTakerController::class, 'sectionGuide'])->name('section-guide');
@@ -57,9 +60,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/reading-section', [TestTakerController::class, 'readingSection'])->name('reading-section');
         Route::post('/score', [TestTakerController::class, 'score'])->name('test_score');
         Route::post('/submit-temp', [TestTakerController::class, 'tempScore'])->name('submit-temp');
-        
-        Route::get("/user-history", [TestTakerController::class, "testHistory"])->name("user-history");
-        Route::get("/user-history/{id}", [TestTakerController::class, "historyDetail"])->name("history-detail");
+
+
     });
 });
 
@@ -68,7 +70,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/store-test-wave', [AdminCOntroller::class, 'storeTestWave'])->name('store-test-wave');
     Route::get('/manage-test', [AdminController::class, 'manageTest'])->name('manage-test');
-    
+
     Route::get('/manage-wave/{wave_id}', [AdminController::class, 'manageWave'])->name('manage-wave');
     Route::post('/update-wave', [AdminController::class, 'updateWave'])->name('update-wave');
     Route::post('/delete-wave', [AdminController::class, 'deleteWave'])->name('delete-wave');
@@ -83,7 +85,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/store-question', [AdminController::class, 'storeQuestion'])->name('store-question');
     Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
     Route::post('/delete-question', [AdminController::class, 'deleteQuestion'])->name('delete-question');
-}); 
+});
 
 Route::post('/dump-post', [TestTakerController::class, 'dumpPost'])->name('dump-post');
 Route::get('/dump-get', [TestTakerController::class, 'dumpGet'])->name('dump-get');
