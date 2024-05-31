@@ -7,12 +7,10 @@ use App\Models\TestQuestion;
 use App\Models\TestResult;
 use App\Models\TestScore;
 use App\Models\TestWave;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Log;
 
 class TestTakerController extends Controller
 {
@@ -30,19 +28,31 @@ class TestTakerController extends Controller
         $token = $request->token;
         $questions = TestWave::where('token', $token)->get()->count();
 
-        // get questions based on token
+        // User entered the wrong token
         if ($questions < 1) {
             return redirect()->route('user.dashboard')->with('sweetalert', [
                 'icon' => 'error',
-                'title' => 'You inserted the wrong token!'
+                'title' => 'You entered the wrong token!'
             ]);
-        } else {
-            $wave_id = TestWave::where('token', $token)->get('wave_id')->value('wave_id');
-            
-            Session::put('wave_id', $wave_id);
-
-            return redirect()->route('start-test', "rules");
         }
+
+        // User already taken the test  
+        $wave_id = TestWave::where('token', $token)->get('wave_id')->value('wave_id');
+
+        $checkUser = TestScore::where("wave_id", $wave_id)->where("user_id", Auth::user()->id)->count();
+
+        if ($checkUser > 0) {
+            return redirect()->route('user.dashboard')->with('sweetalert', [
+                'icon' => 'error',
+                'title' => 'You already taken this test!'
+            ]);
+        }
+
+
+
+        Session::put('wave_id', $wave_id);
+
+        return redirect()->route('start-test', "rules");
 
     }
 
@@ -59,7 +69,7 @@ class TestTakerController extends Controller
             case 'credentials':
                 return view("pages.user.test-start-2", $data);
             case 'audio-test':
-                return view("pages.user.test-start-3", $data);   
+                return view("pages.user.test-start-3", $data);
         }
     }
 
@@ -210,10 +220,10 @@ class TestTakerController extends Controller
     public function countCorrectAnswer($section)
     {
         return count(TestResult::where('wave_id', Session::get('wave_id'))
-               ->where('user_id', Auth::user()->id)
-               ->where('section', $section)
-               ->where('status', 'correct')
-               ->get());
+            ->where('user_id', Auth::user()->id)
+            ->where('section', $section)
+            ->where('status', 'correct')
+            ->get());
     }
 
     public function score(Request $request)
