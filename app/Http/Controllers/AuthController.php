@@ -29,11 +29,31 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if ($request->user()->role === 'admin') return redirect()->route('admin.dashboard');
-            else if ($request->user()->role === 'user') return redirect()->route('user.dashboard');
+
+            return 1;
         }
 
-        return back()->with('failed', 'Your credentials do not match our record!');
+        return 0;
+    }
+
+    public function redirectLogin(Request $request)
+    {
+        $login = $this->authentication($request);
+
+        if ($login === 1) {
+            if ($request->user()->hasVerifiedEmail()) {
+                if ($request->user()->role === 'admin')
+                    return redirect()->route('admin.dashboard');
+                else if ($request->user()->role === 'user')
+                    return redirect()->route('user.dashboard');
+            }
+
+            $request->user()->sendEmailVerificationNotification();
+
+            return redirect()->route("verification-notice");
+        } else if ($login === 0) {
+            return back()->with('failed', 'Your credentials do not match our record!');
+        }
     }
 
     public function store(Request $request)
@@ -58,7 +78,9 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Account succesfully registered! Please proceed to log in');
+        if ($this->redirectLogin($request))
+            return redirect()->route("verification-notice");
+
     }
 
     public function logout(Request $request)

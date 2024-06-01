@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\TestTakerController;
 use Illuminate\Support\Facades\Route;
@@ -32,23 +33,24 @@ Route::get('/result', function () {
 Route::get('/result-more', function () {
     return view('pages.admin.test-taker-score');
 });
-Route::get('/verify-email', function () {
-    return view('pages.verify-email');
-});
 
 
 
 // yang dah fix
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'login')->middleware('guest')->name('login');
-    Route::post('/auth', 'authentication')->name('auth');
-    Route::post('/logout', 'logout')->name('logout');
+    Route::post('/auth', 'redirectLogin')->name('auth');
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
 });
 
 Route::middleware('auth')->group(function () {
+    
+    Route::get("/verify-email/{id}/{hash}", [EmailController::class, "verifyEmail"])->name("verification.verify");
+    Route::post("/send-notification", [EmailController::class, "sendNotification"])->middleware('throttle:6,1')->name("send-notification");
+    Route::get("/verification", [EmailController::class, "verificationNotice"])->name('verification-notice');
 
+    Route::post("/logout", [AuthController::class, "logout"])->name("logout");
 });
 
 // Test taker routes
