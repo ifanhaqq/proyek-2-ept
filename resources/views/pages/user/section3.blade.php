@@ -89,5 +89,5 @@
 @section('scripts')
     <script src="{{ asset('js/testTimer.js') }}"></script>
     <script src="{{ asset('js/test-responses.js') }}"></script>
-    <script src="{{ asset('js/preventRfeload.js') }}"></script>
+    <script src="{{ asset('js/preventReload.js') }}"></script>
 @endsection
