@@ -30,23 +30,29 @@
 
 
                     <li id="no{{ $number }}">
+                        <div class="d-flex">
+                            <div class=" btn btn-warning ms-auto">
+                                <input class="form-check-input" type="checkbox" id="checkbox-{{ $number }}">
+                                <label class="form-check-label" for="checkbox-{{ $number }}">Still not sure</label>
+                            </div>
+                        </div>
                         <p>{{ $qs['question'] }}</p>
 
                         <div class="options">
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch1'] }}">
+                                <input type="radio" class="radio_{{ $number }}" name="choice_{{ $number }}" value="{{ $qs['question_ch1'] }}">
                                 {{ $qs['question_ch1'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch2'] }}">
+                                <input type="radio" class="radio_{{ $number }}" name="choice_{{ $number }}" value="{{ $qs['question_ch2'] }}">
                                 {{ $qs['question_ch2'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch3'] }}">
+                                <input type="radio" class="radio_{{ $number }}" name="choice_{{ $number }}" value="{{ $qs['question_ch3'] }}">
                                 {{ $qs['question_ch3'] }}
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="choice_{{ $number }}" value="{{ $qs['question_ch4'] }}">
+                                <input type="radio" class="radio_{{ $number }}" name="choice_{{ $number }}" value="{{ $qs['question_ch4'] }}">
                                 {{ $qs['question_ch4'] }}
                             </label>
                         </div>

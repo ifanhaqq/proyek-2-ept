@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     const params = $('#params').val()
     const maxParams = $('#max_params').val()
 
@@ -7,55 +7,53 @@ $(document).ready(function () {
         $('#list_question li').hide()
         $('#list_question li ol li').show()
         $('#no' + params).show()
+    }
 
-        for (let index = 1; index <= maxParams; index++) {
-            if (params == index) {
-                $('#nav-button-' + params).addClass('btn-primary')
-            } else {
-                $('.radio_' + index).is(":checked") ? $('#nav-button-' + index).removeClass("btn-primary") : $('#nav-button-' + index).removeClass("btn-primary text-white")
-
-
-            }
+    const currentHandler = (params, index) => {
+        if (params == index) {
+            $('#nav-button-' + params).removeClass('btn-warning btn-dark text-white')
+            $('#nav-button-' + params).addClass('btn-primary')
+        } else {
+            $('.radio_' + index).is(":checked") ? $('#nav-button-' + index).removeClass("btn-primary") : $('#nav-button-' + index).removeClass("btn-primary text-white")
 
         }
     }
 
-    const navHandler = (params) => {
+    const colorHandler = (params) => {
         for (let index = 1; index <= maxParams; index++) {
-            if (params == index) {
-                $('#nav-button-' + params).addClass('btn-primary')
-            } else {
-                $('#nav-button-' + index).removeClass("btn-primary")
-            }
 
-        }
-    }
+            currentHandler(params, index)
 
-    const checkboxHandler = () => {
-        const params = $('#params').val()
-        for (let index = 1; index <= maxParams; index++) {
             if ($('#checkbox-' + index).is(":checked")) {
                 if (params == index) {
-                    $("#nav-button-" + index).addClass("btn-primary")
+                    currentHandler(params, index)
                 } else {
-                    $("#nav-button-" + index).removeClass("btn-dark text-white btn-primary")
-                    $("#nav-button-" + index).addClass("btn-warning text-black")
-                    console.log("false")
+                    $("#nav-button-" + index).removeClass("text-white")
+                    $("#nav-button-" + index).addClass("btn-warning btn-outline-dark text-black")
                 }
-            } else {
-                $("#nav-button-" + index).removeClass("btn-warning text-black")
-                if ($('.radio_' + index).is(":checked")) {
-                    $("#nav-button-" + index).addClass("btn-dark btn-outline-white text-white")
+            }
+
+            if ($('.radio_' + index).is(":checked")) {
+                if (params == index) {
+                    currentHandler(params, index)
+                } else {
+                    if ($('#checkbox-' + index).is(":checked")) {
+                        $("#nav-button-" + index).removeClass("text-white")
+                        $("#nav-button-" + index).addClass("btn-warning btn-outline-dark text-black")
+                    } else {
+                        $("#nav-button-" + index).removeClass("text-black")
+                        $("#nav-button-" + index).addClass("btn-dark btn-outline-white text-white")
+                    }
                 }
             }
         }
-
     }
 
     $('#submit_button').hide()
     $('#prev').hide()
     $('#margin').hide()
     showHide(params)
+    colorHandler(params)
 
 
     $('#next').click(function () {
@@ -69,6 +67,7 @@ $(document).ready(function () {
         }
 
         showHide(newParams)
+        colorHandler(newParams)
     })
 
     $('#prev').click(function () {
@@ -81,46 +80,32 @@ $(document).ready(function () {
         }
         $('#next').show()
         $('#submit_button').hide()
+
         showHide(newParams)
+        colorHandler(newParams)
     })
-
-
-
-
-
 
     for (let index = 1; index <= maxParams; index++) {
         let radioInput = $('.radio_' + index)
         let navButton = $('#nav-button-' + index)
-        let checkbox = $('#checkbox-' + index)
 
 
         radioInput.click(() => {
-            if (checkbox.is(":checked")) {
-                navButton.addClass("btn-warning text-black")
-            } else {
-                navButton.removeClass("btn-warning text-black")
-                navButton.addClass("btn-dark btn-outline-white text-white")
-            }
+            const params = $("#params").val()
+            colorHandler(params)
+        })
 
+        navButton.on('mouseenter',() => {
+            navButton.addClass("text-white")
+            navButton.on('mouseleave', () => {
+                navButton.removeClass("text-white")
+            })
         })
 
         navButton.click(() => {
             const navButtonValue = navButton.html()
-            navHandler(navButtonValue)
-            checkboxHandler()
-
-
+            const params = $("#params").val(navButtonValue).val()
+            colorHandler(params)
         })
-
-        checkboxHandler()
-
-        checkbox.change(() => {
-
-            checkboxHandler()
-
-        })
-
     }
-
 })

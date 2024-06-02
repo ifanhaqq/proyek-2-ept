@@ -18,7 +18,8 @@ class TestTakerController extends Controller
     public function index()
     {
         $data = [
-            'title' => "Welcome to Polindra TOEFL Test Prediction"
+            'title' => "Welcome to Polindra TOEFL Test Prediction",
+            'name' => Auth::user()->name
         ];
         return view('pages.user.home', $data);
     }

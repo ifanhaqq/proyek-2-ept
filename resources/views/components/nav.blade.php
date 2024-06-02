@@ -12,7 +12,7 @@
             <div class="board borders p-3">
                 <!-- Dashboard -->
                 <div class="dashboard borders">
-                    <a href="#">
+                    <a href="/">
                         <h6 class="title-dashboard borders p-2"><strong>DASHBOARD</strong></h6>
                         <!-- Dashboard-Child -->
                     </a>
