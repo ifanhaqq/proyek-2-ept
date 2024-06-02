@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Create an account</title>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
             <!-- form -->
             <div class="col-6">
                 <div class="register-box" style="font-size:0.75vw">
-                    <h5 class="text-center fw-bolder ">REGISTER</h5>
+                    <h1 class="text-center fw-bolder ">REGISTER</h1>
                     @if (session('failed'))
                         <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">
                             <div class="me-auto">{{ session('failed') }}</div>
@@ -47,31 +47,29 @@
                     @endif
                     <form class="form-container rounded-3 sub-font" method="POST" action="{{ route('store') }}">
                         @csrf
-                        <label for="name" class="form-label ">Full Name</label>
-                        <input type="text" class="form-control bg-input" id="name" name="name">
+                        <label for="name" class="form-label fw-bold">Full Name</label>
+                        <input type="text" class="form-control bg-input mb-1" id="name" name="name">
 
-                        <label for="nim" class="form-label">NIM</label>
-                        <input type="number" class="form-control bg-input" id="nim" name="nim">
+                        <label for="nim" class="form-label fw-bold">NIM</label>
+                        <input type="number" class="form-control bg-input mb-1" id="nim" name="nim">
 
-                        <label for="email" class="form-label ">Email</label>
-                        <input type="email" class="form-control bg-input" id="email" name="email">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" class="form-control bg-input mb-1" id="email" name="email">
 
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control bg-input" id="password" name="password">
+                        <label for="password" class="form-label fw-bold">Password</label>
+                        <input type="password" class="form-control bg-input mb-1" id="password" name="password">
 
-                        <label for="pwdrpt" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control bg-input" id="pwdrpt" name="pwdrpt">
+                        <label for="pwdrpt" class="form-label fw-bold">Repeat Password</label>
+                        <input type="password" class="form-control bg-input mb-1" id="pwdrpt" name="pwdrpt">
 
-                        <a href="#">Forgot Password?</a>
-
-                        <div class="register-flex">
-                            <div class="fw-bolder mt-3">
+                        <div class="mt-5 d-flex">
+                            <div>
                                 <button type="submit" class="btn btn-dark ">
-                                    <h5><small>REGISTER</h5>
+                                    <h5 class="">Register</h5>
                                 </button>
                             </div>
-                            <div class="" style="">
-                                <p>Already have an account? Click <a href="#">Here</a></p>
+                            <div class="align-self-center ms-2" style="height: 3vh">
+                                <p>Already have an account? Click <a href="{{ route("login") }}">Here</a></p>
                             </div>
                         </div>
                     </form>

@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\TestTakerController;
+use App\Http\Controllers\PasswordResetController;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,10 @@ Route::get('/result-more', function () {
     return view('pages.admin.test-taker-score');
 });
 
+Route::get("/reset-password", function () {
+    return view('pages.reset-password');
+});
+
 
 
 // yang dah fix
@@ -44,6 +50,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
 });
 
+// Password controller
+Route::get("/forgot-password", [PasswordResetController::class, "index"])->name("forgot-password");
+Route::post("/reset-password", [PasswordResetController::class, "sendResetPasswordNotification"])->name("reset-password");
+Route::get("/reset-password/{token}", [PasswordResetController::class, "changePassword"])->name("password.reset");
+Route::post("/update-password", [PasswordResetController::class, "updatePassword"])->name("update-password");
+
+
+// Email verification
 Route::middleware('auth')->group(function () {
     
     Route::get("/verify-email/{id}/{hash}", [EmailController::class, "verifyEmail"])->name("verification.verify");

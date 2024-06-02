@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Welcome to Polindra TOEFL Prediction Test</title>
 </head>
 
 <body>
@@ -55,24 +55,30 @@
                         </div>
                     @endif
 
-                    <form class="form-container rounded-3 sub-font " style="font-size:1vw" method="POST" action="{{ route('auth') }}">
+                    <form class="form-container rounded-3 sub-font " style="font-size:1vw" method="POST"
+                        action="{{ route('auth') }}">
                         @csrf
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control">
+                        <label class="form-label fw-bold">Email</label>
+                        <input type="email" name="email" class="form-control mb-1">
 
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" name="password">
+                        <label class="form-label fw-bold">Password</label>
+                        <input type="password" name="password" class="form-control mb-1" id="password" name="password">
+                        <a href="{{ route("forgot-password") }}">Forgot your password?</a>
 
-
-                        <div class="row mt-5">
-                            <div class="col-2 fw-bolder">
+                        <div class="mt-5 d-flex">
+                            <div>
                                 <button type="submit" class="btn btn-dark fw-bolder">
                                     Login
                                 </button>
                             </div>
-                            <div class="col-9">
-                                <p><small>Don’t have an account? Click <a href="{{ route('register') }}" id="register-btn">Here</a></p>
+
+                            <div class="align-self-center ms-2" style="height: 3vh">
+                                <p>
+                                    Don’t have an account? Click <a href="{{ route('register') }}"
+                                        id="register-btn">Here</a>
+                                </p>
                             </div>
+
                         </div>
                     </form>
                 </div>
