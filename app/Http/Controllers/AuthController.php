@@ -59,11 +59,14 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         $validatePassword = Validator::make($request->all(), [
-            'password' => 'min:8'
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users',
+            'name' => 'required|max:255',
+            'nim' => 'required|numeric'
         ]);
 
         if ($validatePassword->fails()) {
-            return redirect()->route('register')->with('failed', 'Please input the minimum password of 8 characters!');
+            return redirect()->route('register')->with('failed', 'Failed to register, please re-check your credentials!');
         } else if ($request->password !== $request->pwdrpt) {
             return redirect()->route('register')->with('failed', 'Password is not the same!');
         }
