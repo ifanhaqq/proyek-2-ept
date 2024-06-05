@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 abstract class GuideTest extends Controller
 {
-    public abstract function create(Request $request): void;
+    public abstract function create(Request $request);
 }
