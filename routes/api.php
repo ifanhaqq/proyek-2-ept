@@ -25,7 +25,9 @@ Route::group(["middleware" => "auth:sanctum"], function () {
 
     Route::post('/test-csrf', fn () => [1, 2, 3]);
 
-    Route::get('/mobile-get-score', [TestScoreController::class, 'getScore']);
+    Route::get('/mobile-get-scores', [TestScoreController::class, 'index']);
+
+    Route::get('/get-score/{id}', [TestScoreController::class, 'getScore']);
 
     Route::post('/mobile-logout', [MobileAuthController::class, 'logout']);
 
@@ -34,6 +36,7 @@ Route::group(["middleware" => "auth:sanctum"], function () {
     Route::post('/store-score', [TestScoreController::class, "store"]);
 
     Route::put("/update-score/{id}", [TestScoreController::class, "updateScore"]);
+
     Route::delete("/delete-score/{id}", [TestScoreController::class, "deleteScore"]);
     
     

@@ -124,10 +124,6 @@ class TestTakerController extends Controller
 
     public function listeningSection()
     {
-        function putAsset($param)
-        {
-            return asset("storage/audio/$param");
-        }
 
         $wave = TestWave::where('wave_id', Session::get('wave_id'))->first();
         $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();

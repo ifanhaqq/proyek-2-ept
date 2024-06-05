@@ -10,9 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class TestScoreController extends Controller
 {
+
+    public function index()
+    {
+        try {
+            $scores = TestScore::get();
+        } catch (\Throwable $th) {
+            return response()->json([
+                "status" => 400,
+                "message" => $th
+            ]);
+        }
+
+        return response()->json([
+            "status" => 200,
+            "message" => "Data successfully fetched!",
+            "data" => $scores
+        ]);
+    }
     public function store(Request $request)
     {
-        
+
         try {
             $testScore = new TestScore;
 
@@ -49,30 +67,38 @@ class TestScoreController extends Controller
 
 
     }
-    public function getScore(Request $request)
+    public function getScore($id)
     {
-        $user_id = $request->user()->id;
+        try {
 
-        $scores = TestScore::where('user_id', $user_id)->get();
+            $scores = TestScore::where('id', $id)->get();
 
+        } catch (\Throwable $th) {
+            return response()->json([
+                "status" => 400,
+                "message" => $th
+            ]);
+        }
         return response()->json([
-            "user_id" => $user_id,
-            "test_scores" => $scores
+            "status" => 200,
+            "message" => "Fetching successfully",
+            "data" => $scores
         ]);
     }
 
-    public function updateScore($id, Request $request)
+    public function updateScore(Request $request, $id)
     {
 
         try {
-            $testScore = TestScore::where("id", $id)->first();
+            $testScore = TestScore::find($id);
 
-            $testScore->listening = $request->listening;
             $testScore->grammar = $request->grammar;
+            $testScore->listening = $request->listening;
             $testScore->reading = $request->reading;
             $testScore->score = ($request->grammar * 10) + ($request->reading * 10) + ($request->listening * 10);
 
             $testScore->save();
+
         } catch (\Throwable $th) {
             return response()->json([
                 "status" => 400,
@@ -83,7 +109,7 @@ class TestScoreController extends Controller
 
         return response()->json([
             "status" => 200,
-            "message" => "Data sucessfully updated!, your new score is $testScore->score",
+            "message" => "Data successfully updated!",
 
         ]);
     }
@@ -105,7 +131,7 @@ class TestScoreController extends Controller
 
         return response()->json([
             "status" => 200,
-            "message" => "Data with the id of $id successfully deleted!",
+            "message" => "Data successfully deleted!",
 
         ]);
     }
