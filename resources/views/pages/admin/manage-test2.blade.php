@@ -60,6 +60,49 @@
                     </div>
                 </div>
             </div>
+
+            {{-- add guide --}}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-3">
+                            <h5 class="card-title font-2  ">Test Guide </h5>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="font-2">Choose Section: </label>
+                            <select class="btn btn-outline-dark font-white" id="sectionSelect">
+                                <option value="1">Listening</option>
+                                <option value="2">Structure & Written Expression</option>
+                                <option value="3">Reading</option>
+                            </select>
+                        </div>
+                        <div class="col-3 text-end">
+
+                            <button class="btn btn-sm btn-dark bi bi-plus sub-font " data-bs-toggle="modal"
+                                data-bs-target="#modalGuide">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table>
+                            <tr>
+                                <td>
+                                    "
+Radiocarbon dating and tree-ring dating, in combination, have provided a very powerful tool to establish a time spectrum for more recent dates in the
+past. The initial idea for dating by tree rings can be traced back to 1811. Modern scientific tree-ring dating, dendrochronology, stems from pioneering work in early 1900’s.
+Usually, but not always, trees produce one ring each year. This ring is formed by the cambium, which lies between the old wood and the bark. In spring, wood cells with large lumens are manufactured, but in summer and autumn, the cells become smaller and more thick-walled until with the onset of winter the production of a new cell stops. The same process is repeated the following year. In this way a year’s growth (annual ring) is imprinted as new wood. The demarcation line between summer and autumn wood of the previous year, with its characteristic small cells, and the spring wood of the year following, with its large cells, enables annual rings to be counted relatively easily.
+Growth rings, however, are not always the same thickness. They vary for several reasons. Environmental factors rigidly control the degree of growth of an annual ring or determine whether, in fact, an annual ring appears at all in any particular year. Thus in a specific locale or, more accurately, a specific climatic province, tree-ring counts will reflect climatic conditions and variations due to inequalities of climate from year to year. In years with abnormal drought, for example, narrow rings are produced and sometimes no ring at all. In this way a fossil record is imprinted for as long as the wood remains intact. From this pattern a historical template can be constructed to correlate one set of growth rings in one tree with a set of growth rings in another tree or piece of timber.
+Another important factor is that tree-ring growth varies with age of the tree. As the tree matures, the rings become narrower, and this results in the central rings being wider than those on the outer part of the tree."					
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-12 mt-4">
                     @if (session('success'))
@@ -126,13 +169,16 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-listening"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
+                                                    <form action="{{ route('delete-question') }}" method="POST"
+                                                        id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-button-question"
+                                                            data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -157,13 +203,16 @@
                                                         class="btn btn-sm btn-primary mb-1 update-question-grammar"
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
+                                                    <form action="{{ route('delete-question') }}" method="POST"
+                                                        id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-button-question"
+                                                            data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -195,13 +244,16 @@
                                                         data-bs-toggle="modal" data-bs-target="#updateModal"
                                                         data-id="{{ $qs['question_id'] }}"
                                                         data-reading="{{ $qs['reading_id'] }}">Update</button>
-                                                    <form action="{{ route('delete-question') }}" method="POST" id="delete-question-{{ $qs['question_id'] }}">
+                                                    <form action="{{ route('delete-question') }}" method="POST"
+                                                        id="delete-question-{{ $qs['question_id'] }}">
                                                         @csrf
                                                         <input type="hidden" name="question_id"
                                                             value="{{ $qs['question_id'] }}">
                                                         <input type="hidden" name="wave_id"
                                                             value="{{ $waveInfos->wave_id }}">
-                                                        <button type="submit" class="btn btn-sm btn-danger mb-1 delete-button-question" data-id="{{ $qs['question_id'] }}">Delete</button>
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger mb-1 delete-button-question"
+                                                            data-id="{{ $qs['question_id'] }}">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -221,6 +273,35 @@
 
     {{-- penutup untuk nav --}}
     </div>
+    </div>
+    {{-- modal add guide --}}
+    <div class="modal fade" id="modalGuide" tabindex="-1" aria-labelledby="modalGuide" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 font-2" id="modalGuide">Add Test Question</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sub-font">
+                    <form class="form-container rounded-3 fw-smaller" method="POST">
+                       
+                        <input type="hidden" name="" >
+                        <label class="font-2" for="">Choose Section</label>
+                        <select class="btn btn-outline-dark mb-3" name="" id=" ">
+                            <option value="listening">Listening</option>
+                            <option value="grammar">Structure & Written Expression</option>
+                            <option value="reading">Reading</option>
+                        </select><br>
+                        <label for="" class="font-2">Guide Text</label> <br>
+                        <textarea rows="10" class="form-control" placeholder="Write down here..." id="floatingTextarea2" style="height: 55vh">mjjdhsf </textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning font-2">Add</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     {{-- modal add que --}}
