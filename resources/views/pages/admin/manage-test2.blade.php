@@ -62,6 +62,12 @@
             </div>
 
             {{-- add guide --}}
+            @if (session('guide-success'))
+            <div class="alert alert-success alert-dismissable d-flex flex-row mt-3" role="alert">
+                <div class="me-auto">{{ session('guide-success') }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="card mt-3">
                 <div class="card-header">
                     <div class="row">
@@ -70,10 +76,10 @@
                         </div>
                         <div class="col-6">
                             <label for="" class="font-2">Choose Section: </label>
-                            <select class="btn btn-outline-dark font-white">
-                                <option value="1">Listening</option>
-                                <option value="2">Structure & Written Expression</option>
-                                <option value="3">Reading</option>
+                            <select class="btn btn-outline-dark font-white" id="guideSelect">
+                                <option value="listening_guide">Listening</option>
+                                <option value="grammar_guide">Structure & Written Expression</option>
+                                <option value="reading_guide">Reading</option>
                             </select>
                         </div>
                         <div class="col-3 text-end">
@@ -86,15 +92,19 @@
                 <div class="card-body">
                     <div class="row">
                         <table>
-                            <tr>
+                            <tr class="test_guides" id="listening_guide">
                                 <td>
-                                    "
-Radiocarbon dating and tree-ring dating, in combination, have provided a very powerful tool to establish a time spectrum for more recent dates in the
-past. The initial idea for dating by tree rings can be traced back to 1811. Modern scientific tree-ring dating, dendrochronology, stems from pioneering work in early 1900’s.
-Usually, but not always, trees produce one ring each year. This ring is formed by the cambium, which lies between the old wood and the bark. In spring, wood cells with large lumens are manufactured, but in summer and autumn, the cells become smaller and more thick-walled until with the onset of winter the production of a new cell stops. The same process is repeated the following year. In this way a year’s growth (annual ring) is imprinted as new wood. The demarcation line between summer and autumn wood of the previous year, with its characteristic small cells, and the spring wood of the year following, with its large cells, enables annual rings to be counted relatively easily.
-Growth rings, however, are not always the same thickness. They vary for several reasons. Environmental factors rigidly control the degree of growth of an annual ring or determine whether, in fact, an annual ring appears at all in any particular year. Thus in a specific locale or, more accurately, a specific climatic province, tree-ring counts will reflect climatic conditions and variations due to inequalities of climate from year to year. In years with abnormal drought, for example, narrow rings are produced and sometimes no ring at all. In this way a fossil record is imprinted for as long as the wood remains intact. From this pattern a historical template can be constructed to correlate one set of growth rings in one tree with a set of growth rings in another tree or piece of timber.
-Another important factor is that tree-ring growth varies with age of the tree. As the tree matures, the rings become narrower, and this results in the central rings being wider than those on the outer part of the tree."					
-
+                                    {{ $guideInfo->listening_guide }}
+                                </td>
+                            </tr>
+                            <tr class="test_guides" id="grammar_guide">
+                                <td>
+                                    {{ $guideInfo->grammar_guide }}
+                                </td>
+                            </tr>
+                            <tr class="test_guides" id="reading_guide">
+                                <td>
+                                    {{ $guideInfo->reading_guide }}
                                 </td>
                             </tr>
                         </table>
@@ -283,17 +293,19 @@ Another important factor is that tree-ring growth varies with age of the tree. A
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body sub-font">
-                    <form class="form-container rounded-3 fw-smaller" method="POST">
-                       
-                        <input type="hidden" name="" >
+                    <form class="form-container rounded-3 fw-smaller"
+                        action="{{ route('store-guide', $waveInfos->guide_id) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="">
                         <label class="font-2" for="">Choose Section</label>
-                        <select class="btn btn-outline-dark mb-3" name="" id=" ">
+                        <select class="btn btn-outline-dark mb-3" name="section_guide" id="section_guide">
                             <option value="listening">Listening</option>
                             <option value="grammar">Structure & Written Expression</option>
                             <option value="reading">Reading</option>
                         </select><br>
                         <label for="" class="font-2">Guide Text</label> <br>
-                        <textarea rows="10" class="form-control" placeholder="Write down here..." id="floatingTextarea2" style="height: 55vh">mjjdhsf </textarea>
+                        <textarea rows="10" class="form-control" placeholder="Write down here..." id="text" style="height: 55vh"
+                            name="text"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning font-2">Add</button>
@@ -305,7 +317,6 @@ Another important factor is that tree-ring growth varies with age of the tree. A
     </div>
 
     {{-- modal add que --}}
-    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -424,9 +435,6 @@ Another important factor is that tree-ring growth varies with age of the tree. A
                             <option value="3">C</option>
                             <option value="4">D</option>
                         </select>
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary font-2">Update</button>
@@ -459,8 +467,6 @@ Another important factor is that tree-ring growth varies with age of the tree. A
                         <label class="form-label" for="excel">Upload File</label>
                         <input class="form-control" type="file" id="excel" name="excel"
                             accept=".xlsx, .xls"><br><br>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

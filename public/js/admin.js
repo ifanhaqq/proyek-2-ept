@@ -7,6 +7,7 @@ $(document).ready( function () {
     $('.questionInput').hide()
     $('.readingTextQuestion').hide()
     $('#addNewQuestion').hide()
+    $(".test_guides").hide()
 
     $('#sections tr.section-' + section).show()
     $('#questionInput').removeAttr('required')
@@ -57,6 +58,13 @@ $(document).ready( function () {
 
         $('#sections tr').hide()
         $('#sections tr.section-' + newSection).show()
+    })
+
+    const guideSelect = $("#guideSelect")
+    $("#" + guideSelect.val()).show()
+    guideSelect.change(function () {
+        $(".test_guides").hide()
+        $("#" + guideSelect.val()).show()
     })
 
     $('.update-question-grammar').click(function () {

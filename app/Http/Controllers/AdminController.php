@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guide;
 use App\Models\ListeningAudio;
 use App\Models\ReadingSection;
 use App\Models\TestQuestion;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's home page
+    |--------------------------------------------------------------------------
+    */
+
     public function index()
     {
         $data = [
@@ -24,32 +32,11 @@ class AdminController extends Controller
         return view('pages.admin.home', $data);
     }
 
-    public function storeTestWave(Request $request)
-    {
-        $audio = $request->file('audio_wave');
-        $audioFileName = $request->token . '_audio.' . $audio->getClientOriginalExtension();
-
-        $manualIncrementAudioTable = count(ListeningAudio::get()) + 1;
-
-
-        $newAudio = new ListeningAudio;
-
-        $newAudio->audio_id = $manualIncrementAudioTable;
-        $newAudio->audio_title = $audioFileName;
-
-        $newTest = new TestWave;
-
-        $newTest->title = $request->test_name;
-        $newTest->token = $request->token;
-        $newTest->description = $request->description;
-        $newTest->audio_id = $manualIncrementAudioTable;
-
-        $newAudio->save();
-        $newTest->save();
-        $audio->storeAs('public/audio', $audioFileName);
-
-        return redirect()->route('manage-test')->with('success', 'Test wave added succesfully!');
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's page for managing tests
+    |--------------------------------------------------------------------------
+    */
 
     public function manageTest()
     {
@@ -59,6 +46,12 @@ class AdminController extends Controller
         ];
         return view('pages.admin.manage-test', $data);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's page for test taker results
+    |--------------------------------------------------------------------------
+    */
 
     public function testResults()
     {
@@ -79,6 +72,12 @@ class AdminController extends Controller
         return view('pages.admin.test-taker-result', $data);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's page for detail of each of the tests' result
+    |--------------------------------------------------------------------------
+    */
+
     public function testScores($index)
     {
         $testScore = TestScore::where('id', $index)->first();
@@ -90,11 +89,19 @@ class AdminController extends Controller
         return view('pages.admin.test-taker-score', $data);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's page of the detailed wave management
+    |--------------------------------------------------------------------------
+    */
+
     public function manageWave($wave_id)
     {
-        $testQuestions = new TestQuestion;
+        $waveInfos = TestWave::where('wave_id', $wave_id)->first();
+
         $data = [
-            'waveInfos' => TestWave::where('wave_id', $wave_id)->first(),
+            'waveInfos' => $waveInfos,
+            'guideInfo' => Guide::where('guide_id', $waveInfos->guide_id)->first(),
             'audioFile' => TestWave::select('test_waves.*', 'listening_audios.*')
                 ->where('wave_id', $wave_id)
                 ->join('listening_audios', 'test_waves.audio_id', '=', 'listening_audios.audio_id')
@@ -113,6 +120,50 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.manage-test2', $data);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Test wave's CRUD
+    |--------------------------------------------------------------------------
+    |
+    | Below is the wave's CRUD codes....
+    | 
+    | 
+    |
+    */
+
+    public function storeTestWave(Request $request)
+    {
+        $audio = $request->file('audio_wave');
+        $audioFileName = $request->token . '_audio.' . $audio->getClientOriginalExtension();
+
+        $manualIncrementAudioTable = count(ListeningAudio::get()) + 1;
+        $manualIncrementGuideTable = count(Guide::get()) + 1;
+
+        $newAudio = new ListeningAudio;
+        $newAudio->audio_id = $manualIncrementAudioTable;
+        $newAudio->audio_title = $audioFileName;
+
+        $newGuide = new Guide;
+        $newGuide->guide_id = $manualIncrementGuideTable;
+        $newGuide->listening_guide = "Please input your listening guide!";
+        $newGuide->grammar_guide = "Please input your structure & written expression guide!";
+        $newGuide->reading_guide = "Please input your reading guide!";
+
+        $newTest = new TestWave;
+        $newTest->title = $request->test_name;
+        $newTest->token = $request->token;
+        $newTest->description = $request->description;
+        $newTest->audio_id = $manualIncrementAudioTable;
+        $newTest->guide_id = $manualIncrementGuideTable;
+
+        $newAudio->save();
+        $newGuide->save();
+        $newTest->save();
+        $audio->storeAs('public/audio', $audioFileName);
+
+        return redirect()->route('manage-test')->with('success', 'Test wave added succesfully!');
     }
 
     public function updateWave(Request $request)
@@ -139,9 +190,19 @@ class AdminController extends Controller
         return redirect()->route('manage-test')->with('success', 'Test wave deleted succesfully!');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Question CRUD
+    |--------------------------------------------------------------------------
+    |
+    | Below is the question's CRUD codes....
+    | 
+    | 
+    |
+    */
+
     public function storeQuestion(Request $request)
     {
-        // dd($request);
         $testQuestion = new TestQuestion;
 
         $audio_id = TestWave::where('wave_id', $request->wave_id)->value('audio_id');
@@ -275,6 +336,49 @@ class AdminController extends Controller
 
         return redirect()->route('manage-wave', $request->wave_id)->with("success", "Question deleted sucessfully!");
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Test's guide CRUD
+    |--------------------------------------------------------------------------
+    |
+    | Below is the test guide's CRUD codes....
+    | 
+    | 
+    |
+    */
+
+    public function storeGuide(Request $request, $guide_id)
+    {
+        $guide = Guide::where('guide_id', $guide_id)->first();
+
+        switch ($request->section_guide) {
+            case 'listening':
+                $guide->listening_guide = $request->text;
+                break;
+
+            case 'reading':
+                $guide->reading_guide = $request->text;
+                break;
+
+            case 'grammar':
+                $guide->grammar_guide = $request->text;
+                break;
+        }
+
+        $guide->save();
+
+        $wave_id = TestWave::where('guide_id', $guide_id)->get('wave_id')->value('wave_id');
+
+        return redirect()->route('manage-wave', $wave_id)->with('guide-success', 'Text guide successfully updated!');
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin's page of the test preview feature
+    |--------------------------------------------------------------------------
+    */
 
     public function listeningPreview($wave_id)
     {

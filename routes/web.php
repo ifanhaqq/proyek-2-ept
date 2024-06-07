@@ -109,6 +109,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/update-question', [AdminController::class, 'updateQuestion'])->name('update-question');
     Route::post('/delete-question', [AdminController::class, 'deleteQuestion'])->name('delete-question');
 
+    Route::post('/store-guide/{guide_id}', [AdminController::class, 'storeGuide'])->name('store-guide');
+
     Route::get('/download-template', [SpreadsheetController::class, 'downloadTemplate'])->name('download-template');
     Route::post('/import-spreadsheet/{wave_id}', [SpreadsheetController::class, 'importSpreadsheet'])->name('import-spreadsheet');
 });
