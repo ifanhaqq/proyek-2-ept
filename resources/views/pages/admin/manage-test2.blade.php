@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-6">
                             <label for="" class="font-2">Choose Section: </label>
-                            <select class="btn btn-outline-dark font-white" id="sectionSelect">
+                            <select class="btn btn-outline-dark font-white">
                                 <option value="1">Listening</option>
                                 <option value="2">Structure & Written Expression</option>
                                 <option value="3">Reading</option>

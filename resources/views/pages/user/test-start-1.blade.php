@@ -7,9 +7,11 @@
           <h5 class="card-title font-2 text-center display-6">Ready for take the test?</h5>
           <h4 class="sub-font text-center">There is rules that you need to know during the test!</h4>
           <ol>
-              <li>The test duration is 120 minutes</li>
-              <li>There are 3 sections that contained in the test ,  as for Listening Comprehension, Structure and Written expression, and Reading Comprehension</li>
-              <li>belum kelarr butuh diskusi ama ibu berli lagi....</li>
+            <li>The test duration is 120 minutes, with total number of question is 140</li>
+            <li>There are three sections that contained in the test, as for listening comprehension, structure and written expression, and reading comprehension</li>
+            <li>There is previous and next button also question number button so you can navigate to each question</li>
+            <li>When you already go to the test page, quit from the application is forbidden because your answer will be immediately submitted</li>
+            <li>This test can't be use as a substitute for the actual test TOEFL, it's only prediction test!</li>
           </ol>
           <div class="text-center">
           <a href="{{ route('start-test', 'credentials')}}" class="btn btn-dark text-center">NEXT</a>
