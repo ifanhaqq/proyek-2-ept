@@ -262,4 +262,9 @@ nav {
   border: none;
 }
 
+.guide-text {
+  overflow-y: auto;
+  height: 80vh;
+}
+
 

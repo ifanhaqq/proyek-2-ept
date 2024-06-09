@@ -10,7 +10,8 @@
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
                 <div class="text-center ms-auto">
-                    <audio controls src="{{ asset("storage/audio/{$audio->audio_title}") }}"></audio>
+                    <input type="hidden" id="audio-path" value="{{ asset("storage/audio/{$audio->audio_title}") }}">
+                    <button type="button" id="play-audio" class="btn btn-primary">Play the audio</button>
                 </div>
                 @foreach ($questions as $qs)
                     <input type="hidden" value="{{ $number++ }}">
@@ -62,7 +63,8 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <a href="{{ route('grammar-guide-preview', $wave_id) }}" class="btn btn-dark text-left">Next section</a>
+                    <a href="{{ route('grammar-guide-preview', $wave_id) }}" class="btn btn-dark text-left">Next
+                        section</a>
                 </div>
             </div>
         </form>
@@ -94,4 +96,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/audio-control.js') }}"></script>
 @endsection
