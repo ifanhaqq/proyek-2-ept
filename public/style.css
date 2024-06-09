@@ -258,4 +258,8 @@ nav {
   display: inline-block;
 }
 
+.list-group-item {
+  border: none;
+}
+
 

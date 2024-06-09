@@ -380,11 +380,51 @@ class AdminController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function listeningGuidePreview($wave_id)
+    {
+        $wave = TestWave::where('wave_id', $wave_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
+
+        $data = [
+            'guide' => $guide,
+            'wave_id' => $wave_id
+        ];
+
+        return view('pages.admin.test-guide-listening-preview', $data);
+    }
+
+    public function grammarGuidePreview($wave_id)
+    {
+        $wave = TestWave::where('wave_id', $wave_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
+
+        $data = [
+            'guide' => $guide->grammar_guide,
+            'wave_id' => $wave_id
+        ];
+
+        return view('pages.admin.test-guide-grammar-preview', $data);
+    }
+
+    public function readingGuidePreview($wave_id)
+    {
+        $wave = TestWave::where('wave_id', $wave_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
+
+        $data = [
+            'guide' => $guide->reading_guide,
+            'wave_id' => $wave_id
+        ];
+
+        return view('pages.admin.test-guide-reading-preview', $data);
+    }
+
     public function listeningPreview($wave_id)
     {
 
         $wave = TestWave::where('wave_id', $wave_id)->first();
         $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
 
         $qs = TestQuestion::where('wave_id', $wave_id)
             ->where('section', 'listening')->get();
@@ -394,6 +434,7 @@ class AdminController extends Controller
             'title' => 'Listening Section',
             'number' => 0,
             'audio' => $audio,
+            'guide' => $guide->listening_guide,
             'wave_id' => $wave_id
         ];
 
@@ -408,11 +449,14 @@ class AdminController extends Controller
         $qs = TestQuestion::where('section', 'grammar')
             ->where('wave_id', $wave_id)
             ->inRandomOrder()->get();
+        $wave = TestWave::where('wave_id', $wave_id)->first(); 
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
 
         $data = [
             'questions' => $qs,
             'number' => 0,
             'title' => 'Grammar Section',
+            'guide' => $guide->grammar_guide,
             'wave_id' => $wave_id
         ];
 
@@ -424,6 +468,9 @@ class AdminController extends Controller
 
     public function readingPreview($wave_id)
     {
+        $wave = TestWave::where('wave_id', $wave_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
+
         $qs = DB::table('test_questions')->where('wave_id', $wave_id)
             ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
             ->select('test_questions.*', 'reading_sections.text')
@@ -433,6 +480,7 @@ class AdminController extends Controller
         $data = [
             'questions' => $qs,
             'number' => 0,
+            'guide' => $guide->reading_guide,
             'title' => 'Reading Section',
             'wave_id' => $wave_id
         ];

@@ -51,7 +51,7 @@
                                 <div class="d-flex col-7">
                                     <button type="submit" href=""
                                         class="btn btn-success text-end mt-5">Save</button>
-                                    <a href="{{ route('listening-preview', $waveInfos->wave_id) }}"
+                                    <a href="{{ route('listening-guide-preview', $waveInfos->wave_id) }}"
                                         class="btn btn-primary mt-5 ms-auto">Test preview</a>
                                 </div>
                             </form>
@@ -93,18 +93,18 @@
                     <div class="row">
                         <table>
                             <tr class="test_guides" id="listening_guide">
-                                <td>
-                                    {{ $guideInfo->listening_guide }}
+                                <td class="text-center">
+                                    {!! nl2br(e($guideInfo->listening_guide)) !!}
                                 </td>
                             </tr>
                             <tr class="test_guides" id="grammar_guide">
-                                <td>
-                                    {{ $guideInfo->grammar_guide }}
+                                <td class="text-center">
+                                    {!! nl2br(e($guideInfo->grammar_guide)) !!}
                                 </td>
                             </tr>
                             <tr class="test_guides" id="reading_guide">
-                                <td>
-                                    {{ $guideInfo->reading_guide }}
+                                <td class="text-center">
+                                    {!! nl2br(e($guideInfo->reading_guide)) !!}
                                 </td>
                             </tr>
                         </table>

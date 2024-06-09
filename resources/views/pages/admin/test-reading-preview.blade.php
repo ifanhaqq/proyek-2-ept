@@ -1,6 +1,23 @@
 @extends('layouts.start-test-layout2')
 @section('content')
-    <div class="container mt-5 test-box ">
+    <div class="container mt-5 test-box mb-5">
+        <div class="d-flex mt-5 ">
+            <!-- Button trigger modal -->
+            <div class="me-auto">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    See guide
+                </button>
+            </div>
+            <div>
+                <form name="cd">
+                    <input type="hidden" name="" id="timeExamLimit" value="55">
+                    <input type="hidden" id="timeLimit" value="3">
+                    <label>Remaining Time : </label>
+                    <input style="border:none;background-color: transparent;color:#333e5d;font-size: 25px;" name="disp"
+                        type="text" class="clock" id="txt" value="00:00" size="5" readonly="true" />
+                </form>
+            </div>
+        </div>
         <form action="{{ route('test_score') }}" method="POST" id="testForm">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
@@ -12,6 +29,12 @@
                     <input type="hidden" name="question_id_{{ $number }}" value="{{ $qs->question_id }}">
 
                     <li id="no{{ $number }}">
+                        <div class="d-flex mt-5 mb-2">
+                            <div class=" btn btn-warning ms-auto">
+                                <input class="form-check-input" type="checkbox" id="checkbox-{{ $number }}">
+                                <label class="form-check-label" for="checkbox-{{ $number }}">Still not sure</label>
+                            </div>
+                        </div>
                         {{-- text --}}
                         <p>{{ $qs->text }}</p>
 
@@ -49,20 +72,41 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <a href="{{ route("manage-wave", $wave_id)}}" class="btn btn-dark text-left">Finish</a>
+                    <a href="{{ route('manage-wave', $wave_id) }}" class="btn btn-dark text-left">Finish</a>
                 </div>
             </div>
         </form>
 
         <div class="flex-container mt-4" id="button-wrapper">
             @for ($i = 1; $i <= $count; $i++)
-                <button class="btn btn-outline-dark mb-2 ms-1 me-1" id="nav-button-{{ $i }}">{{ $i }}</button>
+                <button class="btn btn-outline-dark mb-2 ms-1 me-1"
+                    id="nav-button-{{ $i }}">{{ $i }}</button>
             @endfor
         </div>
-
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('js/listeningSection.js') }}"></script>
-    <script src="{{ asset('js/navButton.js') }}"></script>
+    <!-- Guide Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Grammar Section's Guide</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        {!! nl2br(e($guide)) !!}
+                    </p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/testTimer.js') }}"></script>
+    <script src="{{ asset('js/test-responses.js') }}"></script>
 @endsection

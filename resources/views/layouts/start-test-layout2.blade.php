@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    @include('components.header')
+    @include('components.header-test')
 
     @yield('content')
 

@@ -1,6 +1,6 @@
 @extends('layouts.start-test-layout2')
 @section('content')
-    <div class="container mt-5 test-box ">
+    <div class="container mt-5 test-box mb-5">
         <div class="row mt-5 ">
             <div class="col-12 text-end">
                 <form name="cd">
