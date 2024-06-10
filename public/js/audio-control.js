@@ -1,9 +1,11 @@
+
 $(document).ready(function () {
     const audioPath = $("#audio-path").val()
     const playAudioBtn = $("#play-audio")
+    const audioPlayingBtn = $("#audio-playing")
 
     playAudioBtn.hide()
-    playAudioBtn.show(10000)
+    audioPlayingBtn.hide()
 
     const ctx = new AudioContext();
 
@@ -14,53 +16,36 @@ $(document).ready(function () {
         .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
         .then(decodedAudio => {
             audio = decodedAudio;
+            playAudioBtn.show()
         });
 
     function playback() {
         return new Promise((resolve, reject) => {
             try {
-                const playAudio = ctx.createBufferSource();
-                playAudio.buffer = audio;
-                playAudio.connect(ctx.destination);
-                playAudio.start(ctx.currentTime);
-                console.log(ctx.currentTime)
+                if (audio) {
+                    const playAudio = ctx.createBufferSource();
+                    playAudio.buffer = audio;
+                    playAudio.connect(ctx.destination);
+                    playAudio.start(ctx.currentTime);
+                    // console.log(ctx.currentTime)
+                    // console.log(ctx.destination)
+                    console.log("audio data successfully loaded")
 
-                resolve('Playback started successfully');
+                    resolve('Playback started successfully');
+                } else {
+                    console.log('audio data still not loaded')
+                }
+ 
             } catch (error) {
                 reject("error: " + error.message)
             }
         })
     }
 
-    // function playback() {
-    //     return new Promise((resolve, reject) => {
-    //         try {
-    //             // Resume the AudioContext if it is suspended
-    //             if (ctx.state === 'suspended') {
-    //                 console.log(ctx.state)
-    //                 ctx.resume()
-    //             } else {
-    //                 console.log(ctx.state)
-    //                 const playAudio = ctx.createBufferSource();
-    //                 playAudio.buffer = audio;
-    //                 playAudio.connect(ctx.destination);
-    //                 playAudio.start(ctx.currentTime);
-
-    //                 resolve('Playback started successfully');
-    //                 console.log("play button deleted")
-    //             }
-
-
-    //         } catch (error) {
-    //             reject("error: " + error.message);
-    //         }
-    //     });
-    // }
-
-
     playAudioBtn.click(function () {
         playback().then(function () {
             playAudioBtn.hide()
+            audioPlayingBtn.show()
         })
 
     })

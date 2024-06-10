@@ -11,7 +11,8 @@
             <ul id="list_question">
                 <div class="text-center ms-auto">
                     <input type="hidden" id="audio-path" value="{{ asset("storage/audio/{$audio->audio_title}") }}">
-                    <button type="button" id="play-audio" class="btn btn-primary">Play the audio</button>
+                    <button type="button" class="btn btn-success fs-5" id="play-audio"><i class="bi bi-play-circle-fill"></i> Play</button>
+                    <button type="button" class="btn btn-success fs-5" id="audio-playing"><i class="bi bi-pause-circle-fill"></i> Audio playing</button>
                 </div>
                 @foreach ($questions as $qs)
                     <input type="hidden" value="{{ $number++ }}">
