@@ -3,6 +3,7 @@ $(document).ready(function () {
     const audioPath = $("#audio-path").val()
     const playAudioBtn = $("#play-audio")
     const audioPlayingBtn = $("#audio-playing")
+    const spinnerLoadingBtn = $("#spinner-loading")
 
     playAudioBtn.hide()
     audioPlayingBtn.hide()
@@ -16,6 +17,7 @@ $(document).ready(function () {
         .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
         .then(decodedAudio => {
             audio = decodedAudio;
+            spinnerLoadingBtn.hide()
             playAudioBtn.show()
         });
 
@@ -27,8 +29,6 @@ $(document).ready(function () {
                     playAudio.buffer = audio;
                     playAudio.connect(ctx.destination);
                     playAudio.start(ctx.currentTime);
-                    // console.log(ctx.currentTime)
-                    // console.log(ctx.destination)
                     console.log("audio data successfully loaded")
 
                     resolve('Playback started successfully');
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     playAudioBtn.click(function () {
         playback().then(function () {
-            playAudioBtn.hide()
+            playAudioBtn.remove()
             audioPlayingBtn.show()
         })
 

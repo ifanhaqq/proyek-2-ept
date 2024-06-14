@@ -3,7 +3,7 @@
     <div class="container mt-5 test-box">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            See guide
+            Click here for the instruction!
         </button>
         <form action="" method="POST">
             @csrf
@@ -12,6 +12,7 @@
                 <div class="text-center ms-auto">
                     <input type="hidden" id="audio-path" value="{{ asset("storage/audio/{$audio->audio_title}") }}">
                     <button type="button" class="btn btn-success fs-5" id="play-audio"><i class="bi bi-play-circle-fill"></i> Play</button>
+                    <button type="button" class="btn btn-danger fs-5 bg-white text-danger" id="spinner-loading"><img src="{{ asset("icons/spinner.gif") }}" alt="loading.gif" style="height: 40px"> Please wait while our audio is still loading</button>
                     <button type="button" class="btn btn-success fs-5" id="audio-playing"><i class="bi bi-pause-circle-fill"></i> Audio playing</button>
                 </div>
                 @foreach ($questions as $qs)
@@ -20,15 +21,7 @@
                     <input type="hidden" name="section" value="{{ $qs['section'] }}">
                     <input type="hidden" name="question_id_{{ $number }}" value="{{ $qs['question_id'] }}">
 
-                    <li id="no{{ $number }}">
-                        <div class="d-flex justify-content-end">
-                            <div class="btn btn-warning">
-                                <input class="form-check-input" type="checkbox" id="checkbox-{{ $number }}">
-                                <label class="form-check-label" for="checkbox-{{ $number }}">Still not sure</label>
-                            </div>
-
-                        </div>
-
+                    <li id="no{{ $number }}" class="mt-4">
                         <p>{{ $number }}.</p>
                         <div class="options">
                             <label class="btn btn-light">

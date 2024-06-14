@@ -30,9 +30,9 @@
 
                     <li id="no{{ $number }}">
                         <div class="d-flex mt-5 mb-2">
-                            <div class=" btn btn-warning ms-auto">
+                            <div class="btn btn-warning ms-auto border border-2">
                                 <input class="form-check-input" type="checkbox" id="checkbox-{{ $number }}">
-                                <label class="form-check-label" for="checkbox-{{ $number }}">Still not sure</label>
+                                <label class="form-check-label" for="checkbox-{{ $number }}">Unsure</label>
                             </div>
                         </div>
                         {{-- text --}}

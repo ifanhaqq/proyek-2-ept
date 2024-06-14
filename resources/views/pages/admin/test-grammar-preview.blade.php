@@ -5,7 +5,7 @@
             <!-- Button trigger modal -->
             <div class="me-auto">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    See guide
+                    Click here for the instruction!
                 </button>
             </div>
             <div class="">
@@ -34,6 +34,13 @@
 
 
                     <li id="no{{ $number }}">
+                        <div class="d-flex mt-5 mb-2">
+                            <div class="btn btn-warning ms-auto border border-2">
+                                <input class="form-check-input" type="checkbox" id="checkbox-{{ $number }}">
+                                <label class="form-check-label" for="checkbox-{{ $number }}">Unsure</label>
+                            </div>
+                        </div>
+
                         <p>{{ $qs['question'] }}</p>
 
                         <div class="options">
