@@ -7,12 +7,9 @@
                 <div class="">
                     <div class="card-body">
                         <h4 class="font-2">Test Taker Result</h4>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-                            <button class="btn btn-outline-dark" type="submit">Search</button>
-                        </form>
+                        <input id="searchInput" class="form-control me-2" type="text" placeholder="Search...">
                         <div class="container rounded border mt-4">
-                            <table class="table table-striped ps-2">
+                            <table id="scoresTable" class="table table-striped ps-2">
                                 <thead>
                                     <tr class="font-2">
                                         <th>No</th>
@@ -32,7 +29,8 @@
                                             <td>{{ $testScore['test_date'] }}</td>
                                             <td>{{ $testScore['score'] }}</td>
                                             <td>
-                                                <a href="{{ route('test-score', $testScore['id']) }}" class="btn btn-sm btn-info bi bi-search"> more</a>
+                                                <a href="{{ route('test-score', $testScore['id']) }}"
+                                                    class="btn btn-sm btn-info bi bi-search"> more</a>
                                             </td>
                                         </tr>
                                         @php $number++ @endphp
@@ -51,4 +49,7 @@
     {{-- penutup untuk nav --}}
     </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/search.js') }}"></script>
 @endsection

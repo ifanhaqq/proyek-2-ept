@@ -67,7 +67,7 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <a href="{{ route('reading-guide-preview', $wave_id) }}" class="btn btn-dark text-left">Next section</a>
+                    <a href="{{ route('reading-preview', $wave_id) }}" class="btn btn-dark text-left">Next section</a>
                 </div>
             </div>
         </form>

@@ -33,15 +33,6 @@
                                 <h6 class="bi bi-clipboard-check-fill me-4"> Test Taker Result</h6>
                             </li>
                         </a>
-                        <li class="font-3 mt-auto">
-                            <img src="" alt="" />
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn">
-                                    <h6 class="bi bi-arrow-right-square-fill me-4"> LOGOUT</h6>
-                                </button>
-                            </form>
-                        </li>
                     </ul>
                 </div>
             </div>

@@ -5,7 +5,7 @@
             <!-- Button trigger modal -->
             <div class="me-auto">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    See guide
+                    Click here for the instruction
                 </button>
             </div>
             <div>

@@ -23,8 +23,7 @@
             </div>
         </div>
         <div class="row">
-
-            <div class="col-4 ms-3 mt-5">
+            <div class="col-5 ms-3 mt-5">
                 <div class="text-left">
                     <h1 class="main-font display-1" style="line-height: 0.5">POLINDRA</h1>
                     <h1 class="main-font display-5">TOEFL Prediction Test</h1>
@@ -33,11 +32,9 @@
 
                 </div>
             </div>
-            <div class="col-1"></div>
             <!-- form -->
-            <div class="col-6 d-flex ">
-
-                <div class="login-box " style="font-size:0.75vw">
+            <div class="ms-5 col-5 bg-white rounded" style="margin-top: 15vh">
+                <div class="d-flex flex-column mt-4 ms-4 me-4 mb-4" style="font-size:0.75vw">
                     <h1 class="text-center fw-bolder">LOGIN</h1>
                     @if (session('failed'))
                         <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">

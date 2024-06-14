@@ -35,8 +35,8 @@
 
             </div>
             <!-- form -->
-            <div class="col-6">
-                <div class="register-box" style="font-size:0.75vw">
+            <div class="col-6 bg-white rounded border border-1">
+                <div class="ms-4 mt-4 mb-4 me-4" style="font-size:0.75vw">
                     <h1 class="text-center fw-bolder ">REGISTER</h1>
                     @if (session('failed'))
                         <div class="alert alert-danger alert-dismissable d-flex flex-row" role="alert">

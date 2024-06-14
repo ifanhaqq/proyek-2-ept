@@ -51,7 +51,7 @@
                                 <div class="d-flex col-7">
                                     <button type="submit" href=""
                                         class="btn btn-success text-end mt-5">Save</button>
-                                    <a href="{{ route('listening-guide-preview', $waveInfos->wave_id) }}"
+                                    <a href="{{ route('test-rules', $waveInfos->wave_id) }}"
                                         class="btn btn-primary mt-5 ms-auto">Test preview</a>
                                 </div>
                             </form>

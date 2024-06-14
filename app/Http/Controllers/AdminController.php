@@ -380,6 +380,14 @@ class AdminController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function testRules($wave_id)
+    {
+        $data = [
+            'wave_id' => $wave_id
+        ];
+        return view("pages.admin.test-rules", $data);
+    }
+
     public function listeningGuidePreview($wave_id)
     {
         $wave = TestWave::where('wave_id', $wave_id)->first();

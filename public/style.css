@@ -66,7 +66,15 @@ input::-webkit-inner-spin-button {
 
 .font-3 {
   color: #FF650E;
+}
 
+.logout-button {
+  font-family: rowdies;
+  font-weight: lighter;
+}
+
+.logout-button:hover {
+  color: #FF650E;
 }
 
 

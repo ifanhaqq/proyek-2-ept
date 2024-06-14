@@ -64,7 +64,7 @@
                     <button type="button" class="btn btn-dark text-left">Next</button>
                 </div>
                 <div class="col" id="submit_button">
-                    <a href="{{ route('grammar-guide-preview', $wave_id) }}" class="btn btn-dark text-left">Next
+                    <a href="{{ route('grammar-preview', $wave_id) }}" class="btn btn-dark text-left">Next
                         section</a>
                 </div>
             </div>
