@@ -64,8 +64,6 @@ class TestScoreController extends Controller
             "message" => "Data sucessfully submitted!",
 
         ]);
-
-
     }
     public function getScore($id)
     {
