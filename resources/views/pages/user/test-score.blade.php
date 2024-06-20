@@ -1,7 +1,7 @@
 @extends('layouts.start-test-layout')
 @section('content')
     <div class="card  col-11 ms-5 mb-3 me-5 mt-5">
-        
+
         <div class="card-body ">
             <h5 class="card-title text-center fw-bolder font-2 ">TOEFL ITP PREDICTION</h5>
             <p class="fst-italic text-center text-decoration-underline mb-5">Score Report</p>
@@ -48,9 +48,14 @@
             </table>
             <h5 class="text-center font-2">TOTAL SCORE : {{ $result->score }} </h5>
         </div>
+        <div class="d-flex justify-content-center">
+            <a href="{{ route('user.dashboard') }}"><em>Back to dashboard</em></a>
+        </div>
+
     </div>
     <div class="text-center bg-footer">
         <h6 class="bi bi-exclamation-circle-fill font-2"> DISCLAIMER!</h6>
-        <p>The score test only can be use for Politeknik Negeri Indramayu matter. Therefore, you cannot use it on other platforms.</p>
+        <p>The score test only can be use for Politeknik Negeri Indramayu matter. Therefore, you cannot use it on other
+            platforms.</p>
     </div>
 @endsection

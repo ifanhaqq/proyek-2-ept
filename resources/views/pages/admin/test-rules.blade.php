@@ -14,7 +14,7 @@
             <li class="list-group-item">This test can't be use as a substitute for the actual test TOEFL, it's only prediction test!</li>
           </ol>
           <div class="text-center">
-          <a href="{{ route('listening-preview', $wave_id)}}" class="btn btn-dark text-center">NEXT</a>
+          <a href="{{ route('listening-preview', $wave_id)}}" class="btn btn-dark text-center">START THE TEST</a>
         </div>
         </div>
       </div>

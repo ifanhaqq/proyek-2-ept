@@ -1,8 +1,14 @@
 @extends('layouts.start-test-layout2')
 @section('content')
     <div class="container ">
-        <div class="row mt-5 ">
-            <div class="col-12 text-end">
+        <div class="d-flex mt-5 ">
+            <!-- Button trigger modal -->
+            <div class="me-auto">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Click here for the instruction!
+                </button>
+            </div>
+            <div class="">
                 <form name="cd" id="cd">
                     <input type="hidden" name="" id="timeExamLimit" value="25">
                     <input type="hidden" id="timeLimit" value="3">
@@ -16,7 +22,7 @@
     </div>
 
     <div class="container mt-5 test-box ">
-        <form action="{{ route('section-guide', 3) }}" method="POST" id="testForm">
+        <form action="{{ route('loading-screen') }}" method="POST" id="testForm">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
@@ -80,6 +86,26 @@
             @endfor
         </div>
 
+    </div>
+
+    <!-- Guide Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Grammar Section's Guide</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        {!! nl2br(e($guide)) !!}
+                    </p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

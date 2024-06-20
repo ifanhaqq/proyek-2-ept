@@ -40,6 +40,10 @@ Route::get("/reset-password", function () {
     return view('pages.reset-password');
 });
 
+Route::get("/please-wait", function () {
+    return view('pages.user.loading-screen');
+});
+
 
 
 // yang dah fix
@@ -84,7 +88,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/score', [TestTakerController::class, 'score'])->name('test_score');
         Route::post('/submit-temp', [TestTakerController::class, 'tempScore'])->name('submit-temp');
 
-
+        Route::post('/please-wait', [TestTakerController::class, 'gimmickLoading'])->name('loading-screen');
+        Route::post('/sections-handler', [TestTakerController::class, 'sectionsHandler'])->name('sections-handler');
     });
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guide;
 use App\Models\ListeningAudio;
 use App\Models\TestQuestion;
 use App\Models\TestResult;
@@ -53,7 +54,7 @@ class TestTakerController extends Controller
 
         Session::put('wave_id', $wave_id);
 
-        return redirect()->route('start-test', "rules");
+        return redirect()->route('start-test', 'credentials');
 
     }
 
@@ -119,7 +120,28 @@ class TestTakerController extends Controller
 
         $testScore->save();
 
-        return redirect()->route('start-test', 'audio-test');
+        return redirect()->route('start-test', 'rules');
+    }
+
+    public function gimmickLoading(Request $request)
+    {
+        $this->submit($request);
+
+        $data = [
+            'section' => $request->section
+        ];
+
+        return view('pages.user.loading-screen', $data);
+    }
+
+    public function sectionsHandler(Request $request)
+    {
+
+        if ($request->section === 'listening') {
+            return redirect()->route('grammar-section');
+        } else if ($request->section === 'grammar') {
+            return redirect()->route('reading-section');
+        }
     }
 
     public function listeningSection()
@@ -127,6 +149,7 @@ class TestTakerController extends Controller
 
         $wave = TestWave::where('wave_id', Session::get('wave_id'))->first();
         $audio = ListeningAudio::where('audio_id', $wave->audio_id)->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
 
         $qs = TestQuestion::where('wave_id', Session::get('wave_id'))
             ->where('section', 'listening')->get();
@@ -137,6 +160,7 @@ class TestTakerController extends Controller
             'number' => 0,
             'audio' => $audio,
             'user_id' => Auth::user()->id,
+            'guide' => $guide->listening_guide
         ];
 
         $count = count($data['questions']);
@@ -145,8 +169,12 @@ class TestTakerController extends Controller
         return view('pages.user.section1', $data);
     }
 
-    public function grammarSection()
+    public function grammarSection(Request $request)
     {
+        $this->submit($request);
+
+        $wave = TestWave::where('wave_id', Session::get('wave_id'))->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
 
         $qs = TestQuestion::where('section', 'grammar')
             ->where('wave_id', Session::get('wave_id'))
@@ -156,7 +184,8 @@ class TestTakerController extends Controller
             'questions' => $qs,
             'number' => 0,
             'user_id' => Auth::user()->id,
-            'title' => 'Grammar Section'
+            'title' => 'Grammar Section',
+            'guide' => $guide->grammar_guide
         ];
 
         $count = count($data['questions']);
@@ -168,6 +197,9 @@ class TestTakerController extends Controller
     public function readingSection()
     {
 
+        $wave = TestWave::where('wave_id', Session::get('wave_id'))->first();
+        $guide = Guide::where('guide_id', $wave->guide_id)->first();
+
         $qs = DB::table('test_questions')->where('wave_id', Session::get('wave_id'))
             ->join('reading_sections', 'test_questions.reading_id', '=', 'reading_sections.reading_id')
             ->select('test_questions.*', 'reading_sections.text')
@@ -178,7 +210,8 @@ class TestTakerController extends Controller
             'questions' => $qs,
             'number' => 0,
             'user_id' => Auth::user()->id,
-            'title' => 'Reading Section'
+            'title' => 'Reading Section',
+            'guide' => $guide->reading_guide
         ];
 
         $count = count($data['questions']);
@@ -258,10 +291,10 @@ class TestTakerController extends Controller
     public function testHistory()
     {
         $testResults = DB::table('test_scores')->where('user_id', Auth::user()->id)
-                        ->join('test_waves', 'test_scores.wave_id', '=', 'test_waves.wave_id')
-                        ->select('test_scores.*', 'test_waves.title')
-                        ->get()
-                        ->toArray();
+            ->join('test_waves', 'test_scores.wave_id', '=', 'test_waves.wave_id')
+            ->select('test_scores.*', 'test_waves.title')
+            ->get()
+            ->toArray();
 
         $data = [
             "testResults" => $testResults,

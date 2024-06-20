@@ -1,12 +1,21 @@
 @extends('layouts.start-test-layout2')
 @section('content')
     <div class="container mt-5 test-box">
-        <form action="{{ route('section-guide', 2) }}" method="POST" id="testForm">
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Click here for the instruction!
+        </button>
+
+        <form action="{{ route('loading-screen') }}" method="POST" id="testForm">
             @csrf
             <input type="hidden" name="count" id="max_params" value="{{ $count }}">
             <ul id="list_question">
                 <div class="text-center ms-auto">
-                    <audio controls src="{{ asset("storage/audio/{$audio->audio_title}") }}"></audio>
+                    <input type="hidden" id="audio-path" value="{{ asset("storage/audio/{$audio->audio_title}") }}">
+                    <button type="button" class="btn btn-success fs-5" id="play-audio"><i class="bi bi-play-circle-fill"></i> Play</button>
+                    <button type="button" class="btn btn-danger fs-5 bg-white text-danger" id="spinner-loading"><img src="{{ asset("icons/spinner.gif") }}" alt="loading.gif" style="height: 40px"> Please wait while our audio is still loading</button>
+                    <button type="button" class="btn btn-success fs-5" id="audio-playing"><i class="bi bi-pause-circle-fill"></i> Audio playing</button>
                 </div>
                 @foreach ($questions as $qs)
                     <input type="hidden" value="{{ $number++ }}">
@@ -70,9 +79,30 @@
             @endfor
         </div>
     </div>
+
+    <!-- Guide Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Listening Section's Guide</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        {!! nl2br(e($guide)) !!}
+                    </p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/test-responses.js') }}"></script>
+    <script src="{{ asset('js/audio-control.js') }}"></script>
     <script src="{{ asset('js/preventReload.js') }}"></script>
 @endsection
