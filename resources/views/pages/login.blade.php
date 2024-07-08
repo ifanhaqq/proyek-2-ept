@@ -14,8 +14,7 @@
 <body>
     <div class="bg-image">
         <link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css">
-
-
+        
         <!-- welcome -->
         <div class="row">
             <div class="col-12">
